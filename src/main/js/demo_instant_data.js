@@ -6,7 +6,7 @@ window.Appjangle = window.Appjangle || {};
 
 (function(Appjangle, $) {
 	// constants
-	var postWrapper = $("<li class='media'></li>"),
+	var postWrapper = "<li class='media'></li>",
 	    postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
 
 	Appjangle.demos = Appjangle.demos || {};
@@ -37,8 +37,8 @@ window.Appjangle = window.Appjangle || {};
 					var i, item;
 					posts.selectAll(aPost).get(function(postsList) {
 						for (i=0; i<=postLists.nodes().length; i++) {
-							item = $(".postTemplate", wrapper).clone();
-							postList
+							item = $(postWrapper).append($(".postTemplate", wrapper).clone());
+							$(".postText").text(postLists.values()[i]);
 						}
 					});
 				};
