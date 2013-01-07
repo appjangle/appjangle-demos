@@ -39,9 +39,9 @@ window.Appjangle = window.Appjangle || {};
 					});
 				};
 				console.log($(".postButton", wrapper));
-				$(".postButton", wrapper).onClick(function(evt) {
+				$(".postButton", wrapper).click(function(evt) {
 					evt.preventDefault();
-					posts.append($("postInput", wrapper).text()).append(session.node(aPost));
+					posts.append($(".postInput", wrapper).val()+"").append(aPost).get();
 					updateUi();
 				});
 			}());
