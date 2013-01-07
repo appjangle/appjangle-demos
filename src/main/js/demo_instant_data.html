@@ -7,54 +7,64 @@
 	rel="stylesheet">
 
 <script src="http://appjangle.com/js/v01/appjangle/appjangle.nocache.js"></script>
-<script src="demo_instant_data.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script>
+<script src="demo_instant_data.js"></script>
 
+<script>
+	window.onNextwebOnedb = function(engine) {
+		
+		Appjangle.demos.initInstantDataDemo({
+			wrapper : $(".example"),
+			engine: engine
+		});
+	};
 </script>
 
 </head>
 
 <body>
-	<!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_instant_data_html -->
+	<div class="example">
+		<!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_instant_data_html -->
 
 
-	<div class="row-fluid">
-		<div class="span12">
-			<div class="input-append">
-				<input class="span4 input-large" class="postInput" type="text">
-				<button class="postButton btn" type="button">Post</button>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="input-append">
+					<input class="span4 input-large" class="postInput" type="text">
+					<button class="postButton btn" type="button">Post</button>
+
+				</div>
 
 			</div>
-
 		</div>
-	</div>
 
-	<div class="row-fluid">
-		<div class="span12">
-			<p style="color: gray;" class="noPostsYet">No posts yet.</p>
-			<ul class="media-list postList">
+		<div class="row-fluid">
+			<div class="span12">
+				<p style="color: gray;" class="noPostsYet">No posts yet.</p>
+				<ul class="media-list postList">
 
-			</ul>
-			<p>
-				Total Posts: <span class="totalPosts">1</span>
-			</p>
+				</ul>
+				<p>
+					Total Posts: <span class="totalPosts">1</span>
+				</p>
+			</div>
 		</div>
-	</div>
 
-   
-	<div class="postTemplate">
-		<a class="pull-left" href="#"> <img
-				class="media-object"
+
+		<div class="postTemplate">
+			<a class="pull-left" href="#"> <img class="media-object"
 				src="https://docs.google.com/drawings/pub?id=13FdmIQDoL33MCPnMNyn7kxabBTGPCqhvxJYiRB2Cns0&w=64&h=64">
-		</a>
+			</a>
 			<div class="media-body">
 				<!-- <h4 class="media-heading"></h4> -->
-				<p><span class="postText"></span></p>
+				<p>
+					<span class="postText"></span>
+				</p>
 			</div>
-	</div>
+		</div>
 
-	<!-- one.end -->
+		<!-- one.end -->
+	</div>
 </body>
 </html>
