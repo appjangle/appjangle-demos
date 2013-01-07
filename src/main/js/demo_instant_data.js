@@ -9,8 +9,13 @@ window.Appjangle = window.Appjangle || {};
 	 * Returns an aj login object.
 	 * 
 	 */
-	Appjangle.demos.instantData = function(params) {
+	Appjangle.demos.initInstantDataDemo = function(params) {
 
+		var postWrapper;
+		
+		
+		postWrapper = $("<li class='media'></li>");
+		
 		return {
 
 		};
