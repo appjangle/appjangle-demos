@@ -36,9 +36,9 @@ window.Appjangle = window.Appjangle || {};
 				var updateUi = function() {
 					var i, item;
 					posts.selectAll(aPost).get(function(postsList) {
-						for (i=0; i<=postLists.nodes().length; i++) {
+						for (i=0; i<=postList.nodes().length; i++) {
 							item = $(postWrapper).append($(".postTemplate", wrapper).clone());
-							$(".postText").text(postLists.values()[i]);
+							$(".postText").text(postList.values()[i]);
 						}
 					});
 				};
