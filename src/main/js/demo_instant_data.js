@@ -27,22 +27,30 @@ window.Appjangle = window.Appjangle || {};
 		
 		// define data type for posts
 		aPost = session.node(postType);
-		console.log("resovle");
+		
 		// resolving request for data node
 		posts.get(function(posts) {
 			
 			// init UI
 			(function() {
 				var updateUi = function() {
+					var i, item;
 					posts.selectAll(aPost).get(function(postsList) {
-						console.log(postsList.values());
+						for (i=0; i<=postLists.nodes().length; i++) {
+							item = $(".postTemplate", wrapper).clone();
+							postList
+						}
 					});
 				};
-				console.log($(".postButton", wrapper));
+				
 				$(".postButton", wrapper).click(function(evt) {
 					evt.preventDefault();
-					posts.append($(".postInput", wrapper).val()+"").append(aPost).get();
-					updateUi();
+					posts.append($(".postInput", wrapper).val()).append(aPost);
+					
+					session.commit().get(function() {
+						updateUi();
+					});
+					
 				});
 			}());
 		});
