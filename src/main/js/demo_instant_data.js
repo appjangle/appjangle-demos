@@ -33,7 +33,8 @@ window.Appjangle = window.Appjangle || {};
 			
 			// init UI
 			(function() {
-				var createItem = function() {
+				var createItem, updatePosts, updateTotal;
+				createItem = function() {
 					var postContent;
 					postContent= $(".postTemplate", wrapper).clone();
 					postContent.removeClass("hide");
@@ -41,7 +42,7 @@ window.Appjangle = window.Appjangle || {};
 					return $(postWrapper).append(postContent);
 				};
 				
-				var updatePosts = function() {
+				updatePosts = function() {
 					var i, item;
 					
 					posts.selectAll(aPost).get(function(postsList) {
@@ -61,7 +62,7 @@ window.Appjangle = window.Appjangle || {};
 					});
 				};
 				
-				var updateTotal = function() {
+				updateTotal = function() {
 					posts.selectAll(aPost).get(function(postsList) {
 						$(".totalPosts", wrapper).text(postsList.size());
 					});
