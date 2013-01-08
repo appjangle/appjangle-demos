@@ -33,13 +33,37 @@ window.Appjangle = window.Appjangle || {};
 			
 			// init UI
 			(function() {
-				var updateUi = function() {
+				var createItem = function() {
+					var postContent;
+					postContent= $(".postTemplate", wrapper).clone();
+					postContent.removeClass("hide");
+					postContent.removeClass("postTemplate");
+					return $(postWrapper).append(postContent);
+				};
+				
+				var updatePosts = function() {
 					var i, item;
+					
 					posts.selectAll(aPost).get(function(postsList) {
-						for (i=0; i<=postList.nodes().length; i++) {
-							item = $(postWrapper).append($(".postTemplate", wrapper).clone());
-							$(".postText").text(postList.values()[i]);
+						$(".postList", wrapper).empty();
+						for (i=postsList.values().length-1; i>=0; i--) {
+							item = createItem();
+							$(".postList", wrapper).append(item);
+							$(".postText", item).text(postsList.values()[i]);
 						}
+						
+						
+						if (postsList.size() == 0) {
+							$(".noPostsYet", wrapper).show();
+						} else {
+							$(".noPostsYet", wrapper).hide();
+						}
+					});
+				};
+				
+				var updateTotal = function() {
+					posts.selectAll(aPost).get(function(postsList) {
+						$(".totalPosts", wrapper).text(postsList.size());
 					});
 				};
 				
@@ -48,7 +72,8 @@ window.Appjangle = window.Appjangle || {};
 					posts.append($(".postInput", wrapper).val()).append(aPost);
 					
 					session.commit().get(function() {
-						updateUi();
+						updatePosts();
+						updateTotal();
 					});
 					
 				});
