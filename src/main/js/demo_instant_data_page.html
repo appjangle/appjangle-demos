@@ -8,8 +8,13 @@
 <link
 	href="http://appjangle.com/assets/v02/bootstrap-2.2.2/css/bootstrap-responsive.min.css"
 	rel="stylesheet">
+<link
+	href="http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/tomorrow.value.css"
+	rel="stylesheet">
 
 <script src="http://appjangle.com/js/v01/appjangle/appjangle.nocache.js"></script>
+<script
+	src="http://appjangle.com/assets/v02/prettify-small-1-Jun-2011/prettify.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script src="demo_instant_data.js"></script>
@@ -22,6 +27,9 @@
 			engine : engine
 		});
 	};
+	window.onload = function() {
+		prettyPrint();
+	}
 </script>
 
 <style>
@@ -37,7 +45,7 @@
 			<div class="span12">
 				<h4>Summary</h4>
 				<p>This demo allows to make posts to a status or message board.
-					A text typed in the input box above will appear as item in a list
+					A text typed in the input box below will appear as item in a list
 					below the input box upon clicking the [Post] button.</p>
 
 			</div>
@@ -110,13 +118,28 @@
 			<div class="span12">
 				<h4 style="margin-top: 30px;">Note</h4>
 				<dl class="dl-horizontal">
-					<dt>Embedded Database</dt>
-					<dd>This demo runs with an embedded JavaScript database. The
-						Appjangle client libraries allow to perform all types of queries
-						directly in the memory of the local application.</dd>
+					<dt style="font-size: 90%;">Embedded Database</dt>
+					<dd>
+						This demo runs with an embedded JavaScript database. The Appjangle
+						client libraries allow to perform all types of queries directly in
+						the memory of the local application. This allows for <em>high
+							responsiveness</em>.
+					</dd>
+
 				</dl>
+				<dl class="dl-horizontal" style="margin-top: 10px;">
+					<dt style="font-size: 90%;">No Cloud Persistence</dt>
+					<dd>
+						The posts in this demo are not persisted in the Appjangle cloud.
+						Please <a href="#transparentCloudPersistence">see the next
+							demo to see how that can be done</a>.
+					</dd>
+				</dl>
+
 			</div>
 		</div>
+
+
 
 		<div class="row-fluid">
 			<div class="span12">
@@ -124,29 +147,38 @@
 				<p>
 					Appjangle provides the local database containing the posted
 					messages. The <a href="http://nextweb.io">Nextweb open source
-						API</a> is used to interact with the Appjangle platform in this
-					example. Operations in the example are performed in roughly the
-					following order (see full source code below):
+						API</a> is used to interact with the Appjangle embedded database in
+					this example.
 				</p>
-				<p class="text-success" style="margin-top: 35px;">
-					<b>1. Defining data container for app data</b>
+				<p>
+					Following the annotated source code of this demo illustrating the use of Appjangle.</p>
+					 
+				<div style="border: 1px;  border-style:solid; border-color: gray; padding: 15px;">
+				<p style="border-bottom: solid; padding-bottom: 5px;">
+					<a
+						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo_instant_data.js">demo_instant_data.js</a>
 				</p>
 
-				<p>
+
+				<p style="margin-left: 40px; font-size: 90%;">An embedded db server is started
+					and a client session is created.</p>
+				<pre class="prettyprint linenums:24">
+// local db server to manage data
+server = Nextweb.startServer(12322);
+session = Nextweb.createSession();
+</pre>
+				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
 					The <a href="http://nextweb.io/docs/nextweb-seed.value.html">seed
 						operation</a> is used to seed a new root node in the Appjangle
 					database. This root node works as the 'container' for all
 					application data. All other data is appended as direct and indirect
 					child nodes to this root node.
 				</p>
-				<pre class="prettyprint">
+				<pre class="prettyprint linenums:27">
+// request for data node to store all posts
 posts = session.seed("local");
 </pre>
-				<p class="text-success" style="margin-top: 35px;">
-					<b>2. Loading global data type for posts </b>
-				</p>
-
-				<p>
+				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
 					The <a
 						href="http://nextweb.io/docs/nextweb-node-operation.value.html">node
 						operation</a> is used to create a reference to a data type node. This
@@ -156,14 +188,29 @@ posts = session.seed("local");
 					(see <a
 						href="http://nextweb.io/docs/nextweb-data-pattern.value.html">property
 						pattern</a>).
-				<pre class="prettyprint">
-var postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
-var aPost = session.node(postType);</pre>
-				<p class="text-success" style="margin-top: 35px;">
-					<b>3. Store new posts</b>
 				</p>
+				<pre class="prettyprint linenums:30">
+// load data type for posts
+postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
+aPost = session.node(postType);
+</pre>
+				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
+					The requested seed node is resolved from the database server using
+					the <a href="http://nextweb.io/docs/nextweb-get.value.html">get
+						operation</a> (This will happen in real-time, since we are running a
+					local embedded database server).
+				</p>
+				<pre class="prettyprint linenums:34">
+// resolving request for data node
+posts.get(function(posts) {
+    // when data node loaded, show ui
+    demo.initUi();
+});
 
-				<p>
+// submit a new post
+demo.submitPost = function() {
+</pre>
+				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
 					The <a
 						href="http://nextweb.io/docs/nextweb-append-value.value.html">append
 						operation</a> is used to append the text in the input to the
@@ -171,14 +218,24 @@ var aPost = session.node(postType);</pre>
 					seed node created above. The second append is used to assign the
 					data type loaded above.
 				</p>
-				<pre class="prettyprint">
-posts.append($(".postInput").val()).append(aPost);
-</pre>
-				<p class="text-success" style="margin-top: 35px;">
-					<b>4. Calculating total posts</b>
+				<pre class="prettyprint linenums:42">
+    posts.append($(".postInput", wrapper).val()).append(aPost);
+    $(".postInput", wrapper).val("");</pre>
+				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
+					The commit operation triggers a <a
+						href="http://maxrohde.com/2012/05/06/onedb-architecture-and-design/#synchronization">synchronization</a>
+					between client and 'server' (that's still the embedded local
+					server).
 				</p>
+				<pre class="prettyprint linenums:44">
+    session.commit().get(function() {
+        demo.updatePosts();
+        demo.updateTotal();
+    });
+};
 
-				<p>
+demo.updateTotal = function() {</pre>
+				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
 					The <a
 						href="http://nextweb.io/docs/nextweb-selectAll-property.value.html">selectAll(property)</a>
 					operation is used to retrieve a list of all append children of the
@@ -187,37 +244,46 @@ posts.append($(".postInput").val()).append(aPost);
 					which have been marked with the post data type mentioned above. The
 					length of this list is used to display the total number of posts.
 				</p>
-				<pre class="prettyprint">
-posts.selectAll(aPost).get(function(postsList) {
-    $(".totalPosts").text(postsList.size());
-});</pre>
-				<p class="text-success" style="margin-top: 35px;">
-					<b>5. Displaying posts</b>
-				</p>
+				<pre class="prettyprint linenums:53">
+    posts.selectAll(aPost).get(function(postsList) {
+        $(".totalPosts", wrapper).text(postsList.size());
+    });
+};
 
-				<p>
+demo.updatePosts = function() {
+    var i, item;</pre>
+				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
 					The <a
 						href="http://nextweb.io/docs/nextweb-selectAll-property.value.html">selectAll(property)</a>
 					is again used to retrieve a <a
 						href="http://nextweb.io/docs/nextweb-entity-list.value.html">NodeList</a>
 					with posts. The values of these nodes are then iterated through and
-					their text is assigned to elements in a post list.
+					they are displayed as text to elements in a post list.
 				</p>
-				<pre class="prettyprint">
-var i, item;
-                    
-posts.selectAll(aPost).get(function(postsList) {
-     [..]
-     for (i=postsList.values().length-1; i&gt;=0; i--) {
-         [..]
-         $(".postText", item).text(postsList.values()[i]);
-     }
-};</pre>
+				<pre class="prettyprint linenums:61">
+    posts.selectAll(aPost).get(function(postsList) {
+        $(".postList", wrapper).empty();
+        for (i=postsList.values().length-1; i>=0; i--) {
+            item = demo.createItem();
+            $(".postList", wrapper).append(item);
+            
+            $(".postText", item).text(postsList.values()[i]);
+        }
+        
+        if (postsList.size() == 0) {
+            $(".noPostsYet", wrapper).show();
+        } else {
+            $(".noPostsYet", wrapper).hide();
+        }
+    });
+};
+</pre>
+</div>
 			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span12">
-				<h4 style="margin-top: 30px;">Source Code</h4>
+				<h4 style="margin-top: 30px;">Files</h4>
 				<p>
 					<a
 						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo_instant_data.js">demo_instant_data.js</a>
