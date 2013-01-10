@@ -51,12 +51,15 @@ window.Appjangle = window.Appjangle || {};
 		demo.submitPost = function() {
 			posts.append($(".postInput", wrapper).val()).append(aPost);
 			$(".postInput", wrapper).val("");
+			
+			demo.updatePosts();
+			demo.updateTotal();
+			
 			session.commit().get(function() {
 				
-				demo.updatePosts();
-				demo.updateTotal();
-				
 			});
+			
+			
 		};
 		
 		demo.updateTotal = function() {
