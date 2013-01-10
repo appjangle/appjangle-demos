@@ -22,9 +22,9 @@
 </script>
 
 <style>
-.post:hover {
+/*.post:hover {
 	background-color: #F8F8F8;
-}
+}*/
 </style>
 
 </head>
@@ -37,21 +37,16 @@
 		<div class="row-fluid">
 			<div class="span12">
 
-
-				
-
 				<div class="input-append">
 					<input class="postInput span11"  placeholder="What's up?" type="text">
 					<button class="postButton btn" type="button">Post</button>
 				</div>
 
-
-
 			</div>
 		</div>
 
 		<div class="row-fluid">
-			<div class="span11">
+			<div class="span12">
 				<p style="color: gray;" class="noPostsYet">No posts yet.</p>
 				<ul class="media-list postList">
 
@@ -63,7 +58,7 @@
 		</div>
 
 
-		<div class="postTemplate hide post">
+		<div class="postTemplate hide post" onMouseOver="this.style.backgroundColor='#F8F8F8'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
 			<a class="pull-left" href="#"> <img class="media-object"
 				src="https://docs.google.com/drawings/pub?id=13FdmIQDoL33MCPnMNyn7kxabBTGPCqhvxJYiRB2Cns0&w=30&h=30">
 			</a>

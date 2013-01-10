@@ -53,7 +53,6 @@ window.Appjangle = window.Appjangle || {};
 							$(".postText", item).text(postsList.values()[i]);
 						}
 						
-						
 						if (postsList.size() == 0) {
 							$(".noPostsYet", wrapper).show();
 						} else {
@@ -71,13 +70,15 @@ window.Appjangle = window.Appjangle || {};
 				$(".postButton", wrapper).click(function(evt) {
 					evt.preventDefault();
 					posts.append($(".postInput", wrapper).val()).append(aPost);
-					
+					$(".postInput", wrapper).val("");
 					session.commit().get(function() {
 						updatePosts();
 						updateTotal();
 					});
 					
 				});
+				
+				wrapper.show();
 			}());
 		});
 
