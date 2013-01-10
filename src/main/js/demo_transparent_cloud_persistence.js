@@ -30,6 +30,7 @@ window.Appjangle = window.Appjangle || {};
 			posts = session.seed();
 		} else {
 			posts = session.node(params.node);
+			$(".postButton", wrapper).addClass("disabled");
 		}
 		
 		// load data type for posts
