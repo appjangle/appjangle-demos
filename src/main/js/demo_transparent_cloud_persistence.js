@@ -85,6 +85,8 @@ window.Appjangle = window.Appjangle || {};
 					
 				});
 				
+				updatePosts();
+				updateTotal();
 				wrapper.show();
 			}());
 		});
