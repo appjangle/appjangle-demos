@@ -1,13 +1,14 @@
+<!DOCTYPE html>
 <!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_instant_data_app -->
 <html>
 
 <head>
 <link
-    href="http://appjangle.com/assets/v02/bootstrap-2.2.2/css/bootstrap.min.css"
-    rel="stylesheet">
+	href="http://appjangle.com/assets/v02/bootstrap-2.2.2/css/bootstrap.min.css"
+	rel="stylesheet">
 <link
-    href="http://appjangle.com/assets/v02/bootstrap-2.2.2/css/bootstrap-responsive.min.css"
-    rel="stylesheet">
+	href="http://appjangle.com/assets/v02/bootstrap-2.2.2/css/bootstrap-responsive.min.css"
+	rel="stylesheet">
 
 <script src="http://appjangle.com/js/v01/appjangle/appjangle.nocache.js"></script>
 <script
@@ -40,10 +41,18 @@
 		<div class="row-fluid">
 			<div class="span12">
 
-				<div class="input-append">
-					<input class="postInput span11"  placeholder="What's up?" type="text">
-					<button class="postButton btn btn-inverse input-small" type="button">Post</button>
-				</div>
+				<form class="form-search">
+					<div class="input-append" style="width: 100%;">
+						 
+						<input class="search-query input-xxlarge postInput"
+							placeholder="What's up?" type="text"></input> 
+						<button class="postButton btn btn-inverse input-small"
+							type="button" style="max-width: 90px; min-width:90px;">Post</button>
+						
+					</div>
+				</form>
+
+
 
 			</div>
 		</div>
@@ -61,16 +70,18 @@
 		</div>
 
 
-		<div class="postTemplate hide post" onMouseOver="this.style.backgroundColor='#F8F8F8'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+		<div class="postTemplate hide post"
+			onMouseOver="this.style.backgroundColor='#F8F8F8'"
+			onMouseOut="this.style.backgroundColor='#FFFFFF'">
 			<a class="pull-left" href="#"> <img class="media-object"
-				src="http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50&h=50"
-				
-				>
+				src="http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50&h=50">
 				<!-- caesar small: src="http://docs.google.com/drawings/d/1p5QOqa_z14b5wy7dKYDXfsq8t9jFt3ZFqZxjwt8wpmk/pub?w=30&h=30" -->
 				<!-- seal: src="http://docs.google.com/drawings/pub?id=13FdmIQDoL33MCPnMNyn7kxabBTGPCqhvxJYiRB2Cns0&w=30&h=30" -->
 			</a>
 			<div class="media-body">
-				<h4 class="media-heading" style="font-size: 80%;"><span class="postTime hide">2:29</span> <span class="postAuthor">Caesar</span> </h4>
+				<h4 class="media-heading" style="font-size: 80%;">
+					<span class="postTime hide">2:29</span> <span class="postAuthor">Caesar</span>
+				</h4>
 				<p>
 					<span class="postText"></span>
 				</p>
