@@ -15,15 +15,26 @@
 <script src="http://appjangle.com/js/v01/appjangle/appjangle.nocache.js"></script>
 <script
     src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_transparent_cloud_persistence_js.value.html"></script>
+<script src="http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_transparent_cloud_persistence_js.value.js"></script>
 
 <script>
     window.onNextwebOnedb = function(engine) {
-
+        var node;
+    	
+    	if (window.location.hash) {
+    		node = window.location.hash.substring(1);
+    	} else {
+    		node = null;
+    	}
+    	
+    	
         Appjangle.demos.initTransparentCloudPersistenceDemo({
             wrapper : $(".example"),
             engine : engine,
-            node: window.location.hash.substring(1)
+            node: node,
+            onload: function(node) {
+            	alert("Node loaded: "+node);
+            }
         });
     };
 </script>
@@ -34,41 +45,9 @@
 </head>
 
 <body>
-    <div class="example">
+    <div class="example hide">
         
-        <!-- one.download https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_instant_data_app -->
-<html>
-
-<head>
-<link
-	href="http://appjangle.com/assets/v02/bootstrap-2.2.2/css/bootstrap.min.css"
-	rel="stylesheet">
-<link
-	href="http://appjangle.com/assets/v02/bootstrap-2.2.2/css/bootstrap-responsive.min.css"
-	rel="stylesheet">
-
-<script src="http://appjangle.com/js/v01/appjangle/appjangle.nocache.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="demo_instant_data.js"></script>
-
-<script>
-	window.onNextwebOnedb = function(engine) {
-
-		Appjangle.demos.initInstantDataDemo({
-			wrapper : $(".example"),
-			engine : engine
-		});
-	};
-</script>
-
-<style>
-</style>
-
-</head>
-
-<body>
-	<div class="example">
+     
 
 		<!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_instant_data_html -->
 
@@ -118,10 +97,7 @@
 		</div>
 
 		<!-- one.end -->
-	</div>
-</body>
-</html>
-<!-- one.end -->
+	
         
     </div>
     </body>

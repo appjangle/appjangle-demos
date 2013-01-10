@@ -11,7 +11,7 @@ window.Appjangle = window.Appjangle || {};
 
 	Appjangle.demos = Appjangle.demos || {};
 	
-	Appjangle.demos.initInstantDataDemo = function(params) {
+	Appjangle.demos.initTransparentCloudPersistenceDemo = function(params) {
 		var wrapper, Nextweb, server, session, posts, aPost, demo;
 
 		demo =  {};
@@ -39,6 +39,10 @@ window.Appjangle = window.Appjangle || {};
 		posts.get(function(posts) {
 			// when data node loaded, show ui
 			demo.initUi();
+			
+			if (params.onload) {
+				params.onload(posts.uri());
+			}
 		});
 
 		// submit a new post
