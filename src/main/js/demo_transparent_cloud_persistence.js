@@ -21,12 +21,13 @@ window.Appjangle = window.Appjangle || {};
 		Nextweb= params.engine;
 		
 		// local db server to manage data
-		server = Nextweb.startServer(12322);
+		// server = Nextweb.startServer(12322);
 		session = Nextweb.createSession();
 
 		// load or request for data node to store all posts
 		if (!params.node) {
-			posts = session.seed("local");
+			// posts = session.seed("local");
+			posts = session.seed();
 		} else {
 			posts = session.node(params.node);
 		}
