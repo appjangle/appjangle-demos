@@ -21,7 +21,11 @@ window.Appjangle = window.Appjangle || {};
 		session = Nextweb.createSession();
 
 		// request for data node to store all posts
-		posts = session.seed();
+		if (param.node === null) {
+			posts = session.seed();
+		} else {
+			posts = session.node(params.node);
+		}
 		
 		// define data type for posts
 		aPost = session.node(postType);

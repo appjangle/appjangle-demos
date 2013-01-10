@@ -20,9 +20,10 @@
 <script>
     window.onNextwebOnedb = function(engine) {
 
-        Appjangle.demos.initInstantDataDemo({
+        Appjangle.demos.initTransparentCloudPersistenceDemo({
             wrapper : $(".example"),
-            engine : engine
+            engine : engine,
+            node: window.location.hash.substring(1)
         });
     };
 </script>
