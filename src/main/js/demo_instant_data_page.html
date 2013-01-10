@@ -150,57 +150,58 @@
 						API</a> is used to interact with the Appjangle embedded database in
 					this example.
 				</p>
-				<p>
-					Following the annotated source code of this demo illustrating the use of Appjangle.</p>
-					 
-				<div style="border: 1px;  border-style:solid; border-color: gray; padding: 15px;">
-				<p style="border-bottom: solid; padding-bottom: 5px;">
-					<a
-						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo_instant_data.js">demo_instant_data.js</a>
-				</p>
+				<p>Following the annotated source code of this demo illustrating
+					the use of Appjangle.</p>
+
+				<div
+					style="border: 1px; border-style: solid; border-color: gray; padding: 15px;">
+					<p style="border-bottom: solid; padding-bottom: 5px;">
+						<a
+							href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo_instant_data.js">demo_instant_data.js</a>
+					</p>
 
 
-				<p style="margin-left: 40px; font-size: 90%;">An embedded db server is started
-					and a client session is created.</p>
-				<pre class="prettyprint linenums:24">
+					<p style="margin-left: 40px; font-size: 90%;">An embedded db
+						server is started and a client session is created.</p>
+					<pre class="prettyprint linenums:24">
 // local db server to manage data
 server = Nextweb.startServer(12322);
 session = Nextweb.createSession();
 </pre>
-				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
-					The <a href="http://nextweb.io/docs/nextweb-seed.value.html">seed
-						operation</a> is used to seed a new root node in the Appjangle
-					database. This root node works as the 'container' for all
-					application data. All other data is appended as direct and indirect
-					child nodes to this root node.
-				</p>
-				<pre class="prettyprint linenums:27">
+					<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
+						The <a href="http://nextweb.io/docs/nextweb-seed.value.html">seed
+							operation</a> is used to seed a new root node in the Appjangle
+						database. This root node works as the 'container' for all
+						application data. All other data is appended as direct and
+						indirect child nodes to this root node.
+					</p>
+					<pre class="prettyprint linenums:27">
 // request for data node to store all posts
 posts = session.seed("local");
 </pre>
-				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
-					The <a
-						href="http://nextweb.io/docs/nextweb-node-operation.value.html">node
-						operation</a> is used to create a reference to a data type node. This
-					data type node has been defined before with another Appjangle app.
-					The data type can be shared between unlimited apps and allows to
-					distinguish posted messages from other data stored in the database
-					(see <a
-						href="http://nextweb.io/docs/nextweb-data-pattern.value.html">property
-						pattern</a>).
-				</p>
-				<pre class="prettyprint linenums:30">
+					<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
+						The <a
+							href="http://nextweb.io/docs/nextweb-node-operation.value.html">node
+							operation</a> is used to create a reference to a data type node. This
+						data type node has been defined before with another Appjangle app.
+						The data type can be shared between unlimited apps and allows to
+						distinguish posted messages from other data stored in the database
+						(see <a
+							href="http://nextweb.io/docs/nextweb-data-pattern.value.html">property
+							pattern</a>).
+					</p>
+					<pre class="prettyprint linenums:30">
 // load data type for posts
 postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
 aPost = session.node(postType);
 </pre>
-				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
-					The requested seed node is resolved from the database server using
-					the <a href="http://nextweb.io/docs/nextweb-get.value.html">get
-						operation</a> (This will happen in real-time, since we are running a
-					local embedded database server).
-				</p>
-				<pre class="prettyprint linenums:34">
+					<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
+						The requested seed node is resolved from the database server using
+						the <a href="http://nextweb.io/docs/nextweb-get.value.html">get
+							operation</a> (This will happen in real-time, since we are running a
+						local embedded database server).
+					</p>
+					<pre class="prettyprint linenums:34">
 // resolving request for data node
 posts.get(function(posts) {
     // when data node loaded, show ui
@@ -210,24 +211,24 @@ posts.get(function(posts) {
 // submit a new post
 demo.submitPost = function() {
 </pre>
-				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
-					The <a
-						href="http://nextweb.io/docs/nextweb-append-value.value.html">append
-						operation</a> is used to append the text in the input to the
-					<code>posts</code>
-					seed node created above. The second append is used to assign the
-					data type loaded above.
-				</p>
-				<pre class="prettyprint linenums:42">
+					<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
+						The <a
+							href="http://nextweb.io/docs/nextweb-append-value.value.html">append
+							operation</a> is used to append the text in the input to the
+						<code>posts</code>
+						seed node created above. The second append is used to assign the
+						data type loaded above.
+					</p>
+					<pre class="prettyprint linenums:42">
     posts.append($(".postInput", wrapper).val()).append(aPost);
     $(".postInput", wrapper).val("");</pre>
-				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
-					The commit operation triggers a <a
-						href="http://maxrohde.com/2012/05/06/onedb-architecture-and-design/#synchronization">synchronization</a>
-					between client and 'server' (that's still the embedded local
-					server).
-				</p>
-				<pre class="prettyprint linenums:44">
+					<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
+						The commit operation triggers a <a
+							href="http://maxrohde.com/2012/05/06/onedb-architecture-and-design/#synchronization">synchronization</a>
+						between client and 'server' (that's still the embedded local
+						server).
+					</p>
+					<pre class="prettyprint linenums:44">
     session.commit().get(function() {
         demo.updatePosts();
         demo.updateTotal();
@@ -235,16 +236,17 @@ demo.submitPost = function() {
 };
 
 demo.updateTotal = function() {</pre>
-				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
-					The <a
-						href="http://nextweb.io/docs/nextweb-selectAll-property.value.html">selectAll(property)</a>
-					operation is used to retrieve a list of all append children of the
-					root node
-					<code>posts</code>
-					which have been marked with the post data type mentioned above. The
-					length of this list is used to display the total number of posts.
-				</p>
-				<pre class="prettyprint linenums:53">
+					<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
+						The <a
+							href="http://nextweb.io/docs/nextweb-selectAll-property.value.html">selectAll(property)</a>
+						operation is used to retrieve a list of all append children of the
+						root node
+						<code>posts</code>
+						which have been marked with the post data type mentioned above.
+						The length of this list is used to display the total number of
+						posts.
+					</p>
+					<pre class="prettyprint linenums:53">
     posts.selectAll(aPost).get(function(postsList) {
         $(".totalPosts", wrapper).text(postsList.size());
     });
@@ -252,15 +254,15 @@ demo.updateTotal = function() {</pre>
 
 demo.updatePosts = function() {
     var i, item;</pre>
-				<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
-					The <a
-						href="http://nextweb.io/docs/nextweb-selectAll-property.value.html">selectAll(property)</a>
-					is again used to retrieve a <a
-						href="http://nextweb.io/docs/nextweb-entity-list.value.html">NodeList</a>
-					with posts. The values of these nodes are then iterated through and
-					they are displayed as text to elements in a post list.
-				</p>
-				<pre class="prettyprint linenums:61">
+					<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
+						The <a
+							href="http://nextweb.io/docs/nextweb-selectAll-property.value.html">selectAll(property)</a>
+						is again used to retrieve a <a
+							href="http://nextweb.io/docs/nextweb-entity-list.value.html">NodeList</a>
+						with posts. The values of these nodes are then iterated through
+						and they are displayed as text to elements in a post list.
+					</p>
+					<pre class="prettyprint linenums:61">
     posts.selectAll(aPost).get(function(postsList) {
         $(".postList", wrapper).empty();
         for (i=postsList.values().length-1; i>=0; i--) {
@@ -268,8 +270,11 @@ demo.updatePosts = function() {
             $(".postList", wrapper).append(item);
             
             $(".postText", item).text(postsList.values()[i]);
-        }
-        
+        }</pre>
+					<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
+						The size of the retrieved NodeLit is used to trigger the display
+						of a placeholder when no nodes are defined.</p>
+					<pre class="prettyprint linenums:70">
         if (postsList.size() == 0) {
             $(".noPostsYet", wrapper).show();
         } else {
@@ -278,7 +283,7 @@ demo.updatePosts = function() {
     });
 };
 </pre>
-</div>
+				</div>
 			</div>
 		</div>
 		<div class="row-fluid">
