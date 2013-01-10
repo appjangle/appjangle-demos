@@ -50,7 +50,9 @@ window.Appjangle = window.Appjangle || {};
 						for (i=postsList.values().length-1; i>=0; i--) {
 							item = createItem();
 							$(".postList", wrapper).append(item);
+							
 							$(".postText", item).text(postsList.values()[i]);
+							
 						}
 						
 						if (postsList.size() == 0) {
@@ -69,11 +71,14 @@ window.Appjangle = window.Appjangle || {};
 				
 				$(".postButton", wrapper).click(function(evt) {
 					evt.preventDefault();
+					
 					posts.append($(".postInput", wrapper).val()).append(aPost);
 					$(".postInput", wrapper).val("");
 					session.commit().get(function() {
+						
 						updatePosts();
 						updateTotal();
+						
 					});
 					
 				});
