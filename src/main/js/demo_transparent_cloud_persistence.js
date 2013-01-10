@@ -49,15 +49,17 @@ window.Appjangle = window.Appjangle || {};
 
 		// submit a new post
 		demo.submitPost = function() {
-			posts.append($(".postInput", wrapper).val()).append(aPost);
+			posts.append($(".postInput", wrapper).val()).get().append(aPost).get();
 			$(".postInput", wrapper).val("");
-			
+
 			demo.updatePosts();
 			demo.updateTotal();
 			
 			session.commit().get(function() {
 				
 			});
+			
+			
 			
 			
 		};
