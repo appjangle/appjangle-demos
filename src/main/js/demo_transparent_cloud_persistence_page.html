@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_transparent_cloud_persistence_page1 -->
 <html>
 
 <head>
@@ -17,14 +18,17 @@
 	src="http://appjangle.com/assets/v02/prettify-small-1-Jun-2011/prettify.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="demo_instant_data.js"></script>
+<script src="http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_transparent_cloud_persistence_js.value.js"></script>
 
 <script>
 	window.onNextwebOnedb = function(engine) {
 
 		Appjangle.demos.initTransparentCloudPersistenceDemo({
 			wrapper : $(".transparentCloudPersistenceExample"),
-			engine : engine
+			engine : engine,
+			onload: function(node) {
+				$(".openInNewWindow").attr("href", "http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_transparent_cloud_persistence_app.value.html#"+node);
+			}
 		});
 	};
 	window.onload = function() {
@@ -121,7 +125,7 @@
 
 		<div class="row-fluid">
 			<div class="span12">
-				<a href="#" class="openInNewWindow btn btn-primary">Open in New
+				<a href="#" class="openInNewWindow btn btn-primary" target="_blank">Open in New
 					Window</a>
 			</div>
 		</div>
@@ -136,7 +140,7 @@
 					<dd>
 						In this demo, all posts are persisted in the Appjangle cloud. The
 						source code, however, is almost identical to the <a
-							href="#instantData">instant data demo</a>. The high
+							href="#instantData">instant data demo</a>, which worked with a local database. The high
 						responsiveness of the application is maintained without any need
 						for additional caching code, since data is kept in a local
 						embedded database, which is transparently synchronized with the
@@ -145,9 +149,9 @@
 
 				</dl>
 				<dl class="dl-horizontal" style="margin-top: 10px;">
-					<dt style="font-size: 90%;">No Sharing</dt>
+					<dt style="font-size: 90%;">No Collaboration</dt>
 					<dd>
-						Opening the posts in a new window just allows to view these posts.
+						Opening the posts in a new window allows to view them but not make new posts.
 						Check the <a href="#stateSynchronization">state
 							synchronization</a> and <a href="#fineGrainedSharing">fine-grained
 							sharing</a> demos to see how the post can easily be shared and edited
@@ -217,3 +221,4 @@ session = Nextweb.createSession();
 	</div>
 </body>
 </html>
+<!-- one.end -->
