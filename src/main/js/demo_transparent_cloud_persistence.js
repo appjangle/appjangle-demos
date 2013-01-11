@@ -19,17 +19,17 @@ window.Appjangle = window.Appjangle || {};
 		wrapper = params.wrapper;
 		Nextweb = params.engine;
 
-		// local db server to manage data
+		// No local db server required
 		// server = Nextweb.startServer(12322);
 		session = Nextweb.createSession();
 
 		// load or request for data node to store all posts
-		if (!params.node) {
-			// posts = session.seed("local");
-			posts = session.seed();
-		} else {
+		if (params.node) {
 			posts = session.node(params.node);
 			$(".postButton", wrapper).addClass("disabled");
+		} else {
+			// posts = session.seed("local");
+			posts = session.seed();
 		}
 
 		// load data type for posts
