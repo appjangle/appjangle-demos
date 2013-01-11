@@ -80,6 +80,7 @@ window.Appjangle = window.Appjangle || {};
 				}
 				
 				if (postsList.size() == 0) {
+					$(".noPostsYet", wrapper).text("No posts yet.");
 					$(".noPostsYet", wrapper).show();
 				} else {
 					$(".noPostsYet", wrapper).hide();
@@ -97,6 +98,8 @@ window.Appjangle = window.Appjangle || {};
 				demo.submitPost();
 				
 			});
+			
+			$(".noPostsYet", wrapper).text("Loading posts ...");
 			demo.updateTotal();
 			demo.updatePosts();
 			wrapper.show();
