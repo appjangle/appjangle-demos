@@ -58,10 +58,7 @@ window.Appjangle = window.Appjangle || {};
 			session.commit().get(function() {
 				
 			});
-			
-			
-			
-			
+
 		};
 		
 		demo.updateTotal = function() {

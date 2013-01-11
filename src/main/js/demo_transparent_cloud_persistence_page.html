@@ -1,140 +1,219 @@
-<!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_transparent_cloud_persistence_page -->
+<!DOCTYPE html>
+<html>
+
+<head>
+<link
+	href="http://appjangle.com/assets/v02/bootstrap-2.2.2/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="http://appjangle.com/assets/v02/bootstrap-2.2.2/css/bootstrap-responsive.min.css"
+	rel="stylesheet">
+<link
+	href="http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/tomorrow.value.css"
+	rel="stylesheet">
+
+<script src="http://appjangle.com/js/v01/appjangle/appjangle.nocache.js"></script>
+<script
+	src="http://appjangle.com/assets/v02/prettify-small-1-Jun-2011/prettify.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="demo_instant_data.js"></script>
+
+<script>
+	window.onNextwebOnedb = function(engine) {
+
+		Appjangle.demos.initTransparentCloudPersistenceDemo({
+			wrapper : $(".transparentCloudPersistenceExample"),
+			engine : engine
+		});
+	};
+	window.onload = function() {
+		prettyPrint();
+	}
+</script>
+
+<style>
+</style>
+
+</head>
+
+<body>
+	<div class="container-fluid">
 
 
-<div class="row-fluid">
-	<div class="span12">
-		<h4>Summary</h4>
-		<p>This demo allows to make posts to a status or message board. A
-			text typed in the input box above will appear as item in a list below
-			the input box upon clicking the [Post] button.</p>
-		<p>All posts are persisted to the Appjangle cloud storage. You can
-			click on the button [Open in New Window] to try out loading the posts
-			from the cloud.</p>
-	</div>
-</div>
-<div class="row-fluid">
-	<div class="span12">
-		<h4 style="margin-top: 30px;">Demo</h4>
-	</div>
-</div>
-<div class="ajdemo" style="padding: 5px;">
-	<div class="row-fluid">
-		<div class="span12">
-			<div class="transparentCloudPersistenceExample hide"
-				style="border: 1px solid #4C3C1B; padding: 15px;">
-				<!-- one.download https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_instant_data_html -->
+		<!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_transparent_cloud_persistence_page -->
 
 
 		<div class="row-fluid">
-			<div class="input-append" style="border-radius: 3px;">
-
-				<input class="postInput input-block-level" placeholder="What's up?"
-					type="text"
-					style="width: 80%; float: left;"></input>
-				<button class="postButton btn btn-inverse input-small "
-					type="button" style="width: 20%; max-width: 90px; float: left;">Post</button>
+			<div class="span12">
+				<h4>Summary</h4>
+				<p>This demo allows to make posts to a status or message board.
+					A text typed in the input box above will appear as item in a list
+					below the input box upon clicking the [Post] button.</p>
+				<p>All posts are persisted to the Appjangle cloud storage. You
+					can click on the button [Open in New Window] to try out loading the
+					posts from the cloud.</p>
 			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<h4 style="margin-top: 30px;">Demo</h4>
+			</div>
+		</div>
+		<div class="ajdemo" style="padding: 5px;">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="transparentCloudPersistenceExample hide"
+						style="border: 1px solid #4C3C1B; padding: 15px;">
+						<!-- one.download https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_instant_data_html -->
 
+
+						<div class="row-fluid">
+							<div class="input-append" style="border-radius: 3px;">
+
+								<input class="postInput input-block-level"
+									placeholder="What's up?" type="text"
+									style="width: 80%; float: left;"></input>
+								<button class="postButton btn btn-inverse input-small "
+									type="button" style="width: 20%; max-width: 90px; float: left;">Post</button>
+							</div>
+
+						</div>
+
+
+						<div class="row-fluid">
+							<div class="span12">
+								<p style="color: gray;" class="noPostsYet">No posts yet.</p>
+								<ul class="media-list postList">
+
+								</ul>
+								<p>
+									Total Posts: <span class="totalPosts">0</span>
+								</p>
+							</div>
+						</div>
+
+
+						<div class="postTemplate hide post"
+							onMouseOver="this.style.backgroundColor='#F8F8F8'"
+							onMouseOut="this.style.backgroundColor='#FFFFFF'">
+							<a class="pull-left" href="#"> <img class="media-object"
+								src="http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50&h=50">
+								<!-- caesar small: src="http://docs.google.com/drawings/d/1p5QOqa_z14b5wy7dKYDXfsq8t9jFt3ZFqZxjwt8wpmk/pub?w=30&h=30" -->
+								<!-- seal: src="http://docs.google.com/drawings/pub?id=13FdmIQDoL33MCPnMNyn7kxabBTGPCqhvxJYiRB2Cns0&w=30&h=30" -->
+							</a>
+							<div class="media-body">
+								<h4 class="media-heading" style="font-size: 80%;">
+									<span class="postTime hide">2:29</span> <span
+										class="postAuthor">Caesar</span>
+								</h4>
+								<p>
+									<span class="postText"></span>
+								</p>
+							</div>
+						</div>
+
+						<!-- one.end -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row-fluid">
+			<div class="span12">
+				<a href="#" class="openInNewWindow btn btn-primary">Open in New
+					Window</a>
+			</div>
+		</div>
+
+
+
+		<div class="row-fluid">
+			<div class="span12">
+				<h4 style="margin-top: 30px;">Note</h4>
+				<dl class="dl-horizontal">
+					<dt style="font-size: 90%;">Cloud Persistence</dt>
+					<dd>
+						In this demo, all posts are persisted in the Appjangle cloud. The
+						source code, however, is almost identical to the <a
+							href="#instantData">instant data demo</a>. The high
+						responsiveness of the application is maintained without any need
+						for additional caching code, since data is kept in a local
+						embedded database, which is transparently synchronized with the
+						Appjangle cloud.
+					</dd>
+
+				</dl>
+				<dl class="dl-horizontal" style="margin-top: 10px;">
+					<dt style="font-size: 90%;">No Sharing</dt>
+					<dd>
+						Opening the posts in a new window just allows to view these posts.
+						Check the <a href="#stateSynchronization">state
+							synchronization</a> and <a href="#fineGrainedSharing">fine-grained
+							sharing</a> demos to see how the post can easily be shared and edited
+						in multiple locations.
+					</dd>
+				</dl>
+
+			</div>
+		</div>
+
+
+
+		<div class="row-fluid">
+			<div class="span12">
+				<h4 style="margin-top: 30px;">Usage of Appjangle</h4>
+				<p>
+					Appjangle provides the local database containing the posted
+					messages. The <a href="http://nextweb.io">Nextweb open source
+						API</a> is used to interact with the Appjangle embedded database in
+					this example.
+				</p>
+				<p>Following the annotated source code of this demo illustrating
+					the use of Appjangle.</p>
+
+				<div
+					style="border: 1px; border-style: solid; border-color: gray; padding: 15px;">
+					<p style="border-bottom: solid; padding-bottom: 5px;">
+						<a
+							href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo_instant_data.js">demo_instant_data.js</a>
+					</p>
+
+
+					<p style="margin-left: 40px; font-size: 90%;">An embedded db
+						server is started and a client session is created.</p>
+					<pre class="prettyprint linenums:24">
+// local db server to manage data
+server = Nextweb.startServer(12322);
+session = Nextweb.createSession();
+</pre>
+					<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
+						The <a href="http://nextweb.io/docs/nextweb-seed.value.html">seed
+							operation</a> is used to seed a new root node in the Appjangle
+						database. This root node works as the 'container' for all
+						application data. All other data is appended as direct and
+						indirect child nodes to this root node.
+					</p>
+				</div>
+			</div>
 		</div>
 
 
 		<div class="row-fluid">
 			<div class="span12">
-				<p style="color: gray;" class="noPostsYet">No posts yet.</p>
-				<ul class="media-list postList">
-
-				</ul>
+				<h4 style="margin-top: 30px;">Files</h4>
 				<p>
-					Total Posts: <span class="totalPosts">0</span>
+					<a
+						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo_transparent_cloud_persistence.js">demo_transparent_cloud_persistence.js</a>
+				</p>
+				<p>
+					<a
+						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo_instant_data.html">demo_instant_data.html</a>
 				</p>
 			</div>
 		</div>
-
-
-		<div class="postTemplate hide post"
-			onMouseOver="this.style.backgroundColor='#F8F8F8'"
-			onMouseOut="this.style.backgroundColor='#FFFFFF'">
-			<a class="pull-left" href="#"> <img class="media-object"
-				src="http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50&h=50">
-				<!-- caesar small: src="http://docs.google.com/drawings/d/1p5QOqa_z14b5wy7dKYDXfsq8t9jFt3ZFqZxjwt8wpmk/pub?w=30&h=30" -->
-				<!-- seal: src="http://docs.google.com/drawings/pub?id=13FdmIQDoL33MCPnMNyn7kxabBTGPCqhvxJYiRB2Cns0&w=30&h=30" -->
-			</a>
-			<div class="media-body">
-				<h4 class="media-heading" style="font-size: 80%;">
-					<span class="postTime hide">2:29</span> <span class="postAuthor">Caesar</span>
-				</h4>
-				<p>
-					<span class="postText"></span>
-				</p>
-			</div>
-		</div>
-
 		<!-- one.end -->
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row-fluid">
-    <div class="span12">
-        <a href="#" class="openInNewWindow btn btn-primary">Open in New Window</a>
-    </div>
-</div>
-
-<div class="row-fluid">
-	<div class="span12">
-		<h4 style="margin-top: 30px;">Usage of Appjangle</h4>
-		<p>Appjangle provides both a local embedded database for low
-			latency access to the data as well as a cloud-based database to
-			persist the post.</p>
-		<p>
-			The usage of Appjangle is identical to the <a href="#instantData">instant
-				data example</a> apart from the following alterations:
-		</p>
-		<p class="text-success" style="margin-top: 35px;">
-			<b>1. Creating a Cloud-based Seed node</b>
-		</p>
-
-		<p>
-			In the first demo, the <a
-				href="http://nextweb.io/docs/nextweb-seed.value.html">seed
-				operation</a> was used to create a seed node in an embedded database.
-		</p>
-		<p>
-			<b>Before</b>
-		</p>
-		<pre class="prettyprint">
-posts = session.seed("local");
-</pre>
-		<p>For this demo, the additional parameter &quot;local&quot; is
-			removed and the seed operation will default to request a seed node
-			from the Appjangle cloud.</p>
-		<p>
-			<b>Now</b>
-		</p>
-		<pre class="prettyprint">
-posts = session.seed();
-</pre>
-		<p class="text-success" style="margin-top: 35px;">
-			<b>2. That's IT</b>
-		</p>
-
-		<p>No further changes are required to turn the 'local' demo into
-			an application with cloud-based persistence (apart from some JS wiring for reading hash codes).</p>
 
 	</div>
-</div>
-<div class="row-fluid">
-	<div class="span12">
-		<h4 style="margin-top: 30px;">Source Code</h4>
-		<p>
-			<a
-				href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo_transparent_cloud_persistence.js">demo_transparent_cloud_persistence.js</a>
-		</p>
-		<p>
-			<a
-				href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo_instant_data.html">demo_instant_data.html</a>
-		</p>
-	</div>
-</div>
-<!-- one.end -->
+</body>
+</html>
