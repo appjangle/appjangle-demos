@@ -67,7 +67,7 @@ window.Appjangle = window.Appjangle || {};
 					$(".postText", item).text(postsList.values()[i]);
 				}
 				
-				if (postsList.size() == 0) {
+				if (postsList.size() === 0) {
 					$(".noPostsYet", wrapper).show();
 				} else {
 					$(".noPostsYet", wrapper).hide();

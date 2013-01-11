@@ -276,7 +276,7 @@ demo.updatePosts = function() {
 						The size of the retrieved NodeLit is used to trigger the display
 						of a placeholder when no nodes are defined.</p>
 					<pre class="prettyprint linenums:70">
-        if (postsList.size() == 0) {
+        if (postsList.size() === 0) {
             $(".noPostsYet", wrapper).show();
         } else {
             $(".noPostsYet", wrapper).hide();
