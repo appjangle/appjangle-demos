@@ -17,16 +17,26 @@
 
 <script>
 	window.onNextwebOnedb = function(engine) {
+	    var server, session, posts;
+		
+		// local db server to manage data
+        server = Nextweb.startServer(12322);
+        session = Nextweb.createSession();
 
+        // request for data node to store all posts
+        posts = session.seed("local");
+		
 		Appjangle.demos.initSynchronizationDemo({
 			wrapper : $(".client1"),
 			avatar: "http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50&h=50", // caesar
+			posts: posts,
 			engine : engine
 		});
 		
 		Appjangle.demos.initSynchronizationDemo({
             wrapper : $(".client2"),
             avatar: "http://docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50&h=50", // cleopetra
+            posts: posts,
             engine : engine
         });
 	};

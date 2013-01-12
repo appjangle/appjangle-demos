@@ -19,13 +19,9 @@ window.Appjangle = window.Appjangle || {};
 		// jQuery element wrapping all required HTML
 		wrapper = params.wrapper;
 		Nextweb = params.engine;
-
-		// local db server to manage data
-		server = Nextweb.startServer(12322);
-		session = Nextweb.createSession();
-
-		// request for data node to store all posts
-		posts = session.seed("local");
+		session = params.posts.getSession();
+		posts = params.posts;
+		
 
 		// load data type for posts
 		postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
@@ -42,6 +38,9 @@ window.Appjangle = window.Appjangle || {};
 			demo.initUi();
 		});
 
+		// installing monitor to check for updates from other clients
+		posts.monitor(1000).get()
+		
 		// submit a new post
 		demo.submitPost = function() {
 			var post = posts.append($(".postInput", wrapper).val());
