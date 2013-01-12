@@ -1,4 +1,4 @@
-// <!-- one.createPublic demo_collaboration_synchronization -->
+// <!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_collaboration_synchronization -->
 
 /*global window: false */
 
@@ -76,7 +76,7 @@ window.Appjangle = window.Appjangle || {};
 					$(".postText", item).text(post.value());
 					
 					post.select(anAvatar).get(function(avatarPic) {
-						$(".media-object", item).attr(src, avatarPic);
+						$(".media-object", item).attr("src", avatarPic.value());
 					});
 					
 					
