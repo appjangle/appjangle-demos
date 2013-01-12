@@ -13,18 +13,20 @@
 <script src="http://appjangle.com/js/v01/appjangle/appjangle.nocache.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="demo_instant_data.js"></script>
+<script src="demo_collaboration_synchronization.js"></script>
 
 <script>
 	window.onNextwebOnedb = function(engine) {
 
-		Appjangle.demos.initInstantDataDemo({
+		Appjangle.demos.initSynchronizationDemo({
 			wrapper : $(".client1"),
+			avatar: "http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50&h=50", // caesar
 			engine : engine
 		});
 		
-		Appjangle.demos.initInstantDataDemo({
+		Appjangle.demos.initSynchronizationDemo({
             wrapper : $(".client2"),
+            avatar: "http://docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50&h=50", // cleopetra
             engine : engine
         });
 	};
@@ -82,7 +84,7 @@
 							onMouseOver="this.style.backgroundColor='#F8F8F8'"
 							onMouseOut="this.style.backgroundColor='#FFFFFF'">
 							<a class="pull-left" href="#"> <img class="media-object"
-								src="http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50&h=50">
+								>
 								<!-- caesar big src="http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50&h=50"-->
 								<!-- caesar small: src="http://docs.google.com/drawings/d/1p5QOqa_z14b5wy7dKYDXfsq8t9jFt3ZFqZxjwt8wpmk/pub?w=30&h=30" -->
 								<!-- seal: src="http://docs.google.com/drawings/pub?id=13FdmIQDoL33MCPnMNyn7kxabBTGPCqhvxJYiRB2Cns0&w=30&h=30" -->
@@ -90,7 +92,7 @@
 							<div class="media-body">
 								<h4 class="media-heading" style="font-size: 80%;">
 									<span class="postTime hide">2:29</span> <span
-										class="postAuthor">Cleopetra</span>
+										class="postAuthor">Caesar</span>
 								</h4>
 								<p>
 									<span class="postText"></span>
@@ -141,14 +143,15 @@
                             onMouseOver="this.style.backgroundColor='#F8F8F8'"
                             onMouseOut="this.style.backgroundColor='#FFFFFF'">
                             <a class="pull-left" href="#"> <img class="media-object"
-                                src="http://docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50&h=50">
+                               >
+                                <!-- cleopetra:  src="http://docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50&h=50" -->
                                 <!-- caesar small: src="http://docs.google.com/drawings/d/1p5QOqa_z14b5wy7dKYDXfsq8t9jFt3ZFqZxjwt8wpmk/pub?w=30&h=30" -->
                                 <!-- seal: src="http://docs.google.com/drawings/pub?id=13FdmIQDoL33MCPnMNyn7kxabBTGPCqhvxJYiRB2Cns0&w=30&h=30" -->
                             </a>
                             <div class="media-body">
                                 <h4 class="media-heading" style="font-size: 80%;">
                                     <span class="postTime hide">2:29</span> <span
-                                        class="postAuthor">Caesar</span>
+                                        class="postAuthor">Cleopetra</span>
                                 </h4>
                                 <p>
                                     <span class="postText"></span>
