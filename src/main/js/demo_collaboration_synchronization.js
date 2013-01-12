@@ -30,6 +30,7 @@ window.Appjangle = window.Appjangle || {};
 		// load data type for posts
 		postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
 		aPost = session.node(postType);
+		aPost.get(); // to reduce latency when displaying first post
 
 		// load type for avatar picture
 		avatarType = "http://slicnet.com/seed1/seed1/3/9/1/3/h/sd/anAvatar";
