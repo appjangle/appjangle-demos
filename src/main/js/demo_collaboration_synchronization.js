@@ -49,12 +49,14 @@ window.Appjangle = window.Appjangle || {};
 
 			$(".postInput", wrapper).val("");
 			
-			demo.updatePosts();
-			demo.updateTotal();
+			
 			
 			session.commit().get(function() {
 
 			});
+			
+			demo.updatePosts();
+			demo.updateTotal();
 		};
 
 		demo.updateTotal = function() {
@@ -65,10 +67,10 @@ window.Appjangle = window.Appjangle || {};
 
 		demo.updatePosts = function() {
 			var i, post, item;
-
+			console.log(userName+": loading posts");
 			posts.selectAll(aPost).get(
 					function(postsList) {
-						console.log(postsList.values());
+						console.log(userName+": values:["+postsList.values()+"]");
 						$(".postList", wrapper).empty();
 						for (i = postsList.nodes().length - 1; i >= 0; i--) {
 							post = postsList.nodes()[i];
@@ -131,10 +133,14 @@ window.Appjangle = window.Appjangle || {};
 		
 		// installing monitor to check for updates from other clients
 		monitor = posts.monitor("2000", function(context) {
-			demo.updatePosts();
-			demo.updateTotal();
+			console.log(userName+ ": change detected ");
+			
 			//alert("change detected!");
-			//posts.reload(2).get();
+			posts.reload(2).get(function(newPosts) {
+				console.log("reloaded posts ");
+				demo.updatePosts();
+				demo.updateTotal();
+			});
 		});
 		monitor.get(function(monitor) {
 			//alert('monitor installed');
