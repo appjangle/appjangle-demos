@@ -21,7 +21,7 @@ window.Appjangle = window.Appjangle || {};
 		Nextweb = params.engine;
 		session = params.posts.getSession();
 		posts = params.posts;
-		
+		monitor = null;
 
 		// load data type for posts
 		postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
@@ -39,7 +39,10 @@ window.Appjangle = window.Appjangle || {};
 		});
 
 		// installing monitor to check for updates from other clients
-		posts.monitor(1000).get()
+		monitor = posts.monitor("400", function(context) {
+			demo.updatePosts();
+			demo.updateTotal();
+		});
 		
 		// submit a new post
 		demo.submitPost = function() {
@@ -114,6 +117,9 @@ window.Appjangle = window.Appjangle || {};
 		return {
 			wrapper : wrapper,
 			shutdown : function() {
+				if (monitor != null && monitor.get() != null) {
+					monitor.stop();
+				}
 				session.close().get(function() {
 					server.shutdown.get(function() {
 					});
