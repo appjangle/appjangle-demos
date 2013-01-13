@@ -11,11 +11,12 @@ window.Appjangle = window.Appjangle || {};
 	Appjangle.demos = Appjangle.demos || {};
 
 	Appjangle.demos.initSynchronizationDemo = function(params) {
-		var wrapper, avatar, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType, anUserName,demo;
+		var wrapper, avatar, userName. Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType, anUserName,demo;
 
 		demo = {};
 
 		avatar = params.avatar;
+		userName = params.userName;
 		// jQuery element wrapping all required HTML
 		wrapper = params.wrapper;
 		Nextweb = params.engine;
@@ -53,6 +54,7 @@ window.Appjangle = window.Appjangle || {};
 		demo.submitPost = function() {
 			var post = posts.append($(".postInput", wrapper).val());
 			post.append(aPost);
+			post.append(userName).append(anUserName);
 			post.append(avatar).append(anAvatar);
 
 			$(".postInput", wrapper).val("");
@@ -83,9 +85,14 @@ window.Appjangle = window.Appjangle || {};
 					$(".postList", wrapper).append(item);
 					$(".postText", item).text(post.value());
 					
-					post.select(anAvatar).get(function(avatarPic) {
-						$(".media-object", item).attr("src", avatarPic.value());
+					post.select(anUserName).get(function(userNameNode) {
+						$(".postAuthor", item).text(userNameNode.value());
 					});
+					
+					post.select(anAvatar).get(function(avatarNode) {
+						$(".media-object", item).attr("src", avatarNode.value());
+					});
+					
 					
 					
 				}
