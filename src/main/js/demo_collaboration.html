@@ -24,7 +24,7 @@
         session = Nextweb.createSession();
 
         // request for data node to store all posts
-        posts = session.seed("local");
+        posts = session.seed();
 		
         Appjangle.demos.initSynchronizationDemo({
             wrapper : $(".client1"),
