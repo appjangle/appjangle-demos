@@ -35,8 +35,8 @@ window.Appjangle = window.Appjangle || {};
 		// load type for user name
 		userNameType = "http://slicnet.com/seed1/seed1/3/9/2/3/h/sd/userName";
 		anUserName = session.node(userNameType);
-		session.getAll(aPost, anAvatar, anUserName, function() {
-		}); // to reduce latency when displaying first post
+		//session.getAll(aPost, anAvatar, anUserName, function() {
+		//}); // to reduce latency when displaying first post
 
 
 		// submit a new post
@@ -112,6 +112,7 @@ window.Appjangle = window.Appjangle || {};
 			wrapper.show();
 		};
 
+		
 		demo.createItem = function() {
 			var postContent;
 			postContent = $(".postTemplate", wrapper).clone();
@@ -126,11 +127,17 @@ window.Appjangle = window.Appjangle || {};
 			demo.initUi();
 			wrapper.append($("<p>Loaded "+posts.uri()+"</p>"));
 			
+			
 			// installing monitor to check for updates from other clients
 			monitor = posts.monitor("1000", function(context) {
 				demo.updatePosts();
 				demo.updateTotal();
+				alert("change detected!");
 			});
+			monitor.get(function(monitor) {
+				alert('monitor installed');
+			});
+			
 		});
 		
 		return {
