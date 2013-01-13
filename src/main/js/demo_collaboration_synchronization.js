@@ -38,17 +38,6 @@ window.Appjangle = window.Appjangle || {};
 		session.getAll(aPost, anAvatar, anUserName, function() {
 		}); // to reduce latency when displaying first post
 
-		// resolving request for data node
-		posts.get(function(posts) {
-			// when data node loaded, show ui
-			demo.initUi();
-		});
-
-		// installing monitor to check for updates from other clients
-		monitor = posts.monitor("400", function(context) {
-			demo.updatePosts();
-			demo.updateTotal();
-		});
 
 		// submit a new post
 		demo.submitPost = function() {
@@ -58,10 +47,11 @@ window.Appjangle = window.Appjangle || {};
 			post.append(avatar).append(anAvatar);
 
 			$(".postInput", wrapper).val("");
+			
+			demo.updatePosts();
+			demo.updateTotal();
+			
 			session.commit().get(function() {
-
-				demo.updatePosts();
-				demo.updateTotal();
 
 			});
 		};
@@ -109,7 +99,6 @@ window.Appjangle = window.Appjangle || {};
 		};
 
 		demo.initUi = function() {
-			var createItem, updatePosts, updateTotal;
 
 			$(".postButton", wrapper).click(function(evt) {
 				evt.preventDefault();
@@ -118,6 +107,8 @@ window.Appjangle = window.Appjangle || {};
 
 			});
 
+			$(".postInput", wrapper).attr("placeholder", "What's up, "+userName+"?");
+			
 			wrapper.show();
 		};
 
@@ -129,6 +120,19 @@ window.Appjangle = window.Appjangle || {};
 			return $(postWrapper).append(postContent);
 		};
 
+		// resolving request for data node
+		posts.get(function(posts) {
+			// when data node loaded, show ui
+			demo.initUi();
+			wrapper.append($("<p>Loaded "+posts.uri()+"</p>"));
+			
+			// installing monitor to check for updates from other clients
+			monitor = posts.monitor("1000", function(context) {
+				demo.updatePosts();
+				demo.updateTotal();
+			});
+		});
+		
 		return {
 			wrapper : wrapper,
 			shutdown : function() {

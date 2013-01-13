@@ -17,7 +17,7 @@
 
 <script>
 	window.onNextwebOnedb = function(engine) {
-	    var server, session, posts;
+	    var server, session, session2,posts, posts2;
 		
 		// local db server to manage data
         server = Nextweb.startServer(12322);
@@ -26,21 +26,33 @@
         // request for data node to store all posts
         posts = session.seed();
 		
-		Appjangle.demos.initSynchronizationDemo({
-			wrapper : $(".client1"),
-			userName: "Caesar",
-			avatar: "http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50&h=50", // caesar
-			posts: posts,
-			engine : engine
-		});
-		
-		Appjangle.demos.initSynchronizationDemo({
-            wrapper : $(".client2"),
-            userName : "Cleopetra",
-            avatar: "http://docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50&h=50", // cleopetra
-            posts: posts,
-            engine : engine
+        posts.get(function(posts) {
+            
+        	Appjangle.demos.initSynchronizationDemo({
+                wrapper : $(".client1"),
+                userName: "Caesar",
+                avatar: "http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50&h=50", // caesar
+                posts: posts,
+                engine : engine
+            });
+        	
+        	session2 = Nextweb.createSession();
+        	
+        	posts2 = session2.node(posts.uri(), posts.secret());
+        	
+        	Appjangle.demos.initSynchronizationDemo({
+                wrapper : $(".client2"),
+                userName : "Cleopetra",
+                avatar: "http://docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50&h=50", // cleopetra
+                posts: posts2,
+                engine : engine
+            });
+        	
         });
+        
+		
+		
+		
 	};
 </script>
 
@@ -58,7 +70,7 @@
 			<div class="row-fluid">
 
 				<div class="span6">
-					<div class="client1">
+					<div class="client1 hide">
 						<div class="row-fluid">
 							<div class="span12">
 								<h3>Client 1</h3>
@@ -69,7 +81,7 @@
 							<div class="input-append" style="border-radius: 3px;">
 
 								<input class="postInput input-block-level"
-									placeholder="What's up, Caesar?" type="text"
+									placeholder="What's up?" type="text"
 									style="width: 80%; float: left;"></input>
 								<button class="postButton btn btn-inverse input-small "
 									type="button" style="width: 20%; max-width: 90px; float: left;">Post</button>
@@ -117,7 +129,7 @@
 				
 				
                 <div class="span6">
-                    <div class="client2">
+                    <div class="client2 hide">
                         <div class="row-fluid">
                             <div class="span12">
                                 <h3>Client 2</h3>
@@ -128,7 +140,7 @@
                             <div class="input-append" style="border-radius: 3px;">
 
                                 <input class="postInput input-block-level"
-                                    placeholder="What's up, Cleopetra?" type="text"
+                                    placeholder="What's up?" type="text"
                                     style="width: 80%; float: left;"></input>
                                 <button class="postButton btn btn-inverse input-small "
                                     type="button" style="width: 20%; max-width: 90px; float: left;">Post</button>
