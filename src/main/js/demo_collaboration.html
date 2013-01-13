@@ -24,29 +24,33 @@
         session = Nextweb.createSession();
 
         // request for data node to store all posts
-        posts = session.seed();
+        posts = session.seed("local");
 		
+        Appjangle.demos.initSynchronizationDemo({
+            wrapper : $(".client1"),
+            userName: "Caesar",
+            avatar: "http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50&h=50", // caesar
+            posts: posts,
+            engine : engine
+        });
+        
         posts.get(function(posts) {
             
-        	Appjangle.demos.initSynchronizationDemo({
-                wrapper : $(".client1"),
-                userName: "Caesar",
-                avatar: "http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50&h=50", // caesar
-                posts: posts,
-                engine : engine
-            });
+        	setTimeout(function() {
+        		session2 = Nextweb.createSession();
+                
+                posts2 = session2.node(posts.uri(), posts.secret());
+                
+                Appjangle.demos.initSynchronizationDemo({
+                    wrapper : $(".client2"),
+                    userName : "Cleopetra",
+                    avatar: "http://docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50&h=50", // cleopetra
+                    posts: posts2,
+                    engine : engine
+                });	
+        	}, 2000);
         	
-        	session2 = Nextweb.createSession();
         	
-        	posts2 = session2.node(posts.uri(), posts.secret());
-        	
-        	Appjangle.demos.initSynchronizationDemo({
-                wrapper : $(".client2"),
-                userName : "Cleopetra",
-                avatar: "http://docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50&h=50", // cleopetra
-                posts: posts2,
-                engine : engine
-            });
         	
         });
         

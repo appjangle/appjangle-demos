@@ -27,7 +27,8 @@ window.Appjangle = window.Appjangle || {};
 		// load data type for posts
 		postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
 		aPost = session.node(postType);
-
+		aPost.get();
+		
 		// load type for avatar picture
 		avatarType = "http://slicnet.com/seed1/seed1/3/9/1/3/h/sd/anAvatar";
 		anAvatar = session.node(avatarType);
@@ -67,7 +68,7 @@ window.Appjangle = window.Appjangle || {};
 
 			posts.selectAll(aPost).get(
 					function(postsList) {
-
+						console.log(postsList.values());
 						$(".postList", wrapper).empty();
 						for (i = postsList.nodes().length - 1; i >= 0; i--) {
 							post = postsList.nodes()[i];
@@ -112,7 +113,6 @@ window.Appjangle = window.Appjangle || {};
 			wrapper.show();
 		};
 
-		
 		demo.createItem = function() {
 			var postContent;
 			postContent = $(".postTemplate", wrapper).clone();
@@ -127,17 +127,17 @@ window.Appjangle = window.Appjangle || {};
 			demo.initUi();
 			wrapper.append($("<p>Loaded "+posts.uri()+"</p>"));
 			
-			
-			// installing monitor to check for updates from other clients
-			monitor = posts.monitor("1000", function(context) {
-				demo.updatePosts();
-				demo.updateTotal();
-				alert("change detected!");
-			});
-			monitor.get(function(monitor) {
-				alert('monitor installed');
-			});
-			
+		});
+		
+		// installing monitor to check for updates from other clients
+		monitor = posts.monitor("2000", function(context) {
+			demo.updatePosts();
+			demo.updateTotal();
+			//alert("change detected!");
+			//posts.reload(2).get();
+		});
+		monitor.get(function(monitor) {
+			//alert('monitor installed');
 		});
 		
 		return {
