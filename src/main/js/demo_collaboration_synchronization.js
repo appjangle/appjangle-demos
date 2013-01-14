@@ -36,9 +36,6 @@ window.Appjangle = window.Appjangle || {};
 		// load type for user name
 		userNameType = "http://slicnet.com/seed1/seed1/3/9/2/3/h/sd/userName";
 		anUserName = session.node(userNameType);
-		//session.getAll(aPost, anAvatar, anUserName, function() {
-		//}); // to reduce latency when displaying first post
-
 
 		// submit a new post
 		demo.submitPost = function() {
@@ -127,21 +124,21 @@ window.Appjangle = window.Appjangle || {};
 			demo.initUi();
 			wrapper.append($("<p>Loaded "+posts.uri()+"</p>"));
 			
+			// installing monitor to check for updates from other clients
+			monitor = posts.monitor("400", function(context) {
+				
+				posts.reload(2).get(function(newPosts) {
+					demo.updatePosts();
+					demo.updateTotal();
+				});
+			});
+			monitor.get(function(monitor) {
+				
+			});
+			
 		});
 		
-		// installing monitor to check for updates from other clients
-		monitor = posts.monitor("400", function(context) {
-			
-			//alert("change detected!");
-			posts.reload(2).get(function(newPosts) {
-				
-				demo.updatePosts();
-				demo.updateTotal();
-			});
-		});
-		monitor.get(function(monitor) {
-			//alert('monitor installed');
-		});
+		
 		
 		return {
 			wrapper : wrapper,
