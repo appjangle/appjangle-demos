@@ -93,14 +93,17 @@ window.Appjangle = window.Appjangle || {};
 																				.updatePosts();
 																	});
 														};
-														
-														if (!$
+														console.log(aPost
+																				.uri()+" "+properties
+																				.uris());
+														if ($
 																.inArray(
 																		aPost
 																				.uri(),
 																		properties
-																				.uris())) {
+																				.uris()) === -1) {
 															reload();
+															return;
 														}
 
 														item = demo
