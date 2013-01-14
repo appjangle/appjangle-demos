@@ -112,6 +112,7 @@ window.Appjangle = window.Appjangle || {};
 			
 			posts.selectAll().get(
 					function(postsList) {
+						var i;
 						
 						if (postsList.size() === 0) {
 							return;
@@ -121,10 +122,20 @@ window.Appjangle = window.Appjangle || {};
 						
 						for (i = postsList.nodes().length - 1; i >= 0; i--) {
 							post = postsList.nodes()[i];
-							post.reload(1).get(function(loadedPost) {
-								$(".loadIndicator", wrapper).hide();
+							if (!post) continue;
+							post.selectAll().get(function(postProps) {
 								demo.updatePosts();
+								for (i=0; i<=postProps.size()-1; i++) {
+									postProps.nodes()[i].get(function(prop) {
+										$(".loadIndicator", wrapper).hide();
+										demo.updatePosts();
+									} );
+								}
 							});
+							//post.reload(1).get(function(loadedPost) {
+								
+								
+							//});
 						}
 
 						demo.updateTotal();
