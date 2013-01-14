@@ -40,9 +40,9 @@ window.Appjangle = window.Appjangle || {};
 		// submit a new post
 		demo.submitPost = function() {
 			var post = posts.append($(".postInput", wrapper).val());
-			post.append(aPost);
-			post.append(userName).append(anUserName);
-			post.append(avatar).append(anAvatar);
+			post.append(aPost).get();
+			post.append(userName).append(anUserName).get();
+			post.append(avatar).append(anAvatar).get();
 
 			$(".postInput", wrapper).val("");
 
@@ -115,7 +115,9 @@ window.Appjangle = window.Appjangle || {};
 					function(postsList) {
 						var i, j, post, prop;
 						
-						if (postsList.size() === 0) {
+						console.log(userName+" has posts: "+postsList.nodes());
+						if (postsList.nodes().length === 0) {
+							console.log(userName+" skip!");
 							return;
 						}
 						
@@ -123,18 +125,28 @@ window.Appjangle = window.Appjangle || {};
 						
 						for (i = postsList.nodes().length - 1; i >= 0; i--) {
 							post = postsList.nodes()[i];
-							if (!post) continue;
-							post.selectAll().get(function(postProps) {
-								demo.updatePosts();
-								for (j=0; j< postProps.nodes().length; j++) {
-									prop = postProps.nodes()[j];
-									if (!prop) continue;
-									prop.get(function(prop) {
-										$(".loadIndicator", wrapper).hide();
-										demo.updatePosts();
-									} );
-								}
+							console.log(userName+" load post "+post.uri()+" with value "+post.value());
+							
+							// this nees to be here, since initially the version of the post is retrived with no children
+							// why does it need to be reload(1)?
+							post.reload(1).get(function(post) {
+								console.log(userName+" resolved "+post.uri());
+								post.selectAll().get(function(postProps) {
+									console.log(userName+" loaded children "+post.uri()+" "+postProps.size());
+									demo.updatePosts();
+									for (j=0; j < postProps.nodes().length; j++) {
+										prop = postProps.nodes()[j];
+										console.log(userName+" loading prop "+prop.uri());
+										//if (!prop) continue;
+										prop.get(function(prop) {
+											$(".loadIndicator", wrapper).hide();
+											console.log(userName+" prop loaded "+prop.uri());
+											demo.updatePosts();
+										} );
+									}
+								});
 							});
+							
 							//post.reload(1).get(function(loadedPost) {
 								
 								
