@@ -64,10 +64,11 @@ window.Appjangle = window.Appjangle || {};
 
 		
 		demo.updatePosts = function() {
-			var i, post, item;
+			var post, item;
 
 			posts.selectAll(aPost).get(
 					function(postsList) {
+						var i;
 						
 						$(".postList", wrapper).empty();
 						for (i = postsList.nodes().length - 1; i >= 0; i--) {
@@ -112,7 +113,7 @@ window.Appjangle = window.Appjangle || {};
 			
 			posts.selectAll().get(
 					function(postsList) {
-						var i;
+						var i, j, post, prop;
 						
 						if (postsList.size() === 0) {
 							return;
@@ -125,8 +126,10 @@ window.Appjangle = window.Appjangle || {};
 							if (!post) continue;
 							post.selectAll().get(function(postProps) {
 								demo.updatePosts();
-								for (i=0; i<=postProps.size()-1; i++) {
-									postProps.nodes()[i].get(function(prop) {
+								for (j=0; j< postProps.nodes().length; j++) {
+									prop = postProps.nodes()[j];
+									if (!prop) continue;
+									prop.get(function(prop) {
 										$(".loadIndicator", wrapper).hide();
 										demo.updatePosts();
 									} );
