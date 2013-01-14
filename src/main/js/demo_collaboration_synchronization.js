@@ -94,15 +94,15 @@ window.Appjangle = window.Appjangle || {};
 																	});
 														};
 														
-//														if ($
-//																.inArray(
-//																		aPost
-//																				.uri(),
-//																		properties
-//																				.uris()) === -1) {
-//															reload();
-//															return;
-//														}
+														if ($
+																.inArray(
+																		aPost
+																				.uri(),
+																		properties
+																				.uris()) === -1) {
+															reload();
+															return;
+														}
 
 														item = demo
 																.createItem();
