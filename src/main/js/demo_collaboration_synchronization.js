@@ -11,7 +11,7 @@ window.Appjangle = window.Appjangle || {};
 	Appjangle.demos = Appjangle.demos || {};
 
 	Appjangle.demos.initSynchronizationDemo = function(params) {
-		var wrapper, avatar, userName, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType, anUserName, demo, monitor;
+		var wrapper, avatar, userName, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType, anUserName, demo, monitor, lastPostCount;
 
 		demo = {};
 
@@ -60,12 +60,13 @@ window.Appjangle = window.Appjangle || {};
 			});
 		};
 
+		
 		demo.updatePosts = function() {
 			var i, post, item;
 
 			posts.selectAll(aPost).get(
 					function(postsList) {
-
+						
 						$(".postList", wrapper).empty();
 						for (i = postsList.nodes().length - 1; i >= 0; i--) {
 							post = postsList.nodes()[i];
@@ -104,6 +105,35 @@ window.Appjangle = window.Appjangle || {};
 					});
 		};
 
+		
+		demo.reloadPosts = function() {
+			
+			posts.selectAll(aPost).get(
+					function(postsList) {
+						if (lastPostCount !== null) {
+							if (lastPostCount === postsList.size()) {
+								return;
+							}
+						} else {
+							lastPostCount = 1;
+						}
+						$(".loadIndicator", wrapper).show();
+						for (i = postsList.nodes().length - 1; i >= lastPostCount - 1; i--) {
+							post = postsList.nodes()[i];
+							post.reload(1).get(function(loadedPost) {
+								$(".loadIndicator", wrapper).hide();
+								demo.updatePosts();
+							});
+						}
+						
+						lastPostCount = postsList.size();
+						
+						demo.updateTotal();
+					});
+			
+			
+		};
+		
 		demo.initUi = function() {
 
 			$(".postButton", wrapper).click(function(evt) {
@@ -135,17 +165,8 @@ window.Appjangle = window.Appjangle || {};
 
 			// installing monitor to check for updates from other clients
 			monitor = posts.monitor("400", function(context) {
-				$(".loadIndicator", wrapper).show();
-				posts.reload(1).get(function(newPosts) {
-					$(".loadIndicator", wrapper).hide();
-					demo.updatePosts();
-					demo.updateTotal();
-					posts.reload(2).get(function(newPosts) {
-						
-						demo.updatePosts();
-						demo.updateTotal();
-					});
-				});
+				
+				demo.reloadPosts();
 			});
 			monitor.get(function(monitor) {
 
