@@ -28,7 +28,7 @@ window.Appjangle = window.Appjangle || {};
 		postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
 		aPost = session.node(postType);
 		aPost.get();
-		
+
 		// load type for avatar picture
 		avatarType = "http://slicnet.com/seed1/seed1/3/9/1/3/h/sd/anAvatar";
 		anAvatar = session.node(avatarType);
@@ -49,7 +49,7 @@ window.Appjangle = window.Appjangle || {};
 			session.commit().get(function() {
 
 			});
-			
+
 			demo.updatePosts();
 			demo.updateTotal();
 		};
@@ -62,10 +62,10 @@ window.Appjangle = window.Appjangle || {};
 
 		demo.updatePosts = function() {
 			var i, post, item;
-			
+
 			posts.selectAll(aPost).get(
 					function(postsList) {
-						console.log(userName+": values:["+postsList.values()+"]");
+
 						$(".postList", wrapper).empty();
 						for (i = postsList.nodes().length - 1; i >= 0; i--) {
 							post = postsList.nodes()[i];
@@ -74,13 +74,21 @@ window.Appjangle = window.Appjangle || {};
 							$(".postList", wrapper).append(item);
 							$(".postText", item).text(post.value());
 
-							post.select(anUserName).get(
+							var userNameNode = post.select(anUserName);
+							
+							userNameNode.catchUndefined(function() { });
+							
+							userNameNode.get(
 									function(userNameNode) {
 										$(".postAuthor", item).text(
 												userNameNode.value());
 									});
 
-							post.select(anAvatar).get(
+							var avatarNode = post.select(anAvatar);
+							
+							avatarNode.catchUndefined(function() { });
+							
+							avatarNode.get(
 									function(avatarNode) {
 										$(".media-object", item).attr("src",
 												avatarNode.value());
@@ -105,8 +113,9 @@ window.Appjangle = window.Appjangle || {};
 
 			});
 
-			$(".postInput", wrapper).attr("placeholder", "What's up, "+userName+"?");
-			
+			$(".postInput", wrapper).attr("placeholder",
+					"What's up, " + userName + "?");
+
 			wrapper.show();
 		};
 
@@ -122,24 +131,26 @@ window.Appjangle = window.Appjangle || {};
 		posts.get(function(posts) {
 			// when data node loaded, show ui
 			demo.initUi();
-			wrapper.append($("<p>Loaded "+posts.uri()+"</p>"));
-			
+			wrapper.append($("<p>Loaded " + posts.uri() + "</p>"));
+
 			// installing monitor to check for updates from other clients
 			monitor = posts.monitor("400", function(context) {
-				
-				posts.reload(2).get(function(newPosts) {
+
+				posts.reload(1).get(function(newPosts) {
 					demo.updatePosts();
 					demo.updateTotal();
+					posts.reload(2).get(function(newPosts) {
+						demo.updatePosts();
+						demo.updateTotal();
+					});
 				});
 			});
 			monitor.get(function(monitor) {
-				
+
 			});
-			
+
 		});
-		
-		
-		
+
 		return {
 			wrapper : wrapper,
 			shutdown : function() {
