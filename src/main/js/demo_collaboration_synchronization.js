@@ -11,7 +11,7 @@ window.Appjangle = window.Appjangle || {};
 	Appjangle.demos = Appjangle.demos || {};
 
 	Appjangle.demos.initSynchronizationDemo = function(params) {
-		var wrapper, avatar, userName, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType, anUserName, demo, monitor, lastPostCount;
+		var wrapper, avatar, userName, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType, anUserName, demo, monitor;
 
 		demo = {};
 
@@ -52,6 +52,8 @@ window.Appjangle = window.Appjangle || {};
 
 			demo.updatePosts();
 			demo.updateTotal();
+			
+			
 		};
 
 		demo.updateTotal = function() {
@@ -108,26 +110,23 @@ window.Appjangle = window.Appjangle || {};
 		
 		demo.reloadPosts = function() {
 			
-			posts.selectAll(aPost).get(
+			posts.selectAll().get(
 					function(postsList) {
-						if (lastPostCount !== null) {
-							if (lastPostCount === postsList.size()) {
-								return;
-							}
-						} else {
-							lastPostCount = 1;
+						
+						if (postsList.size() === 0) {
+							return;
 						}
+						
 						$(".loadIndicator", wrapper).show();
-						for (i = postsList.nodes().length - 1; i >= lastPostCount - 1; i--) {
+						
+						for (i = postsList.nodes().length - 1; i >= 0; i--) {
 							post = postsList.nodes()[i];
 							post.reload(1).get(function(loadedPost) {
 								$(".loadIndicator", wrapper).hide();
 								demo.updatePosts();
 							});
 						}
-						
-						lastPostCount = postsList.size();
-						
+
 						demo.updateTotal();
 					});
 			
@@ -165,7 +164,6 @@ window.Appjangle = window.Appjangle || {};
 
 			// installing monitor to check for updates from other clients
 			monitor = posts.monitor("400", function(context) {
-				
 				demo.reloadPosts();
 			});
 			monitor.get(function(monitor) {
