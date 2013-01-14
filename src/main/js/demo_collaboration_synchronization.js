@@ -52,8 +52,7 @@ window.Appjangle = window.Appjangle || {};
 
 			demo.updatePosts();
 			demo.updateTotal();
-			
-			
+
 		};
 
 		demo.updateTotal = function() {
@@ -62,103 +61,112 @@ window.Appjangle = window.Appjangle || {};
 			});
 		};
 
-		
 		demo.updatePosts = function() {
 			var post, item;
 
-			posts.selectAll(aPost).get(
-					function(postsList) {
-						var i;
-						
-						$(".postList", wrapper).empty();
-						for (i = postsList.nodes().length - 1; i >= 0; i--) {
-							post = postsList.nodes()[i];
-							item = demo.createItem();
+			posts
+					.selectAll()
+					.get(
+							function(postsList) {
+								var i;
 
-							$(".postList", wrapper).append(item);
-							$(".postText", item).text(post.value());
+								$(".postList", wrapper).empty();
+								for (i = postsList.nodes().length - 1; i >= 0; i--) {
+									post = postsList.nodes()[i];
 
-							var userNameNode = post.select(anUserName);
-							
-							userNameNode.catchUndefined(function() { });
-							
-							userNameNode.get(
-									function(userNameNode) {
-										$(".postAuthor", item).text(
-												userNameNode.value());
-									});
+									post
+											.selectAllLinks()
+											.get(
+													function(properties) {
+														var reload = function() {
+															$(".loadIndicator", wrapper).show();
+															post
+															.reload(1)
+															.get(
+																	function(
+																			post) {
+																		$(
+																				".loadIndicator",
+																				wrapper)
+																				.hide();
+																		demo
+																				.updatePosts();
+																	});
+														};
+														
+														if (!$
+																.inArray(
+																		aPost
+																				.uri(),
+																		properties
+																				.uris())) {
+															reload();
+														}
 
-							var avatarNode = post.select(anAvatar);
-							
-							avatarNode.catchUndefined(function() { });
-							
-							avatarNode.get(
-									function(avatarNode) {
-										$(".media-object", item).attr("src",
-												avatarNode.value());
-									});
+														item = demo
+																.createItem();
 
-						}
+														$(".postList", wrapper)
+																.append(item);
+														$(".postText", item)
+																.text(
+																		post
+																				.value());
 
-						if (postsList.size() === 0) {
-							$(".noPostsYet", wrapper).show();
-						} else {
-							$(".noPostsYet", wrapper).hide();
-						}
-					});
-		};
+														var userNameNode = post
+																.select(anUserName);
 
-		
-		demo.reloadPosts = function() {
-			
-			posts.selectAll().get(
-					function(postsList) {
-						var i, j, post, prop;
-						
-						console.log(userName+" has posts: "+postsList.nodes());
-						if (postsList.nodes().length === 0) {
-							console.log(userName+" skip!");
-							return;
-						}
-						
-						$(".loadIndicator", wrapper).show();
-						
-						for (i = postsList.nodes().length - 1; i >= 0; i--) {
-							post = postsList.nodes()[i];
-							console.log(userName+" load post "+post.uri()+" with value "+post.value());
-							
-							// this nees to be here, since initially the version of the post is retrived with no children
-							// why does it need to be reload(1)?
-							post.reload(1).get(function(post) {
-								console.log(userName+" resolved "+post.uri());
-								post.selectAll().get(function(postProps) {
-									console.log(userName+" loaded children "+post.uri()+" "+postProps.size());
-									demo.updatePosts();
-									for (j=0; j < postProps.nodes().length; j++) {
-										prop = postProps.nodes()[j];
-										console.log(userName+" loading prop "+prop.uri());
-										//if (!prop) continue;
-										prop.get(function(prop) {
-											$(".loadIndicator", wrapper).hide();
-											console.log(userName+" prop loaded "+prop.uri());
-											demo.updatePosts();
-										} );
-									}
-								});
+														userNameNode
+																.catchUndefined(function() {
+																	reload();
+																	
+																});
+
+														userNameNode
+																.get(function(
+																		userNameNode) {
+																	$(
+																			".postAuthor",
+																			item)
+																			.text(
+																					userNameNode
+																							.value());
+																});
+
+														var avatarNode = post
+																.select(anAvatar);
+
+														avatarNode
+																.catchUndefined(function() {
+																	reload();
+																});
+
+														avatarNode
+																.get(function(
+																		avatarNode) {
+																	$(
+																			".media-object",
+																			item)
+																			.attr(
+																					"src",
+																					avatarNode
+																							.value());
+																});
+
+													});
+
+								}
+
+								if (postsList.size() === 0) {
+									$(".noPostsYet", wrapper).show();
+								} else {
+									$(".noPostsYet", wrapper).hide();
+								}
 							});
-							
-							//post.reload(1).get(function(loadedPost) {
-								
-								
-							//});
-						}
-
-						demo.updateTotal();
-					});
-			
-			
 		};
+
 		
+
 		demo.initUi = function() {
 
 			$(".postButton", wrapper).click(function(evt) {
@@ -190,7 +198,7 @@ window.Appjangle = window.Appjangle || {};
 
 			// installing monitor to check for updates from other clients
 			monitor = posts.monitor("400", function(context) {
-				demo.reloadPosts();
+				demo.updatePosts();
 			});
 			monitor.get(function(monitor) {
 
