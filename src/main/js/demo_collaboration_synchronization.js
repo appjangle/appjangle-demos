@@ -135,11 +135,13 @@ window.Appjangle = window.Appjangle || {};
 
 			// installing monitor to check for updates from other clients
 			monitor = posts.monitor("400", function(context) {
-
+				$(".loadIndicator", wrapper).show();
 				posts.reload(1).get(function(newPosts) {
+					$(".loadIndicator", wrapper).hide();
 					demo.updatePosts();
 					demo.updateTotal();
 					posts.reload(2).get(function(newPosts) {
+						
 						demo.updatePosts();
 						demo.updateTotal();
 					});
