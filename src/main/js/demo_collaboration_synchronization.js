@@ -64,109 +64,50 @@ window.Appjangle = window.Appjangle || {};
 		demo.updatePosts = function() {
 			var post, item;
 
-			posts
-					.selectAll()
-					.get(
-							function(postsList) {
-								var i;
+			posts.selectAll(aPost).get(
+					function(postsList) {
+						var i;
 
-								$(".postList", wrapper).empty();
-								for (i = postsList.nodes().length - 1; i >= 0; i--) {
-									post = postsList.nodes()[i];
+						$(".postList", wrapper).empty();
+						for (i = postsList.nodes().length - 1; i >= 0; i--) {
+							post = postsList.nodes()[i];
 
-									post
-											.selectAllLinks()
-											.get(
-													function(properties) {
-														var reload = function() {
-															$(".loadIndicator", wrapper).show();
-															post
-															.reload(1)
-															.get(
-																	function(
-																			post) {
-																		$(
-																				".loadIndicator",
-																				wrapper)
-																				.hide();
-																		demo
-																				.updatePosts();
-																	});
-														};
-														
-														if ($
-																.inArray(
-																		aPost
-																				.uri(),
-																		properties
-																				.uris()) === -1) {
-															reload();
-															return;
-														}
+							item = demo.createItem();
 
-														item = demo
-																.createItem();
+							$(".postList", wrapper).append(item);
+							$(".postText", item).text(post.value());
 
-														$(".postList", wrapper)
-																.append(item);
-														$(".postText", item)
-																.text(
-																		post
-																				.value());
+							var userNameNode = post.select(anUserName);
 
-														var userNameNode = post
-																.select(anUserName);
+							userNameNode.catchUndefined(function() {
 
-														userNameNode
-																.catchUndefined(function() {
-																	reload();
-																	
-																});
-
-														userNameNode
-																.get(function(
-																		userNameNode) {
-																	$(
-																			".postAuthor",
-																			item)
-																			.text(
-																					userNameNode
-																							.value());
-																});
-
-														var avatarNode = post
-																.select(anAvatar);
-
-														avatarNode
-																.catchUndefined(function() {
-																	reload();
-																});
-
-														avatarNode
-																.get(function(
-																		avatarNode) {
-																	$(
-																			".media-object",
-																			item)
-																			.attr(
-																					"src",
-																					avatarNode
-																							.value());
-																});
-
-													});
-
-								}
-
-								if (postsList.size() === 0) {
-									$(".noPostsYet", wrapper).show();
-								} else {
-									$(".noPostsYet", wrapper).hide();
-								}
 							});
-		};
 
-		
+							userNameNode.get(function(userNameNode) {
+								$(".postAuthor", item).text(
+										userNameNode.value());
+							});
+
+							var avatarNode = post.select(anAvatar);
+
+							avatarNode.catchUndefined(function() {
+
+							});
+
+							avatarNode.get(function(avatarNode) {
+								$(".media-object", item).attr("src",
+										avatarNode.value());
+							});
+
+						}
+
+						if (postsList.size() === 0) {
+							$(".noPostsYet", wrapper).show();
+						} else {
+							$(".noPostsYet", wrapper).hide();
+						}
+					});
+		};
 
 		demo.initUi = function() {
 
