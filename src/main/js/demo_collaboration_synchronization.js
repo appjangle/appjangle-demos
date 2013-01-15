@@ -39,19 +39,21 @@ window.Appjangle = window.Appjangle || {};
 
 		// submit a new post
 		demo.submitPost = function() {
-			var post = posts.append($(".postInput", wrapper).val());
-			post.append(aPost).get();
-			post.append(userName).append(anUserName).get();
-			post.append(avatar).append(anAvatar).get();
+			posts.getSafe().get(function(posts) {
+				var post = posts.append($(".postInput", wrapper).val());
+				post.append(aPost).get();
+				post.append(userName).append(anUserName).get();
+				post.append(avatar).append(anAvatar).get();
 
-			$(".postInput", wrapper).val("");
+				$(".postInput", wrapper).val("");
 
-			session.commit().get(function() {
+				//session.commit().get(function() {
 
+				//});
+
+				demo.updatePosts();
+				demo.updateTotal();
 			});
-
-			demo.updatePosts();
-			demo.updateTotal();
 
 		};
 
@@ -154,22 +156,10 @@ window.Appjangle = window.Appjangle || {};
 				
 			});
 			
-			setInterval(function() {
-				posts.selectAll().get(function(allChildren) {
-					var i, reloadRequests = [];
-					
-					for (i=0;i<allChildren.nodes().length;i++) {
-						reloadRequests.push(allChildren.nodes()[i].reload());
-					}
-					
-					session.getAll(reloadRequests, function() {
-						demo.updatePosts();
-					});
-				});
-			}, 2000);
-			monitor.get(function(monitor) {
+			
+			//monitor.get(function(monitor) {
 
-			});
+			//});
 
 		});
 
@@ -177,7 +167,7 @@ window.Appjangle = window.Appjangle || {};
 			wrapper : wrapper,
 			shutdown : function() {
 				if (monitor !== null && monitor.get() !== null) {
-					monitor.stop();
+					monitor.get().stop();
 				}
 				session.close().get(function() {
 					server.shutdown.get(function() {
