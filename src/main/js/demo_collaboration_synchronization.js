@@ -61,44 +61,19 @@ window.Appjangle = window.Appjangle || {};
 			});
 		};
 
+		
 		demo.updatePosts = function() {
-			var post, item;
+			var post;
 
 			posts.selectAll(aPost).get(
 					function(postsList) {
-						var i;
+						var i, item;
 
 						$(".postList", wrapper).empty();
 						for (i = postsList.nodes().length - 1; i >= 0; i--) {
 							post = postsList.nodes()[i];
 
-							item = demo.createItem();
-
-							$(".postList", wrapper).append(item);
-							$(".postText", item).text(post.value());
-
-							var userNameNode = post.select(anUserName);
-
-							userNameNode.catchUndefined(function() {
-
-							});
-
-							userNameNode.get(function(userNameNode) {
-								$(".postAuthor", item).text(
-										userNameNode.value());
-							});
-
-							var avatarNode = post.select(anAvatar);
-
-							avatarNode.catchUndefined(function() {
-
-							});
-
-							avatarNode.get(function(avatarNode) {
-								$(".media-object", item).attr("src",
-										avatarNode.value());
-							});
-
+							demo.renderPost(post);
 						}
 
 						if (postsList.size() === 0) {
@@ -109,6 +84,38 @@ window.Appjangle = window.Appjangle || {};
 					});
 		};
 
+		demo.renderPost = function(post) {
+			var item;
+			item = demo.createItem();
+
+			$(".postList", wrapper).append(item);
+			$(".postText", item).text(post.value());
+
+			var userNameNode = post.select(anUserName);
+
+			userNameNode.catchUndefined(function() {
+				console.log("user name not defined for "+post.uri());
+			});
+
+			userNameNode.get(function(userNameNode) {
+				console.log("author: "+userNameNode.value());
+				$(".postAuthor", item).text(
+						userNameNode.value());
+			});
+
+			var avatarNode = post.select(anAvatar);
+
+			avatarNode.catchUndefined(function() {
+				console.log('avatar not defined for '+post.uri())
+			});
+
+			avatarNode.get(function(avatarNode) {
+				console.log("avatar: "+avatarNode.value());
+				$(".media-object", item).attr("src",
+						avatarNode.value());
+			});
+		};
+		
 		demo.initUi = function() {
 
 			$(".postButton", wrapper).click(function(evt) {
