@@ -65,11 +65,14 @@ window.Appjangle = window.Appjangle || {};
 		demo.updatePosts = function() {
 			var post;
 
+			
+			
 			posts.selectAll(aPost).get(
 					function(postsList) {
 						var i, item;
 
 						$(".postList", wrapper).empty();
+						console.log(userName+" all posts: "+postsList.values());
 						for (i = postsList.nodes().length - 1; i >= 0; i--) {
 							post = postsList.nodes()[i];
 
@@ -91,14 +94,14 @@ window.Appjangle = window.Appjangle || {};
 			$(".postList", wrapper).append(item);
 			$(".postText", item).text(post.value());
 
+			
 			var userNameNode = post.select(anUserName);
 
 			userNameNode.catchUndefined(function() {
-				console.log("user name not defined for "+post.uri());
+				
 			});
 
 			userNameNode.get(function(userNameNode) {
-				console.log("author: "+userNameNode.value());
 				$(".postAuthor", item).text(
 						userNameNode.value());
 			});
@@ -106,11 +109,10 @@ window.Appjangle = window.Appjangle || {};
 			var avatarNode = post.select(anAvatar);
 
 			avatarNode.catchUndefined(function() {
-				console.log('avatar not defined for '+post.uri())
+
 			});
 
 			avatarNode.get(function(avatarNode) {
-				console.log("avatar: "+avatarNode.value());
 				$(".media-object", item).attr("src",
 						avatarNode.value());
 			});
@@ -136,7 +138,7 @@ window.Appjangle = window.Appjangle || {};
 			postContent = $(".postTemplate", wrapper).clone();
 			postContent.removeClass("hide");
 			postContent.removeClass("postTemplate");
-			return $(postWrapper).append(postContent);
+			return postContent.appendTo($(postWrapper));
 		};
 
 		// resolving request for data node
@@ -147,8 +149,24 @@ window.Appjangle = window.Appjangle || {};
 
 			// installing monitor to check for updates from other clients
 			monitor = posts.monitor("400", function(context) {
+				
 				demo.updatePosts();
+				
 			});
+			
+			setInterval(function() {
+				posts.selectAll().get(function(allChildren) {
+					var i, reloadRequests = [];
+					
+					for (i=0;i<allChildren.nodes().length;i++) {
+						reloadRequests.push(allChildren.nodes()[i].reload());
+					}
+					
+					session.getAll(reloadRequests, function() {
+						demo.updatePosts();
+					});
+				});
+			}, 2000);
 			monitor.get(function(monitor) {
 
 			});
