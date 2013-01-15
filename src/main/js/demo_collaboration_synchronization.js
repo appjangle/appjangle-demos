@@ -47,9 +47,9 @@ window.Appjangle = window.Appjangle || {};
 
 				$(".postInput", wrapper).val("");
 
-				//session.commit().get(function() {
+				session.commit().get(function() {
 
-				//});
+				});
 
 				demo.updatePosts();
 				demo.updateTotal();
@@ -151,15 +151,21 @@ window.Appjangle = window.Appjangle || {};
 
 			// installing monitor to check for updates from other clients
 			monitor = posts.monitor("400", function(context) {
-				
 				demo.updatePosts();
+				$(".loadIndicator", wrapper).show();
+				posts.reload(1).get(function(posts) {
+					$(".loadIndicator", wrapper).hide();
+					demo.updatePosts();
+				});
+				
+				
 				
 			});
 			
 			
-			//monitor.get(function(monitor) {
+			monitor.get(function(monitor) {
 
-			//});
+			});
 
 		});
 
