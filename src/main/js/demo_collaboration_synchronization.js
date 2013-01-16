@@ -6,7 +6,7 @@ window.Appjangle = window.Appjangle || {};
 
 (function(Appjangle, $) {
 	// constants
-	var postWrapper = "<li class='media'></li>", postType;
+	var postWrapper = "<li class='media'></li>", postType, ignore = function() {};
 
 	Appjangle.demos = Appjangle.demos || {};
 
@@ -39,17 +39,19 @@ window.Appjangle = window.Appjangle || {};
 
 		// submit a new post
 		demo.submitPost = function() {
+			var postText = $(".postInput", wrapper).val();
+			$(".postInput", wrapper).val("");
 			posts.getSafe().get(function(posts) {
-				var post = posts.append($(".postInput", wrapper).val());
-				post.append(aPost).get();
-				post.append(userName).append(anUserName).get();
-				post.append(avatar).append(anAvatar).get();
+				var post = posts.append(postText);
+				 post.append(aPost);
+				 post.append(userName).append(anUserName);
+				 post.append(avatar).append(anAvatar);
 
-				$(".postInput", wrapper).val("");
+				 session.commit().get(function() {
 
-				session.commit().get(function() {
-
-				});
+					});
+				 
+				
 
 				demo.updatePosts();
 				demo.updateTotal();
@@ -64,10 +66,12 @@ window.Appjangle = window.Appjangle || {};
 		};
 
 		
-		demo.updatePosts = function() {
+		demo.updatePosts = function(callback) {
 			var post;
 
-			
+			posts.selectAll().get(function(nodeList) {
+				console.log(userName+" all nodes "+nodeList.values());
+			});
 			
 			posts.selectAll(aPost).get(
 					function(postsList) {
@@ -86,38 +90,34 @@ window.Appjangle = window.Appjangle || {};
 						} else {
 							$(".noPostsYet", wrapper).hide();
 						}
+						
+						if (callback) {callback();}
 					});
 		};
 
 		demo.renderPost = function(post) {
-			var item;
+			var item, userNameNode, avatarNode;
 			item = demo.createItem();
 
 			$(".postList", wrapper).append(item);
 			$(".postText", item).text(post.value());
 
 			
-			var userNameNode = post.select(anUserName);
+			userNameNode = post.select(anUserName);
+			userNameNode.catchUndefined(ignore);
 
-			userNameNode.catchUndefined(function() {
-				
-			});
+			avatarNode = post.select(anAvatar);
+			avatarNode.catchUndefined(ignore);
 
-			userNameNode.get(function(userNameNode) {
+			session.getAll(userNameNode, avatarNode, function(userNameNode, avatarNode) {
 				$(".postAuthor", item).text(
 						userNameNode.value());
-			});
-
-			var avatarNode = post.select(anAvatar);
-
-			avatarNode.catchUndefined(function() {
-
-			});
-
-			avatarNode.get(function(avatarNode) {
+				
 				$(".media-object", item).attr("src",
 						avatarNode.value());
 			});
+			
+
 		};
 		
 		demo.initUi = function() {
@@ -150,13 +150,15 @@ window.Appjangle = window.Appjangle || {};
 			wrapper.append($("<p>Loaded " + posts.uri() + "</p>"));
 
 			// installing monitor to check for updates from other clients
-			monitor = posts.monitor("400", function(context) {
-				demo.updatePosts();
-				$(".loadIndicator", wrapper).show();
-				posts.reload(1).get(function(posts) {
-					$(".loadIndicator", wrapper).hide();
-					demo.updatePosts();
+			monitor = posts.monitor("2000", function(context) {
+				demo.updatePosts(function() {
+					$(".loadIndicator", wrapper).show();
+					posts.reload(1).get(function(posts) {
+						$(".loadIndicator", wrapper).hide();
+						demo.updatePosts();
+					});
 				});
+				
 				
 				
 				
