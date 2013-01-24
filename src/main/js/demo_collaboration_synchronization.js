@@ -41,15 +41,14 @@ window.Appjangle = window.Appjangle || {};
 		demo.submitPost = function() {
 			var postText = $(".postInput", wrapper).val();
 			$(".postInput", wrapper).val("");
-			posts.getSafe().get(function(posts) {
+			posts.shield().get(function(posts) {
 				var post = posts.append(postText);
 				 post.append(aPost);
 				 post.append(userName).append(anUserName);
 				 post.append(avatar).append(anAvatar);
 
 				 session.commit().get(function() {
-
-					});
+				 });
 				 
 				
 
@@ -109,13 +108,16 @@ window.Appjangle = window.Appjangle || {};
 			avatarNode = post.select(anAvatar);
 			avatarNode.catchUndefined(ignore);
 
-			session.getAll(userNameNode, avatarNode, function(userNameNode, avatarNode) {
+			userNameNode.get(function(userNameNode) {
 				$(".postAuthor", item).text(
 						userNameNode.value());
-				
+			});
+			
+			avatarNode.get(function(avatarNode) {
 				$(".media-object", item).attr("src",
 						avatarNode.value());
 			});
+			
 			
 
 		};
@@ -150,20 +152,11 @@ window.Appjangle = window.Appjangle || {};
 			wrapper.append($("<p>Loaded " + posts.uri() + "</p>"));
 
 			// installing monitor to check for updates from other clients
-			monitor = posts.monitor("2000", function(context) {
+			monitor = posts.monitor().setInterval("1000").setDepth(2).addListener(function(context) {
 				demo.updatePosts(function() {
-					$(".loadIndicator", wrapper).show();
-					posts.reload(1).get(function(posts) {
-						$(".loadIndicator", wrapper).hide();
-						demo.updatePosts();
+					
 					});
 				});
-				
-				
-				
-				
-			});
-			
 			
 			monitor.get(function(monitor) {
 
