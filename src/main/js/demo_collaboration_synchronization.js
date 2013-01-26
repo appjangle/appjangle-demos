@@ -6,7 +6,8 @@ window.Appjangle = window.Appjangle || {};
 
 (function(Appjangle, $) {
 	// constants
-	var postWrapper = "<li class='media'></li>", postType, ignore = function() {};
+	var postWrapper = "<li class='media'></li>", postType, ignore = function() {
+	};
 
 	Appjangle.demos = Appjangle.demos || {};
 
@@ -41,20 +42,17 @@ window.Appjangle = window.Appjangle || {};
 		demo.submitPost = function() {
 			var postText = $(".postInput", wrapper).val();
 			$(".postInput", wrapper).val("");
-			posts.shield().get(function(posts) {
-				var post = posts.append(postText);
-				 post.append(aPost);
-				 post.append(userName).append(anUserName);
-				 post.append(avatar).append(anAvatar);
 
-				 session.commit().get(function() {
-				 });
-				 
-				
+			var post = posts.append(postText);
+			post.append(aPost);
+			post.append(userName).append(anUserName);
+			post.append(avatar).append(anAvatar);
 
-				demo.updatePosts();
-				demo.updateTotal();
+			session.commit().get(function() {
 			});
+
+			demo.updatePosts();
+			demo.updateTotal();
 
 		};
 
@@ -64,34 +62,31 @@ window.Appjangle = window.Appjangle || {};
 			});
 		};
 
-		
-		demo.updatePosts = function(callback) {
+		demo.updatePosts = function() {
 			var post;
 
 			posts.selectAll().get(function(nodeList) {
-				console.log(userName+" all nodes "+nodeList.values());
+				console.log(userName + " all nodes " + nodeList.values());
 			});
-			
-			posts.selectAll(aPost).get(
-					function(postsList) {
-						var i, item;
 
-						$(".postList", wrapper).empty();
-						console.log(userName+" all posts: "+postsList.values());
-						for (i = postsList.nodes().length - 1; i >= 0; i--) {
-							post = postsList.nodes()[i];
+			posts.selectAll(aPost).get(function(postsList) {
+				var i, item;
 
-							demo.renderPost(post);
-						}
+				$(".postList", wrapper).empty();
+				console.log(userName + " all posts: " + postsList.values());
+				for (i = postsList.nodes().length - 1; i >= 0; i--) {
+					post = postsList.nodes()[i];
 
-						if (postsList.size() === 0) {
-							$(".noPostsYet", wrapper).show();
-						} else {
-							$(".noPostsYet", wrapper).hide();
-						}
-						
-						if (callback) {callback();}
-					});
+					demo.renderPost(post);
+				}
+
+				if (postsList.size() === 0) {
+					$(".noPostsYet", wrapper).show();
+				} else {
+					$(".noPostsYet", wrapper).hide();
+				}
+
+			});
 		};
 
 		demo.renderPost = function(post) {
@@ -101,7 +96,6 @@ window.Appjangle = window.Appjangle || {};
 			$(".postList", wrapper).append(item);
 			$(".postText", item).text(post.value());
 
-			
 			userNameNode = post.select(anUserName);
 			userNameNode.catchUndefined(ignore);
 
@@ -109,19 +103,15 @@ window.Appjangle = window.Appjangle || {};
 			avatarNode.catchUndefined(ignore);
 
 			userNameNode.get(function(userNameNode) {
-				$(".postAuthor", item).text(
-						userNameNode.value());
+				$(".postAuthor", item).text(userNameNode.value());
 			});
-			
+
 			avatarNode.get(function(avatarNode) {
-				$(".media-object", item).attr("src",
-						avatarNode.value());
+				$(".media-object", item).attr("src", avatarNode.value());
 			});
-			
-			
 
 		};
-		
+
 		demo.initUi = function() {
 
 			$(".postButton", wrapper).click(function(evt) {
@@ -152,12 +142,11 @@ window.Appjangle = window.Appjangle || {};
 			wrapper.append($("<p>Loaded " + posts.uri() + "</p>"));
 
 			// installing monitor to check for updates from other clients
-			monitor = posts.monitor().setInterval("1000").setDepth(2).addListener(function(context) {
-				demo.updatePosts(function() {
-					
+			monitor = posts.monitor().setInterval("400").setDepth(2)
+					.addListener(function(context) {
+						demo.updatePosts();
 					});
-				});
-			
+
 			monitor.get(function(monitor) {
 
 			});
