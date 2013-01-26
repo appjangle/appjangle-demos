@@ -1,3 +1,99 @@
 <!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/impersonate-unit-tests -->
+<div class="row-fluid">
+	<div class="span12">
+		<h4>Adding Unit Tests</h4>
+		<p>We have been some naughty developers so far and did not define
+			proper unit tests like good craftsmen should!</p>
+		<p>However, using the Appjangle platform does not prevent us from
+			writing unit tests neither does it impose to do it in the infamous
+			tests-last style. Indeed, Appjangle has been architected from the
+			ground up to support writing tests conveniently and effectively.</p>
+		<p>The main device to support testability is the full-blown
+			database engine embedded in the Appjangle client libraries. Using the
+			Appjangle client libraries allows to create complex in-memory
+			databases, which provide an almost identical set of features as the
+			Appjangle cloud. In particular, almost all operations of the Nextweb
+			API are supported by the embedded databases.</p>
+		<p>The following two examples illustrate, how a unit test for our
+			application could look like!</p>
+		<h5>QUnit Test</h5>
+		<p>
+			The following test utilizes the <a href="http://qunitjs.com/">QUnit</a>
+			unit testing framework to define a simple <a
+				href="http://api.qunitjs.com/category/async-control/">asynchronous
+				tests</a>.
+		</p>
+		<p>The method under test calculates the total number of posts on a
+			wall. With a few minor changes, we could link this method into our
+			proceeding demo apps.</p>
+		<pre class="prettyprint">
+var aPost = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
 
+function calculateNumberOfPosts(posts, callback) {
+			posts.selectAll(session.node(aPost)).get(function(postsList) {
+				callback(postsList.size());
+			});
+};
+
+test("Calculate total number of posts", function() {
+    stop();
+    var server = Nextweb.startServer(12322);
+    var session = Nextweb.createSession();
+    
+    var posts = session.seed("local");
+    
+    posts.append("Post 1").append(session.node(aPost));
+    
+    calculateNumberOfPosts(posts, function(total) {
+       ok(total === 1, "Total is "+total+" (expected 1)");
+       
+       session.close().get(function(success) {
+           server.shutdown().get(function(success) {
+               start();
+           });
+       });
+    });
+});
+</pre>
+		<h5>JUnit Test</h5>
+		<p>
+			We can likewise use good, old <a
+				href="https://github.com/KentBeck/junit">JUnit 4.x</a> to define a test
+			in Java.
+		</p>
+		<p>
+			The following JUnit test also tests a method, which calculates the
+			total number of posts. However, we change the logic slightly to make
+			it more natural to JUnits synchronous testing style (but note that we
+			could also write this logic in an asynchronous style using the
+			asynchronous <a href="http://nextweb.io/docs/nextweb-get.value.html">get
+				operation</a> in the Nextweb Java API).</p>
+				
+	</div>
+<pre class="prettyprint language-java">
+public class TestCalculateTotal {
+   
+   private String aPost = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
+   
+   public static int calculateNumberOfPosts(Query posts) {
+       return posts.selectAll(session.node(aPost)).get().size();
+   }
+   
+   @Test
+   public void test_calculate_total_number_of_posts() {
+       Server server = Nextweb.startServer(13311);
+       Session session = Nextweb.createSession();
+       
+       Query seed = session.seed("local");
+       
+       posts.append("Post 1").append(session.node(aPost));
+       
+       Assert.assertEquals(1, calculateNumberOfPosts(seed));
+       
+       session.close().get();
+       server.shutdown().get();
+   }
+}
+</pre>
+</div>
 <!-- one.end -->
