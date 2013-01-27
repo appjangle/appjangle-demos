@@ -2,11 +2,29 @@
 <div class="row-fluid">
 	<div class="span12">
 		<h4>Demo 01: Salve</h4>
+		<h5>Objectives</h5>
+		<ul>
+			<li>Introduce HyperData model</li>
+			<li>Provide simple Hello, World! examples for Appjangle.</li>
+		</ul>
+		<h5>Requirements</h5>
 		<p>While our new social network will without doubt have numerous
 			unique and cool features, let's start with something simple for now:</p>
-		<p>The Wall of Wisdom</p>
-		<p>On the wall of wisdom, historical characters can leave
+		<div style="text-align: center; margin: 10px;">
+			<img
+				src="https://docs.google.com/drawings/d/1yEkjUT_czjS316U_7mjwXAUH41VK2reGgAh-VYG6vw8/pub?w=400"
+				alt="The Wall of The Wise">
+		</div>
+		<p>On the wall of the wise, historical characters can leave
 			inspiring and insightful comments to their heart's delight.</p>
+		<dl class="dl-horizontal">
+			<dt>Requirement 1</dt>
+			<dd>Build a first, simple data model for The Wall of the Wise</dd>
+			<dt>Requirement 2</dt>
+			<dd>Upload a few example posts for a Wall of the Wise to the
+				Appjangle cloud</dd>
+		</dl>
+		<h5>Data Model</h5>
 		<p>
 			Appjangle is built on a <a
 				href="http://nextweb.io/docs/nextweb-data-model.value.html">Hyperdata
@@ -17,65 +35,75 @@
 			wall itself can be represented by a node; posts to this wall are
 			represented as text nodes, which are connected to the 'wall node'.
 			For instance:</p>
-		<img
-			src="http://docs.google.com/drawings/d/1lVCDOrmWdP8KqCQyWegrNSiinmJlXJz6NCUcHVB4Hqc/pub?w=381&h=124">
+		<div style="text-align: center; margin: 10px;">
+			<img class="img-polaroid"
+				src="http://docs.google.com/drawings/d/1lVCDOrmWdP8KqCQyWegrNSiinmJlXJz6NCUcHVB4Hqc/pub?w=291">
+			<p style="text-size: 90%">
+				<em>Figure: Naive data model</em>
+			</p>
+		</div>
 		<p>
 			For more details regarding the <a
 				href="http://nextweb.io/docs/nextweb-data-model.value.html">data
 				model</a> as well as the <a
 				href="http://nextweb.io/docs/nextweb-modeling-language.value.html">modelling
 				language</a> used here, please refer to the <a href="http://nextweb.io">Nextweb</a>
-			documentation!
-		</p>
-		<p>This first model is without doubt overly simplistic. But no
+			documentation! This first model is without doubt overly simplistic. But no
 			worries, we will extend it later.</p>
-		<p>For now, we can use this understanding of our app data as
+		<!-- <p>For now, we can use this understanding of our app data as
 			starting point to write a quick application, which stores data of our
-			'Wall of Wisdom' in Appjangle's cloud based storage</p>
-		<h5>JavaScript</h5>
-		<p>The following JavaScript application uploads a data model as
-			illustrated above to the Appjangle cloud.</p>
+			'Wall of Wisdom' in Appjangle's cloud based storage</p> -->
+		<h5>Hello, World: JavaScript</h5>
+		<p>The following JavaScript application uploads some date according to the defined data model to the Appjangle cloud.</p>
 	</div>
 </div>
-		<div class="jsexample" id="salveExample">
-				<pre class="jscode">var session = Nextweb.createSession();
 
-var seed = session.seed();
+<div class="jsexample" id="salveExample">
+	<pre class="jscode">var session = Nextweb.createSession();
 
-seed.get(function(node) {
-    console.log("resolved: "+node.uri());
-});</pre>
+var posts = session.seed();
+
+posts.append("Salve, Munde.");
+posts.append("Man is born free; and everywhere he is in chains.");
+
+session.commit().get(function(success) {
+    console.log("Upload completed to: "+posts.get().uri());
+    session.close().get(function(success) { });
+});
+</pre>
+
+</div>
+
 <script>
-var pageisloaded = 0;
-window.onload = function(){
- 	if (pageisloaded === 1) {
- 		return;
- 	}
-	pageisloaded=1;
+	var salveExampleLoaded = false;
+	window.onShowcaseLoaded = function() {
+		if (salveExampleLoaded === true) {
+			return;
+		}
+		salveExampleLoaded = true;
 
-	$('#salveExample')
-	.each(
-			function(idx, elem) {
-				var pre = $('.jscode', elem), code = pre.text(), jsSourceTemplate = $(
-						'.jsSourceTemplate').clone(), exampleElem = $(
-						jsSourceTemplate).appendTo(elem);
+		var elem = $('#salveExample');
+		console.log("render " + elem.length);
+		var idx = 1;
 
-				pre.remove();
-				exampleElem.removeClass('jsSourceTemplate');
-				exampleElem.show();
-				$.initCodeExample({
-					elem : exampleElem,
-					marker : "js_example_" + idx,
-					code : code
-				});
-			});	
-};
+		var pre = $('.jscode', elem), code = pre.text(), jsSourceTemplate = $(
+				'.jsSourceTemplateAj').clone(), exampleElem = $(
+				jsSourceTemplate).appendTo(elem);
 
+		pre.remove();
+		exampleElem.removeClass('jsSourceTemplateAj');
+		exampleElem.show();
+		window.initCodeExample({
+			elem : exampleElem,
+			marker : "js_example_salve_" + idx,
+			code : code
+		});
+
+	};
 </script>
-			</div>
-		
-	<div class="row-fluid">
-	<div class="span12">	
+
+<div class="row-fluid">
+	<div class="span12">
 		<p>Click the Run button to execute the application. You can click
 			on the generated link to see the data uploaded to the Appjangle
 			cloud.</p>
@@ -89,10 +117,9 @@ window.onload = function(){
 			<li><a href="http://nextweb.io/docs/nextweb-seed.value.html">seed</a>
 			<li><a
 				href="http://nextweb.io/docs/nextweb-append-value.value.html">append</a>
-			<li><a
-				href="http://nextweb.io/docs/nextweb-commit.value.html">commit</a>
+			<li><a href="http://nextweb.io/docs/nextweb-commit.value.html">commit</a>
 		</ul>
-		<h5>Java</h5>
+		<h5>Hello, World: Java</h5>
 		<p>
 			We can implement the same application in Java. You can copy the
 			source code below it into any Java class. But please note that in
@@ -112,42 +139,46 @@ System.out.println("Upload completed to: "+posts.get().uri());
 
 session.close().get();
 </pre>
+		<p>
+			<i class="icon-arrow-right"></i> <a href="#dataTypes">Continue to
+				Demo 02: Add Data Types</a>
+		</p>
 	</div>
 </div>
 
-<div class="jsSourceTemplate hide">
+<div class="jsSourceTemplateAj hide">
 	<div class="example">
-	<div class="row-fluid">
+		<div class="row-fluid">
 
-		<div class="span12">
-			<p>
-				 <span class="pull-right"><small><a
-						class="editButton" href="#">edit</a><a class="viewButton hide"
-						href="#">view</a></small></span>
-			</p>
-			<div class="codeContainer" style="margin-top: -12px;">
-				<pre class="code prettyprint languague-javascript"></pre>
-				<div class="editor hide"></div>
-			</div>
-			<div class="pull-right">
-				<div class="btn-group">
-					<a class="runButton btn btn-primary btn-mini"
-						style="width: 50px; margin-top: -17px;"><i
-						class="icon-play icon-white"></i> Run</a>
+			<div class="span12">
+				<p>
+					<span class="pull-right" style="margin-right: 5px;"><small><a
+							class="editButton" href="#">edit</a><a class="viewButton hide"
+							href="#">view</a></small></span>
+				</p>
+				<div class="codeContainer" style="margin-top: -12px;">
+					<pre class="code prettyprint languague-javascript"></pre>
+					<div class="editor hide"></div>
+				</div>
+				<div class="pull-right">
+					<div class="btn-group">
+						<a class="runButton btn btn-primary btn-mini"
+							style="width: 50px; margin-top: -17px;"><i
+							class="icon-play icon-white"></i> Run</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="row-fluid">
-		<div class="span12">
-			<pre class="console prettyprint language-html">
+		<div class="row-fluid">
+			<div class="span12">
+				<pre class="console prettyprint language-html">
 </pre>
-			<img class="hide busyIndicator"
-				style="margin-top: -78px; margin-left: 5px;"
-				src="https://dl.dropbox.com/u/957046/static/assets/1210/ajax-loader-arrows.gif">
+				<img class="hide busyIndicator"
+					style="margin-top: -78px; margin-left: 5px;"
+					src="http://dl.dropbox.com/u/957046/static/assets/1301/ajax-loader-black.gif">
+			</div>
 		</div>
 	</div>
-</div>
 </div>
 <!-- one.end -->
