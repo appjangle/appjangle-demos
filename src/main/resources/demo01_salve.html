@@ -1,10 +1,11 @@
 <!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/impersonate-salve -->
 <div class="row-fluid">
 	<div class="span12">
-		<h4>Demo 01: Salve</h4>
+		<h4>Demo 01: Salve!</h4>
+		<hr>
 		<h5>Objectives</h5>
 		<ul>
-			<li>Introduce HyperData model</li>
+			<li>Introduce hyperdata data modelling</li>
 			<li>Provide simple Hello, World! examples for Appjangle.</li>
 		</ul>
 		<h5>Requirements</h5>
@@ -27,7 +28,7 @@
 		<h5>Data Model</h5>
 		<p>
 			Appjangle is built on a <a
-				href="http://nextweb.io/docs/nextweb-data-model.value.html">Hyperdata
+				href="http://nextweb.io/docs/nextweb-data-model.value.html">hyperdata
 				data model</a>. Therefore, all data is expressed as nodes and (untyped)
 			connections.
 		</p>
@@ -64,7 +65,7 @@
 var posts = session.seed();
 
 posts.append("Salve, Munde.");
-posts.append("Man is born free; and everywhere he is in chains.");
+posts.append("Salve, Nubes!");
 
 session.commit().get(function(success) {
     console.log("Upload completed to: "+posts.get().uri());
@@ -131,8 +132,8 @@ session.commit().get(function(success) {
 
 Query posts = session.seed();
 
-posts.append("Men willingly believe what they wish.");
-posts.append("Man is born free; and everywhere he is in chains.");
+posts.append("Salve, Munde.");
+posts.append("Salve, Nubes!");
 
 session.commit().get();
 System.out.println("Upload completed to: "+posts.get().uri());

@@ -2,7 +2,68 @@
 <div class="row-fluid">
 	<div class="span12">
 		<h4>Demo 02: Add Data Types</h4>
+		<hr>
+		<h5>Objectives</h5>
+		<ul>
+			<li>Introduce hyperdata properties/type nodes</li>
+			<li>Upload type nodes to the Appjangle cloud.</li>
+		</ul>
+		<h5>Requirements</h5>
 		<p>
+			The first data model we have designed in <a href="#salve">demo 01</a>
+			certainly leaves much to be desired. In this demo, we introduce a few
+			simple data types for our model to make the data of our application
+			more meaningful.
+		</p>
+		<dl class="dl-horizontal">
+			<dt>Requirement 1</dt>
+			<dd>Extend the data model for the Wall of the Wise with data
+				types</dd>
+			<dt>Requirement 2</dt>
+			<dd>Upload a few types posts to the Appjangle cloud</dd>
+			<dt>Requirement 3</dt>
+			<dd>Retrieved typed data from the Appjangle cloud</dd>
+		</dl>
+		<h5>Data Model</h5>
+		<p>
+			In order to make the data of the Wall of the Wise application more
+			meaningful, we can utilize a simple HyperData design pattern: <a
+				href="http://nextweb.io/docs/nextweb-data-pattern.value.html#property">the
+				hyperdata property</a>. These properties allow to enrich simple untyped
+			graphs with meaningful data types.
+		</p>
+		<p>In simple terms, a hyperdata property consists of three nodes:</p>
+		<ul>
+			<li><em>target node</em>: this is the node for which the
+				property is to be defined.
+			<li><em>property value node</em>: this node carries the value of
+				the property.
+			<li><em>property type node</em>: this node represents the type
+				of the property.
+		</ul>
+		<p>
+			For our Wall of the Wise we define a property 'a post', which helps
+			us to identify posts to our wall to other data items. For the model
+			build in <a href="#salve">demo 01</a>, the resulting model with types
+			could be defined as follows:
+		</p>
+		<div style="text-align: center; margin: 10px;">
+			<img
+				src="http://docs.google.com/drawings/d/1a9nQTh5rwMtz7djdZ6sl6s8GMx4sORmzN2dbZ66b2go/pub?w=279&h=164">
+			<p style="text-size: 90%">
+				<em>Figure: Data model with types</em>
+			</p>
+		</div>
+		<h5>Upload Data Types</h5>
+		<p>
+			In the model, we use the data type <em>aPost</em>. In order to use
+			this data type, we first need to create it. Luckily, this is very
+			easy, since the property pattern allows any arbitrary node to serve
+			as a type node and creating nodes is what Appjangle does best!
+		</p>
+		<p>The following script creates a new data type node 'aPost' and
+			prints out the address for this data type. By copying this address,
+			we
 	</div>
 </div>
 <!-- one.end -->
