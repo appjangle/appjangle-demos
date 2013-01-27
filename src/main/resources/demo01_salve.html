@@ -84,7 +84,7 @@ session.commit().get(function(success) {
 		salveExampleLoaded = true;
 
 		var elem = $('#salveExample');
-		console.log("render " + elem.length);
+		
 		var idx = 1;
 
 		var pre = $('.jscode', elem), code = pre.text(), jsSourceTemplate = $(
@@ -147,39 +147,5 @@ session.close().get();
 	</div>
 </div>
 
-<div class="jsSourceTemplateAj hide">
-	<div class="example">
-		<div class="row-fluid">
 
-			<div class="span12">
-				<p>
-					<span class="pull-right" style="margin-right: 5px;"><small><a
-							class="editButton" href="#">edit</a><a class="viewButton hide"
-							href="#">view</a></small></span>
-				</p>
-				<div class="codeContainer" style="margin-top: -12px;">
-					<pre class="code prettyprint languague-javascript"></pre>
-					<div class="editor hide"></div>
-				</div>
-				<div class="pull-right">
-					<div class="btn-group">
-						<a class="runButton btn btn-primary btn-mini"
-							style="width: 50px; margin-top: -17px;"><i
-							class="icon-play icon-white"></i> Run</a>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row-fluid">
-			<div class="span12">
-				<pre class="console prettyprint language-html">
-</pre>
-				<img class="hide busyIndicator"
-					style="margin-top: -78px; margin-left: 5px;"
-					src="http://dl.dropbox.com/u/957046/static/assets/1301/ajax-loader-black.gif">
-			</div>
-		</div>
-	</div>
-</div>
 <!-- one.end -->

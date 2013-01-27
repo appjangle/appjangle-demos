@@ -62,8 +62,65 @@
 			as a type node and creating nodes is what Appjangle does best!
 		</p>
 		<p>The following script creates a new data type node 'aPost' and
-			prints out the address for this data type. By copying this address,
-			we
+			prints out the address for this data type. This address is all we
+			need to use the newly created node as globally available, reusable
+			and documented data type!</p>
+		<p>We can also save the 'secret' for the node in order to be able
+			to edit and modify our data type later on.</p>
+			
+	</div>
+</div>
+
+
+<div class="jsexample" id="dataTypesExample">
+	<pre class="jscode">var session = Nextweb.createSession();
+
+var typesRoot = session.seed();
+
+var aPost = typesRoot.append("A post on a message board, wall or chat room.", "./aPost");
+
+aPost.get(function(aPost) {
+	console.log("URI: "+aPost.uri());
+	console.log("Secret: "+aPost.secret());
+});
+session.commit().get(function(success) {
+    session.close().get(function(success) { });
+});
+</pre>
+
+</div>
+
+<script>
+	//var salveExampleLoaded = false;
+	window.onShowcaseLoaded = function() {
+		//if (salveExampleLoaded === true) {
+		//	return;
+		//}
+		//salveExampleLoaded = true;
+
+		var elem = $('#dataTypesExample');
+		
+		var idx = 1;
+
+		var pre = $('.jscode', elem), code = pre.text(), jsSourceTemplate = $(
+				'.jsSourceTemplateAj').clone(), exampleElem = $(
+				jsSourceTemplate).appendTo(elem);
+
+		pre.remove();
+		exampleElem.removeClass('jsSourceTemplateAj');
+		exampleElem.show();
+		window.initCodeExample({
+			elem : exampleElem,
+			marker : "js_example_data_types_" + idx,
+			code : code
+		});
+
+	};
+</script>
+
+<div class="row-fluid">
+	<div class="span12">
+	
 	</div>
 </div>
 <!-- one.end -->
