@@ -79,11 +79,9 @@ var typesRoot = session.seed();
 
 var aPost = typesRoot.append("A post on a message board, wall or chat room.", "./aPost");
 
-aPost.get(function(aPost) {
-	console.log("URI: "+aPost.uri());
-	console.log("Secret: "+aPost.secret());
-});
 session.commit().get(function(success) {
+    console.log("URI: "+aPost.get().uri());
+	console.log("Secret: "+aPost.get().secret());
     session.close().get(function(success) { });
 });
 </pre>
