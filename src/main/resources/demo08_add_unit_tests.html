@@ -1,7 +1,7 @@
 <!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/impersonate-unit-tests -->
 <div class="row-fluid">
 	<div class="span12">
-		<h4>Adding Unit Tests</h4>
+		<h4>Demo 08: Add Unit Tests</h4>
 		<p>We have been some naughty developers so far and did not define
 			proper unit tests like good craftsmen should!</p>
 		<p>However, using the Appjangle platform does not prevent us from
@@ -26,8 +26,7 @@
 		<p>The method under test calculates the total number of posts on a
 			wall. With a few minor changes, we could link this method into our
 			proceeding demo apps.</p>
-		<pre class="prettyprint">
-var aPost = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
+		<pre class="prettyprint">var aPost = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
 
 function calculateNumberOfPosts(posts, callback) {
 			posts.selectAll(session.node(aPost)).get(function(postsList) {
