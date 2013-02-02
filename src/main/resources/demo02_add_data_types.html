@@ -109,7 +109,7 @@ session.commit().get(function(success) {
 <p>
 	In addition to adding the data types, we also retrieve the defined
 	posts with the defined data type using the <a
-		href="http://nextweb.io/docs/nextweb-select-property.value.html">select(property)</a>
+		href="http://nextweb.io/docs/nextweb-selectAll-property.value.html">selectAll(property)</a>
 	operation.</p>
 <div class="jsexample" id="salveExampleWithTypes">
 	<pre class="jscode">var session = Nextweb.createSession();
@@ -125,7 +125,7 @@ session.commit().get(function(success) {
     console.log("Upload completed to: "+posts.get().uri());
     
     console.log("Now loading posts ...");
-    posts.select(aPost).get(function(nodelist) {
+    posts.selectAll(aPost).get(function(nodelist) {
        console.log(nodelist.values());
     });
     
