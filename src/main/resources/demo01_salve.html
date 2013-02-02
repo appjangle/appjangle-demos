@@ -77,7 +77,8 @@ session.commit().get(function(success) {
 
 <script>
 	var salveExampleLoaded = false;
-	window.onShowcaseLoaded = function() {
+	window.onShowcaseLoaded = window.onShowcaseLoaded || [];
+	window.onShowcaseLoaded.push( function() {
 		if (salveExampleLoaded === true) {
 			return;
 		}
@@ -100,7 +101,7 @@ session.commit().get(function(success) {
 			code : code
 		});
 
-	};
+	});
 </script>
 
 <div class="row-fluid">
