@@ -106,32 +106,59 @@ session.commit().get(function(success) {
 	have created earlier, feel free to edit the example to replace the link
 	with a link to 'your' data type node.
 </p>
+<p>
+	In addition to adding the data types, we also retrieve the defined
+	posts with the defined data type using the <a
+		href="http://nextweb.io/docs/nextweb-select-property.value.html">select(property)</a>
+	operation.</p>
+<div class="jsexample" id="salveExampleWithTypes">
+	<pre class="jscode">var session = Nextweb.createSession();
 
+var aPost = session.node("http://slicnet.com/seed1/seed1/4/4/1/4/h/sd/aPost");
 
+var posts = session.seed();
+
+posts.append("Salve, Munde.").append(aPost);
+posts.append("Salve, Nubes!").append(aPost);
+
+session.commit().get(function(success) {
+    console.log("Upload completed to: "+posts.get().uri());
+    
+    console.log("Now loading posts ...");
+    posts.select(aPost).get(function(nodelist) {
+       console.log(nodelist.values());
+    });
+    
+    session.close().get(function(success) { });
+});
+</pre>
+
+</div>
 
 <script>
-window.onShowcaseLoaded = window.onShowcaseLoaded || [];
-	window.onShowcaseLoaded.push( function() {
-		
+	window.onShowcaseLoaded = window.onShowcaseLoaded || [];
+	window.onShowcaseLoaded
+			.push(function() {
 
-		var elem = $('#dataTypesExample');
+				var initCodeElem = function(elem, idx) {
+					var pre = $('.jscode', elem), code = pre.text(), jsSourceTemplate = $(
+							'.jsSourceTemplateAj').clone(), exampleElem = $(
+							jsSourceTemplate).appendTo(elem);
 
-		var idx = 1;
+					pre.remove();
+					exampleElem.removeClass('jsSourceTemplateAj');
+					exampleElem.show();
+					window.initCodeExample({
+						elem : exampleElem,
+						marker : "js_example_data_types_" + idx,
+						code : code
+					});
+				};
 
-		var pre = $('.jscode', elem), code = pre.text(), jsSourceTemplate = $(
-				'.jsSourceTemplateAj').clone(), exampleElem = $(
-				jsSourceTemplate).appendTo(elem);
+				initCodeElem($('#dataTypesExample'), 1);
+				initCodeElem($('#salveExampleWithTypes'), 2);
 
-		pre.remove();
-		exampleElem.removeClass('jsSourceTemplateAj');
-		exampleElem.show();
-		window.initCodeExample({
-			elem : exampleElem,
-			marker : "js_example_data_types_" + idx,
-			code : code
-		});
-
-	});
+			});
 </script>
 <div class="row-fluid">
 	<div class="span12"></div>
