@@ -3,59 +3,52 @@
 	<div class="span12">
 		<h4>Demo 01: Salve!</h4>
 		<hr>
-		<h5>Objectives</h5>
-		<ul>
-			<li>Introduce hyperdata data modelling</li>
-			<li>Provide simple Hello, World! examples for Appjangle.</li>
-		</ul>
-		<h5>Requirements</h5>
-		<p>While our new social network will without doubt have numerous
-			unique and cool features, let's start with something simple for now:</p>
-		<div style="text-align: center; margin: 10px;">
-			<img
-				src="https://docs.google.com/drawings/d/1yEkjUT_czjS316U_7mjwXAUH41VK2reGgAh-VYG6vw8/pub?w=400"
-				alt="The Wall of The Wise">
-		</div>
-		<p>On the wall of the wise, historical characters can leave
-			inspiring and insightful comments to their heart's delight.</p>
-		<dl class="dl-horizontal">
-			<dt>Requirement 1</dt>
-			<dd>Build a first, simple data model for The Wall of the Wise</dd>
-			<dt>Requirement 2</dt>
-			<dd>Upload a few example posts for a Wall of the Wise to the
-				Appjangle cloud</dd>
-		</dl>
+		<p>In this first step of developing 'The Wall of the Wise', we
+			define a simple data model to store wall posts on the Appjangle cloud
+			and implement this model for a JavaScript and Java application.
 		<h5>Data Model</h5>
 		<p>
 			Appjangle is built on a <a
 				href="http://nextweb.io/docs/nextweb-data-model.value.html">hyperdata
 				data model</a>. Therefore, all data is expressed as nodes and (untyped)
-			connections.
+			connections. Modelling our desired wall using this model is simple.
+			Check the the <a
+				href="http://nextweb.io/docs/nextweb-modeling-language.value.html">Nextweb
+				docs</a> for details regarding the hyperdata modelling language.
 		</p>
-		<p>Modelling our desired wall using this model is no big deal. The
-			wall itself can be represented by a node; posts to this wall are
-			represented as text nodes, which are connected to the 'wall node'.
-			For instance:</p>
+		<p>A model for the Wall of the Wise could be defined as follows:</p>
+		<ul>
+			<li>The wall itself can be represented by an arbitrary node
+				'posts'.</li>
+			<li>This wall is connected to one or more text nodes, which
+				represent the posts.</li>
+		</ul>
+
+		<div style="text-align: center; margin: 10px;">
+			<img class="img-polaroid"
+				src="http://docs.google.com/drawings/d/1YOalXKhaOOwvFkSHqh_zPuM3Eixfcf3N1_tTYIgkkTA/pub?w=291">
+			<p style="text-size: 90%">
+				<em>Figure: Abstract data model</em>
+			</p>
+		</div>
+		<p>Hyperdata modelling allows to express not only 'abstract'
+			models as the one presented above but also concrete models containing
+			example data. A concrete example of our first model could look as
+			follows:</p>
 		<div style="text-align: center; margin: 10px;">
 			<img class="img-polaroid"
 				src="http://docs.google.com/drawings/d/1lVCDOrmWdP8KqCQyWegrNSiinmJlXJz6NCUcHVB4Hqc/pub?w=291">
 			<p style="text-size: 90%">
-				<em>Figure: Naive data model</em>
+				<em>Figure: Concrete data model</em>
 			</p>
 		</div>
-		<p>
-			For more details regarding the <a
-				href="http://nextweb.io/docs/nextweb-data-model.value.html">data
-				model</a> as well as the <a
-				href="http://nextweb.io/docs/nextweb-modeling-language.value.html">modelling
-				language</a> used here, please refer to the <a href="http://nextweb.io">Nextweb</a>
-			documentation! This first model is without doubt overly simplistic. But no
+		<p>This first model is without doubt overly simplistic. But no
 			worries, we will extend it later.</p>
-		<!-- <p>For now, we can use this understanding of our app data as
-			starting point to write a quick application, which stores data of our
-			'Wall of Wisdom' in Appjangle's cloud based storage</p> -->
-		<h5>Hello, World: JavaScript</h5>
-		<p>The following JavaScript application uploads some date according to the defined data model to the Appjangle cloud.</p>
+		<h5>JavaScript</h5>
+		<p>The following JavaScript application uploads some data
+			according to the defined data model to the Appjangle cloud. Please
+			note that the uploaded data satisfies both the abstract and concrete
+			model defined above.</p>
 	</div>
 </div>
 
@@ -78,14 +71,14 @@ session.commit().get(function(success) {
 <script>
 	var salveExampleLoaded = false;
 	window.onShowcaseLoaded = window.onShowcaseLoaded || [];
-	window.onShowcaseLoaded.push( function() {
+	window.onShowcaseLoaded.push(function() {
 		if (salveExampleLoaded === true) {
 			return;
 		}
 		salveExampleLoaded = true;
 
 		var elem = $('#salveExample');
-		
+
 		var idx = 1;
 
 		var pre = $('.jscode', elem), code = pre.text(), jsSourceTemplate = $(
