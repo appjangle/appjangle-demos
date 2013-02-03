@@ -3,7 +3,7 @@
 	<div class="span12">
 		<h4>Demo 01: Salve!</h4>
 		<hr>
-		<p>In this first step of developing 'The Wall of the Wise', we
+		<p>As the first step in developing 'The Wall of the Wise', we
 			define a simple data model to store wall posts on the Appjangle cloud
 			and implement this model for a JavaScript and Java application.
 		<h5>Data Model</h5>
@@ -31,10 +31,14 @@
 				<em>Figure: Abstract data model</em>
 			</p>
 		</div>
-		<p>Hyperdata modelling allows to express not only 'abstract'
-			models as the one presented above but also concrete models containing
-			example data. A concrete example of our first model could look as
-			follows:</p>
+		<p>
+			Hyperdata modelling allows to express not only 'abstract' models as
+			the one presented above but also concrete models containing example
+			data (see also <a
+				href="http://nextweb.io/docs/nextweb-data-modeling-example.value.html">the
+				modelling example in the Nextweb documentation</a>). A concrete example
+			of our first model could look as follows:
+		</p>
 		<div style="text-align: center; margin: 10px;">
 			<img class="img-polaroid"
 				src="http://docs.google.com/drawings/d/1lVCDOrmWdP8KqCQyWegrNSiinmJlXJz6NCUcHVB4Hqc/pub?w=291">
@@ -44,7 +48,7 @@
 		</div>
 		<p>This first model is without doubt overly simplistic. But no
 			worries, we will extend it later.</p>
-		<h5>JavaScript</h5>
+		<h5>JavaScript Implementation</h5>
 		<p>The following JavaScript application uploads some data
 			according to the defined data model to the Appjangle cloud. Please
 			note that the uploaded data satisfies both the abstract and concrete
@@ -101,8 +105,7 @@ session.commit().get(function(success) {
 	<div class="span12">
 		<p>Click the Run button to execute the application. You can click
 			on the generated link to see the data uploaded to the Appjangle
-			cloud.</p>
-		<p>You can also click the Edit button to make extensions and
+			cloud. You can also click the Edit button to make extensions and
 			changes to the example, if you wish.</p>
 		<p>To learn more about the operations used in the example, check
 			the Nextweb API documentation:</p>
@@ -114,7 +117,7 @@ session.commit().get(function(success) {
 				href="http://nextweb.io/docs/nextweb-append-value.value.html">append</a>
 			<li><a href="http://nextweb.io/docs/nextweb-commit.value.html">commit</a>
 		</ul>
-		<h5>Hello, World: Java</h5>
+		<h5>Java Implementation</h5>
 		<p>
 			We can implement the same application in Java. You can copy the
 			source code below it into any Java class. But please note that in

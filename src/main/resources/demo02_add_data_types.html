@@ -3,39 +3,26 @@
 	<div class="span12">
 		<h4>Demo 02: Add Data Types</h4>
 		<hr>
-		<h5>Objectives</h5>
-		<ul>
-			<li>Introduce hyperdata properties/type nodes</li>
-			<li>Upload type nodes to the Appjangle cloud.</li>
-		</ul>
-		<h5>Requirements</h5>
 		<p>
-			The first data model we have designed in <a href="#salve">demo 01</a>
-			certainly leaves much to be desired. In this demo, we introduce a few
-			simple data types for our model to make the data of our application
-			more meaningful.
+			After we have defined a simple data model as well as uploaded data
+			according to this model to the Appjangle cloud, we will improve and
+			extend our original model in the second development step. In
+			particular, we introduce a simple data type, upload this data type to
+			the Appjangle cloud and extend our first prototype from <a
+				href="#salve">demo 01</a> with this type.
 		</p>
-		<dl class="dl-horizontal">
-			<dt>Requirement 1</dt>
-			<dd>Extend the data model for the Wall of the Wise with data
-				types</dd>
-			<dt>Requirement 2</dt>
-			<dd>Upload required data types to the Appjangle cloud</dd>
-			<dt>Requirement 3</dt>
-			<dd>Enhance application from demo 01 with new types.</dd>
-		</dl>
-		<h5>Data Model</h5>
+		<h5>Introduce Data Type</h5>
 		<p>
 			In order to make the data of the Wall of the Wise application more
-			meaningful, we can utilize a simple HyperData design pattern: <a
+			meaningful, we can utilize a few simple HyperData design pattern,
+			namely the <a
+				href="http://nextweb.io/docs/nextweb-data-pattern.value.html#type">hyperdata
+				type</a> and the <a
 				href="http://nextweb.io/docs/nextweb-data-pattern.value.html#property">the
 				hyperdata property</a>.
-		<p>
-			For our Wall of the Wise we define a property with the type 'a post',
-			which helps us to identify posts to our wall to other data items. For
-			the model build in <a href="#salve">demo 01</a>, the resulting model
-			with types could be defined as follows:
 		</p>
+		<p>First, we define a new global data type 'a post', which
+			identifies posts to our wall (or any other message board).</p>
 		<div style="text-align: center; margin: 10px;">
 			<img
 				src="http://docs.google.com/drawings/d/1a9nQTh5rwMtz7djdZ6sl6s8GMx4sORmzN2dbZ66b2go/pub?w=279&h=164">
@@ -110,7 +97,8 @@ session.commit().get(function(success) {
 	In addition to adding the data types, we also retrieve the defined
 	posts with the defined data type using the <a
 		href="http://nextweb.io/docs/nextweb-selectAll-property.value.html">selectAll(property)</a>
-	operation.</p>
+	operation.
+</p>
 <div class="jsexample" id="salveExampleWithTypes">
 	<pre class="jscode">var session = Nextweb.createSession();
 
