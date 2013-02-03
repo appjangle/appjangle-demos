@@ -58,10 +58,10 @@
 			The following script creates a new data type node <em>aPost</em> and
 			prints out the address for this node. This address is all we need to
 			use the newly created node as globally available, reusable and
-			documented data type!
+			documented data type (the nodes you have created will be persisted
+			indefinitely)! We can also save the 'secret' for the node in order to
+			be able to edit and modify our data type later on.
 		</p>
-		<p>We can also save the 'secret' for the node in order to be able
-			to edit and modify our data type later on.</p>
 
 	</div>
 </div>
@@ -76,22 +76,28 @@ var aPost = typesRoot.append("A post on a message board, wall or chat room.", ".
 
 session.commit().get(function(success) {
     console.log("URI: "+aPost.get().uri());
-	console.log("Secret: "+aPost.get().secret());
+    console.log("Secret: "+aPost.get().secret());
     session.close().get(function(success) { });
 });
 </pre>
 
-	<p>
-		Note: you can click on the link to the generated node to explore its
-		automatically generated web representation. By adding to the end of
-		the URI <a
-			href="http://slicnet.com/seed1/seed1/4/4/1/4/h/sd/aPost.value.xml">.value.xml</a>
-		or <a
-			href="http://slicnet.com/seed1/seed1/4/4/1/4/h/sd/aPost.value.json">.value.json</a>,
-		you can also easily see the other rendered representations of the
-		node.
-	</p>
+
 </div>
+<div class="row-fluid">
+	<div class="span12">
+		<p>
+			Note: You can click on the link to the generated node to explore its
+			automatically generated web representation. By adding to the end of
+			the URI <a
+				href="http://slicnet.com/seed1/seed1/4/4/1/4/h/sd/aPost.value.xml">.value.xml</a>
+			or <a
+				href="http://slicnet.com/seed1/seed1/4/4/1/4/h/sd/aPost.value.json">.value.json</a>,
+			you can also easily see the other rendered representations of the
+			node.
+		</p>
+	</div>
+</div>
+
 <h5>Extend Prototype</h5>
 <p>
 	After we have created the new data type node, we can readily use it to
@@ -103,7 +109,8 @@ session.commit().get(function(success) {
 </p>
 
 <p>Also, In order to use the node we have defined in our
-	application, we need to reference it using the<p>
+	application, we need to reference it using the
+<p>
 	In addition to adding the data types, we also retrieve the defined
 	posts with the defined data type using the <a
 		href="http://nextweb.io/docs/nextweb-selectAll-property.value.html">selectAll(property)</a>
