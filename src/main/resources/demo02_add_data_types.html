@@ -21,28 +21,45 @@
 				href="http://nextweb.io/docs/nextweb-data-pattern.value.html#property">the
 				hyperdata property</a>.
 		</p>
-		<p>First, we define a new global data type 'a post', which
-			identifies posts to our wall (or any other message board).</p>
+		<p>
+			First, we define a new global data type <em>aPost</em>, which
+			identifies posts to our wall (or any other message board). We then
+			employ the hyperdata property pattern to define any posts to the
+			message board as properties with the property value of the post text
+			and the property type <em>aPost</em>.
+		</p>
+		<div style="text-align: center; margin: 10px;">
+			<img
+				src="https://docs.google.com/drawings/d/1XGehGxdnGntLZL7Xg_YWNbcIUoBWoaYvYuzxFfbZCeA/pub?w=291">
+			<p style="text-size: 90%">
+				<em>Figure: Concrete data model with types</em>
+			</p>
+		</div>
+
+		<p>Again, we can create an example instance of our abstact model
+			with concrete model. For instance:
 		<div style="text-align: center; margin: 10px;">
 			<img
 				src="http://docs.google.com/drawings/d/1a9nQTh5rwMtz7djdZ6sl6s8GMx4sORmzN2dbZ66b2go/pub?w=279&h=164">
 			<p style="text-size: 90%">
-				<em>Figure: Data model with types</em>
+				<em>Figure: Concrete data model with types</em>
 			</p>
 		</div>
-		<h5>Prepare Data Type</h5>
+		<h5>Upload Data Type to Appjangle Cloud</h5>
 		<p>
-			In the model, we use the data type <em>aPost</em>. In order to use
-			this data type in our application, we first need to create it.
-			Luckily, this is very easy, since the property pattern allows any
-			arbitrary node to serve as a type node (<a
+			We have introduced the data type <em>aPost</em> in our hyperdata
+			model. In order to use this data type in an application, we first
+			need to create it. Luckily, this is very easy, since the property
+			pattern allows any arbitrary node to serve as a type node (<a
 				href="http://nextweb.io/docs/nextweb-data-pattern.value.html#type">see
 				Nextweb documentation</a>) and creating nodes is very easy in Appjangle.
 		</p>
-		<p>The following script creates a new data type node 'aPost' and
+		<p>
+			The following script creates a new data type node <em>aPost</em> and
 			prints out the address for this node. This address is all we need to
 			use the newly created node as globally available, reusable and
-			documented data type!</p>
+			documented data type!
+		</p>
 		<p>We can also save the 'secret' for the node in order to be able
 			to edit and modify our data type later on.</p>
 
@@ -75,25 +92,18 @@ session.commit().get(function(success) {
 		node.
 	</p>
 </div>
-<h5>Use New Types</h5>
+<h5>Extend Prototype</h5>
 <p>
 	After we have created the new data type node, we can readily use it to
 	enhance the original application from <a href="#salve">demo 01</a>. For
 	this we utilize the <a
 		href="http://nextweb.io/docs/nextweb-append-value.value.html">append
-		operation</a> as before.
+		operation</a> as before. This time, however, we also use it to append our
+	new data type node!
 </p>
 
-<p>
-	This time, however, we also use it to append our new data type node! In
-	order to use the node we have defined in our application, we need to
-	reference it using the <a
-		href="http://nextweb.io/docs/nextweb-node-operation.value.html">node</a>
-	operation. The example below contains a link to a data type node we
-	have created earlier, feel free to edit the example to replace the link
-	with a link to 'your' data type node.
-</p>
-<p>
+<p>Also, In order to use the node we have defined in our
+	application, we need to reference it using the<p>
 	In addition to adding the data types, we also retrieve the defined
 	posts with the defined data type using the <a
 		href="http://nextweb.io/docs/nextweb-selectAll-property.value.html">selectAll(property)</a>
