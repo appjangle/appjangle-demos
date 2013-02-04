@@ -19,7 +19,8 @@
 			<h4 style="margin-top: 30px;">Live Demo</h4>
 		</div>
 	</div>
-	<div class="ajdemo" style="padding: 5px;">
+	<div class="ajdemo"
+		style="padding: 5px; border: 1px solid rgb(76, 60, 27)">
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="syncClientSpawn hide">
@@ -36,14 +37,40 @@
 							<td><a class="spawnSocrates" href="#" target="_blank"><img
 									src="http://docs.google.com/drawings/d/1kqVqej6c6R6PGpox-STQEc9O6fZO9zGicL5S6mmBkdQ/pub?w=50">
 									Start Client for Socrates</a></td>
-							
+
 							<td><a class="spawnLincoln" href="#" target="_blank"><img
 									src="http://docs.google.com/drawings/d/1VyBRCBo2OOOcBVOmiRLP8r-ZPvva-VolSenXdnni4VM/pub?w=50">
 									Start Client for Lincoln</a></td>
-						</td>
+							</td>
 					</table>
 
 				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<h4 style="margin-top: 30px;">Key Changes</h4>
+			<p>
+				Following a list of the key changes introduced in comparison to <a
+					href="transparentCloudPersistence">demo 04</a>.
+			<h5>Added Monitor for Posts node</h5>
+			<div style="margin-left: 25px;">
+			<p >
+				In order to be notified of changes made by another client, we
+				installed a monitor on the posts node (see <a
+					href="http://nextweb.io/docs/nextweb-monitor.value.html">Nextweb
+					Monitor</a>). A monitor will automatically the specified nodes for
+				changes in a specified interval in a certain 'depth'. The depth
+				specifies how many of the nodes child nodes should be monitored as
+				well. For this demo, we select an interval of 1 second as well as a
+				monitor depth of 2.
+			</p>
+			<p>The monitor is initialized as follows (see demo02_add_synchronization.js):</p>
+			<pre class="prettyprint">
+// BEFORE: server = Nextweb.startServer(12322);
+session = Nextweb.createSession();</pre>
+			
 			</div>
 		</div>
 	</div>
