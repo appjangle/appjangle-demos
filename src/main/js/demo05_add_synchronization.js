@@ -68,16 +68,12 @@ window.Appjangle = window.Appjangle || {};
 
 		demo.updatePosts = function() {
 			var post;
-
-			posts.selectAll().get(function(nodeList) {
-				console.log(userName + " all nodes " + nodeList.values());
-			});
-
+			
 			posts.selectAll(aPost).get(function(postsList) {
 				var i, item;
 
 				$(".postList", wrapper).empty();
-				console.log(userName + " all posts: " + postsList.values());
+				
 				for (i = postsList.nodes().length - 1; i >= 0; i--) {
 					post = postsList.nodes()[i];
 
@@ -146,7 +142,7 @@ window.Appjangle = window.Appjangle || {};
 			wrapper.append($("<p>Loaded " + posts.uri() + "</p>"));
 
 			// installing monitor to check for updates from other clients
-			monitor = posts.monitor().setInterval("400").setDepth(2)
+			monitor = posts.monitor().setInterval("1000").setDepth(2)
 					.addListener(function(context) {
 						demo.update();
 					});
