@@ -43,21 +43,22 @@
 		<!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_instant_data_page -->
 		<div class="row-fluid">
 			<div class="span12">
-				<h4>Summary</h4>
+				<h4>Demo 03: Add Web Ui</h4>
+				<hr>
 				<p>
-					This demo allows to make posts to a status or message board. A text
-					typed in the input box below will appear as item in a list below
-					the input box upon clicking the
-					<button class="postButton btn btn-inverse input-small "
-						type="button" style="width: 20%; max-width: 90px; float: left;">Post</button>
-					button.
+					After having enhanced the data model of our Wall of the Wise
+					prototype in <a href="#dataTypes">demo 02</a>, it's now time to
+					implement a simple user interface for our application.
 				</p>
-
+				<p>This user interface will allow to make posts to a wall by
+					using the data model, we have defined. Find the live demo embedded
+					in this page and try to make your first posts. The nuts and bolts of the
+					example are explained in detail below as annotated source code.</p>
 			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span12">
-				<h4 style="margin-top: 30px;">Demo</h4>
+				<h5 style="margin-top: 30px;">Live Demo</h5>
 			</div>
 		</div>
 		<div class="ajdemo" style="padding: 5px;">
@@ -120,7 +121,7 @@
 			</div>
 		</div>
 
-		<div class="row-fluid">
+	   <div class="row-fluid">
 			<div class="span12">
 				<h4 style="margin-top: 30px;">Note</h4>
 				<dl class="dl-horizontal">
@@ -139,8 +140,9 @@
 					<dd>
 						The source code of the demo utilizes the open source API <a
 							href="http://nextweb.io">Nextweb</a> to interact with the
-						Appjangle's embedded database. This makes it easy to release the source code
-						of applications easily under any open source license you desire.
+						Appjangle's embedded database. This makes it easy to release the
+						source code of applications easily under any open source license
+						you desire.
 					</dd>
 				</dl>
 
@@ -175,14 +177,21 @@
 				</p>
 
 				<div style="padding: 15px;">
-
-					<p style="margin-left: 40px; font-size: 90%;">An embedded db
-						server is started and a client session is created.</p>
-					<pre class="prettyprint linenums:24">
+                    <div class="row-fluid">
+                    <div class="span6">
+                       <pre class="prettyprint linenums:24">
 // local db server to manage data
 server = Nextweb.startServer(12322);
 session = Nextweb.createSession();
-</pre>
+</pre> 
+                    </div>
+                    <div class="span6">
+                        <p style="margin-left: 40px; font-size: 90%;">An embedded db
+                        server is started and a client session is created.</p>
+                    </div>
+                    </div>
+					
+					
 					<p style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
 						The <a href="http://nextweb.io/docs/nextweb-seed.value.html">seed
 							operation</a> is used to seed a new root node in the Appjangle
