@@ -55,11 +55,17 @@ window.Appjangle = window.Appjangle || {};
 
 		};
 
+		var updatePending = false;
 		demo.update = function() {
+			if (updatePending) {
+				return;
+			}
+			updatePending = true;
 			demo.updatePosts();
 			demo.updateTotal();
+			updatePending = false;
 		};
-		
+
 		demo.updateTotal = function() {
 			posts.selectAll(aPost).get(function(postsList) {
 				$(".totalPosts", wrapper).text(postsList.size());
@@ -68,12 +74,12 @@ window.Appjangle = window.Appjangle || {};
 
 		demo.updatePosts = function() {
 			var post;
-			
+
 			posts.selectAll(aPost).get(function(postsList) {
 				var i, item;
 
 				$(".postList", wrapper).empty();
-				
+
 				for (i = postsList.nodes().length - 1; i >= 0; i--) {
 					post = postsList.nodes()[i];
 
@@ -108,7 +114,7 @@ window.Appjangle = window.Appjangle || {};
 
 			avatarNode.get(function(avatarNode) {
 				$(".media-object", item).attr("src", avatarNode.value());
-			});
+			})
 
 		};
 
@@ -123,9 +129,9 @@ window.Appjangle = window.Appjangle || {};
 
 			$(".postInput", wrapper).attr("placeholder",
 					"What's up, " + userName + "?");
-			
+
 			demo.update();
-			
+
 			wrapper.show();
 		};
 
