@@ -23,42 +23,17 @@
 	    
         session = Nextweb.createSession();
 
-        
-        
-        // request for data node to store all posts
+        // data node for posts
         posts = session.node(params[0]);
-		
-        
-        
+
         Appjangle.demos.initSynchronizationDemo({
             wrapper : $(".client1"),
             userName: params[1],
-            avatar: "", // caesar
+            avatar: params[2], 
             posts: posts,
             engine : engine
         });
-        
-        posts.get(function(posts) {
-            
-        	setTimeout(function() {
-        		session2 = Nextweb.createSession();
-                
-                posts2 = session2.node(posts.uri(), posts.secret());
-                
-                Appjangle.demos.initSynchronizationDemo({
-                    wrapper : $(".client2"),
-                    userName : "Cleopetra",
-                    avatar: "", // cleopetra
-                    posts: posts2,
-                    engine : engine
-                });	
-        	}, 200);
-        	
-        	
-        	
-        });
-        
-		
+
 		
 		
 	};

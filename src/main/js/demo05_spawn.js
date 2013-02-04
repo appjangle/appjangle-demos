@@ -4,10 +4,14 @@
 
 window.Appjangle = window.Appjangle || {};
 
+
+
 (function(Appjangle, $) {
 
-	Appjangle.initDemo05Spawn = function(params) {
-		var elem = params.elem;
+	window.demos.Appjangle = window.demos.Appjangle || {};
+	
+	Appjangle.demos.initDemo05Spawn = function(params) {
+		var elem = params.wrapper;
 		var postsUrl = params.postsUrl;
 		var appUrl = "http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo-collaboration_app.value.html";
 
