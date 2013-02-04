@@ -51,11 +51,15 @@ window.Appjangle = window.Appjangle || {};
 			session.commit().get(function() {
 			});
 
-			demo.updatePosts();
-			demo.updateTotal();
+			demo.update();
 
 		};
 
+		demo.update = function() {
+			demo.updatePosts();
+			demo.updateTotal();
+		};
+		
 		demo.updateTotal = function() {
 			posts.selectAll(aPost).get(function(postsList) {
 				$(".totalPosts", wrapper).text(postsList.size());
@@ -144,7 +148,7 @@ window.Appjangle = window.Appjangle || {};
 			// installing monitor to check for updates from other clients
 			monitor = posts.monitor().setInterval("400").setDepth(2)
 					.addListener(function(context) {
-						demo.updatePosts();
+						demo.update();
 					});
 
 			monitor.get(function(monitor) {
