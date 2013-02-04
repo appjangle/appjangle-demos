@@ -26,6 +26,10 @@
         // data node for posts
         posts = session.node(params[0], params[1]);
 
+        $(".clientAvatarName").text(params[2]);
+        $(".clientAvatarPic").attr('src', params[3]);
+        
+        
         Appjangle.demos.initSynchronizationDemo({
             wrapper : $(".client1"),
             userName: params[2],

@@ -123,7 +123,9 @@ window.Appjangle = window.Appjangle || {};
 
 			$(".postInput", wrapper).attr("placeholder",
 					"What's up, " + userName + "?");
-
+			
+			demo.update();
+			
 			wrapper.show();
 		};
 
