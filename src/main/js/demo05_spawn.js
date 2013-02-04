@@ -13,7 +13,7 @@ window.Appjangle = window.Appjangle || {};
 	Appjangle.demos.initDemo05Spawn = function(params) {
 		var elem = params.wrapper;
 		var postsUrl = params.postsUrl;
-		var postsSecret = params.postSecret;
+		var postsSecret = params.postsSecret;
 		var appUrl = "http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo-collaboration_app.value.html";
 
 		$(".spawnCaesar", elem)
@@ -32,7 +32,7 @@ window.Appjangle = window.Appjangle || {};
 								+ postsUrl + "&" +postsSecret
 								+ "&Cleopetra&http://docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50");
 		
-		
+		elem.show();
 
 	};
 
