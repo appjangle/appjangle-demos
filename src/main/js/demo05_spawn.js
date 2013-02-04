@@ -8,9 +8,9 @@ window.Appjangle = window.Appjangle || {};
 
 (function(Appjangle, $) {
 
-	window.Appjangle.demos = window.Appjangle.demos || {};
+	Appjangle.demos = Appjangle.demos || {};
 	
-	window.Appjangle.demos.initDemo05Spawn = function(params) {
+	Appjangle.demos.initDemo05Spawn = function(params) {
 		var elem = params.wrapper;
 		var postsUrl = params.postsUrl;
 		var appUrl = "http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo-collaboration_app.value.html";
@@ -35,6 +35,6 @@ window.Appjangle = window.Appjangle || {};
 
 	};
 
-}());
+}(Appjangle, jQuery));
 
 // <!-- one.end -->
