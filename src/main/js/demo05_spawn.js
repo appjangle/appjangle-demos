@@ -8,7 +8,7 @@ window.Appjangle = window.Appjangle || {};
 
 (function(Appjangle, $) {
 
-	window.demos.Appjangle = window.demos.Appjangle || {};
+	window.Appjangle.demos = window.Appjangle.demos || {};
 	
 	Appjangle.demos.initDemo05Spawn = function(params) {
 		var elem = params.wrapper;
