@@ -26,17 +26,17 @@ window.Appjangle = window.Appjangle || {};
 
 							var clientsReadWriteToken = factory.createToken(
 									session, "adf34fsf", "readwrite",
-									"");
+									posts.uri());
 							var clientsReadToken = factory.createToken(
 									session, "fuehfqd", "read", "");
 							var moderatorToken = factory
 									.createToken(session, "se4efga",
 											"readwrite", "");
 
-							posts.append(clientsReadWriteToken);
-							moderations.append(moderatorToken);
-							moderations.append(clientsReadToken);
-
+							posts.appendValue(clientsReadWriteToken);
+							moderations.appendValue(moderatorToken);
+							moderations.appendValue(clientsReadToken);
+							
 							var postsUrl = params.postsUrl;
 							var postsSecret = params.postsSecret;
 							var appUrl = "http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo06_app.value.html";

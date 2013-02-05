@@ -13,7 +13,7 @@ window.Appjangle = window.Appjangle || {};
 
 	Appjangle.demos.initAuthorizationDemo = function(params) {
 		var wrapper, avatar, userName, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType,
-		remarkableType, remarkable, /*moderationType, moderation,*/
+		remarkableType, remarkable, 
 		aUserName, demo, monitor;
 
 		demo = {};
@@ -41,9 +41,6 @@ window.Appjangle = window.Appjangle || {};
 
 		remarkableType = "http://slicnet.com/seed1/seed1/4/5/0/2/h/sd/remarkable";
 		aRemarkablePost = session.node(remarkableType);
-		
-		//moderationType= "http://slicnet.com/seed1/seed1/4/5/0/2/h/sd/moderation";
-		//aModeration = session.node(moderationType); 
 		
 		// submit a new post
 		demo.submitPost = function() {
