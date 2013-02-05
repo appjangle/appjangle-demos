@@ -12,7 +12,7 @@ window.Appjangle = window.Appjangle || {};
 	Appjangle.demos = Appjangle.demos || {};
 
 	Appjangle.demos.initSynchronizationDemo = function(params) {
-		var wrapper, avatar, userName, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType, anUserName, demo, monitor;
+		var wrapper, avatar, userName, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType, aUserName, demo, monitor;
 
 		demo = {};
 
@@ -36,7 +36,7 @@ window.Appjangle = window.Appjangle || {};
 
 		// load type for user name
 		userNameType = "http://slicnet.com/seed1/seed1/3/9/2/3/h/sd/userName";
-		anUserName = session.node(userNameType);
+		aUserName = session.node(userNameType);
 
 		// submit a new post
 		demo.submitPost = function() {
@@ -45,7 +45,7 @@ window.Appjangle = window.Appjangle || {};
 
 			var post = posts.append(postText);
 			post.append(aPost);
-			post.append(userName).append(anUserName);
+			post.append(userName).append(aUserName);
 			post.append(avatar).append(anAvatar);
 
 			session.commit().get(function() {
@@ -102,16 +102,14 @@ window.Appjangle = window.Appjangle || {};
 			$(".postList", wrapper).append(item);
 			$(".postText", item).text(post.value());
 
-			userNameNode = post.select(anUserName);
+			userNameNode = post.select(aUserName);
 			userNameNode.catchUndefined(ignore);
-
-			avatarNode = post.select(anAvatar);
-			avatarNode.catchUndefined(ignore);
-
 			userNameNode.get(function(userNameNode) {
 				$(".postAuthor", item).text(userNameNode.value());
 			});
-
+			
+			avatarNode = post.select(anAvatar);
+			avatarNode.catchUndefined(ignore);
 			avatarNode.get(function(avatarNode) {
 				$(".media-object", item).attr("src", avatarNode.value());
 			})
