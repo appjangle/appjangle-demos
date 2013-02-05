@@ -12,7 +12,9 @@ window.Appjangle = window.Appjangle || {};
 	Appjangle.demos = Appjangle.demos || {};
 
 	Appjangle.demos.initSynchronizationDemo = function(params) {
-		var wrapper, avatar, userName, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType, aUserName, demo, monitor;
+		var wrapper, avatar, userName, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType,
+		remarkableType, remarkable, /*moderationType, moderation,*/
+		aUserName, demo, monitor;
 
 		demo = {};
 
@@ -23,6 +25,8 @@ window.Appjangle = window.Appjangle || {};
 		Nextweb = params.engine;
 		session = params.posts.getSession();
 		posts = params.posts;
+		moderations = params.moderations;
+		
 		monitor = null;
 
 		postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
@@ -35,6 +39,13 @@ window.Appjangle = window.Appjangle || {};
 		userNameType = "http://slicnet.com/seed1/seed1/3/9/2/3/h/sd/userName";
 		aUserName = session.node(userNameType);
 
+		remarkableType = "http://slicnet.com/seed1/seed1/4/5/0/2/h/sd/remarkable";
+		aRemarkablePost = session.node(remarkableType);
+		
+		//moderationType= "http://slicnet.com/seed1/seed1/4/5/0/2/h/sd/moderation";
+		//aModeration = session.node(moderationType); 
+		
+		// submit a new post
 		demo.submitPost = function() {
 			var postText = $(".postInput", wrapper).val();
 			$(".postInput", wrapper).val("");
@@ -51,19 +62,6 @@ window.Appjangle = window.Appjangle || {};
 
 		};
 
-		demo.preparePosts(callback) {
-			var server = Nextweb.startServer(12322);
-			var session = Nextweb.createSession();
-			
-			var localPosts = session.seed("local");
-			
-			wall.selectAll(userPosts).get(function(posts) {
-				
-				posts.
-				
-			});
-		};
-		
 		var updatePending = false;
 		demo.update = function() {
 			if (updatePending) {
@@ -121,7 +119,17 @@ window.Appjangle = window.Appjangle || {};
 			avatarNode.catchUndefined(ignore);
 			avatarNode.get(function(avatarNode) {
 				$(".media-object", item).attr("src", avatarNode.value());
-			})
+			});
+			
+			moderation = moderations.select(session.node(post));
+			moderation.catchUndefined(ignore);
+			moderation.get(function(moderationNode) {
+				moderationNode.selectAllLinks().get(function(linklist) {
+					if (linklist.contains(aRemarkablePost)) {
+						$(".remarkablePostMarker", item).show();
+					}
+				});
+			});
 
 		};
 
