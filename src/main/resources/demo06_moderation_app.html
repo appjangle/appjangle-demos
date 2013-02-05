@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo06_app -->
+<!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo06_moderation_app -->
 <html>
 
 <head>
@@ -13,7 +13,7 @@
 <script src="http://appjangle.com/js/v01/appjangle/appjangle.nocache.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo_authorization.value.js"></script>
+<script src="http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo05_moderation_app_js.value.js"></script>
 
 <script>
 	window.onNextwebOnedb = function(engine) {
@@ -24,17 +24,11 @@
         session = Nextweb.createSession();
 
         // data node for posts
-        posts = session.node(params[0], params[1]);
-
-        $(".clientAvatarName").text(params[2]);
-        $(".clientAvatarPic").attr('src', params[3]);
+        moderations = session.node(params[0], params[1]);
         
-        
-        Appjangle.demos.initSynchronizationDemo({
+        Appjangle.demos.initModerationDemo({
             wrapper : $(".client1"),
-            userName: params[2],
-            avatar: params[3], 
-            posts: posts,
+            moderations : moderations,
             engine : engine
         });
 
@@ -70,21 +64,11 @@
 					<div class="client1 hide">
 						<div class="row-fluid">
 							<div class="span12">
-								<h3><img class="clientAvatarPic"> <span class="clientAvatarName"></span></h3>
+								<h3>The Moderator</h3>
 							</div>
 						</div>
 
-						<div class="row-fluid">
-							<div class="input-append" style="border-radius: 3px;">
-
-								<input class="postInput input-block-level"
-									placeholder="What's up?" type="text"
-									style="width: 80%; float: left;"></input>
-								<button class="postButton btn btn-inverse input-small "
-									type="button" style="width: 20%; max-width: 90px; float: left;">Post</button>
-							</div>
-
-						</div>
+						
 
                         <div class="loadIndicator hide row-fluid" style="margin-top: 5px;">
                             <div class="span12" style="text-align: center;">
@@ -114,6 +98,7 @@
 							</a>
 							<div class="media-body">
 								<h4 class="media-heading" style="font-size: 80%;">
+									<button class="markAsRemarkable btn pull-right">Mark as Remarkable</button>
 									<span class="postTime hide">2:29</span> <span
 										class="postAuthor"></span>
 								</h4>
