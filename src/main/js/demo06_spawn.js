@@ -1,4 +1,4 @@
-// <!-- one.createPublic demo06_spawn -->
+// <!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo06_spawn -->
 
 /*global window: false */
 
@@ -25,12 +25,12 @@ window.Appjangle = window.Appjangle || {};
 						function(posts, moderations) {
 
 							var clientsReadWriteToken = factory.createToken(
-									initAuthSession, "adf34fsf", "readwrite",
+									session, "adf34fsf", "readwrite",
 									"");
 							var clientsReadToken = factory.createToken(
-									initAuthSession, "fuehfqd", "read", "");
+									session, "fuehfqd", "read", "");
 							var moderatorToken = factory
-									.createToken(initAuthSession, "se4efga",
+									.createToken(session, "se4efga",
 											"readwrite", "");
 
 							posts.append(clientsReadWriteToken);

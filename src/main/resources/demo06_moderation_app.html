@@ -23,11 +23,15 @@
 	    
         session = Nextweb.createSession();
 
-        // data node for posts
-        moderations = session.node(params[0], params[1]);
+		posts = session.node(parms[0], params[1]);        
+
+        moderations = session.node(params[2], params[3]);
+        
+        
         
         Appjangle.demos.initModerationDemo({
             wrapper : $(".client1"),
+            posts : posts,
             moderations : moderations,
             engine : engine
         });
