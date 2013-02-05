@@ -25,20 +25,16 @@ window.Appjangle = window.Appjangle || {};
 		posts = params.posts;
 		monitor = null;
 
-		// load data type for posts
 		postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
 		aPost = session.node(postType);
 		aPost.get();
 
-		// load type for avatar picture
 		avatarType = "http://slicnet.com/seed1/seed1/3/9/1/3/h/sd/anAvatar";
 		anAvatar = session.node(avatarType);
 
-		// load type for user name
 		userNameType = "http://slicnet.com/seed1/seed1/3/9/2/3/h/sd/userName";
 		aUserName = session.node(userNameType);
 
-		// submit a new post
 		demo.submitPost = function() {
 			var postText = $(".postInput", wrapper).val();
 			$(".postInput", wrapper).val("");
@@ -55,6 +51,19 @@ window.Appjangle = window.Appjangle || {};
 
 		};
 
+		demo.preparePosts(callback) {
+			var server = Nextweb.startServer(12322);
+			var session = Nextweb.createSession();
+			
+			var localPosts = session.seed("local");
+			
+			wall.selectAll(userPosts).get(function(posts) {
+				
+				posts.
+				
+			});
+		};
+		
 		var updatePending = false;
 		demo.update = function() {
 			if (updatePending) {
