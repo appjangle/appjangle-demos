@@ -118,8 +118,9 @@ window.Appjangle = window.Appjangle || {};
 			$(".markAsRemarkable", item).click(function(evt) {
 				evt.preventDefault();
 				
-				moderationNode.append("Remarkable").append(aRemarkablePost);
+				moderations.append("Remarkable").append(aRemarkablePost);
 				
+				demo.update();
 				session.commit().get(function() {});
 			});
 			
@@ -156,6 +157,13 @@ window.Appjangle = window.Appjangle || {};
 
 			});
 
+			monitorModerations = moderations.monitor().setInterval("1000").setDepth(1).addListener(function(context) {
+				demo.update();
+			});
+			
+monitorModerations.get(function(monitor) {
+				
+			});
 		});
 
 		return {

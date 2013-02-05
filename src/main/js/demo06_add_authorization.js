@@ -170,6 +170,14 @@ window.Appjangle = window.Appjangle || {};
 			monitor.get(function(monitor) {
 
 			});
+			
+			monitorModerations = moderations.monitor().setInterval("1000").setDepth(1).addListener(function(context) {
+				demo.update();
+			});
+			
+			monitorModerations.get(function(monitor) {
+				
+			});
 
 		});
 
