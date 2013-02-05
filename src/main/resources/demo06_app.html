@@ -17,7 +17,7 @@
 
 <script>
 	window.onNextwebOnedb = function(engine) {
-	    var params, session, posts;
+	    var params, session, posts, moderations;
 		
 	    params = window.location.hash.substring(1).split("&");
 	    
@@ -25,16 +25,18 @@
 
         // data node for posts
         posts = session.node(params[0], params[1]);
-
-        $(".clientAvatarName").text(params[2]);
-        $(".clientAvatarPic").attr('src', params[3]);
+		moderations = session.node(params[2], params[3]);
+        
+        $(".clientAvatarName").text(params[4]);
+        $(".clientAvatarPic").attr('src', params[5]);
         
         
         Appjangle.demos.initSynchronizationDemo({
             wrapper : $(".client1"),
-            userName: params[2],
-            avatar: params[3], 
+            userName: params[4],
+            avatar: params[5], 
             posts: posts,
+            moderations: moderations,
             engine : engine
         });
 
