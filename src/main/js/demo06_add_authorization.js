@@ -11,7 +11,7 @@ window.Appjangle = window.Appjangle || {};
 
 	Appjangle.demos = Appjangle.demos || {};
 
-	Appjangle.demos.initSynchronizationDemo = function(params) {
+	Appjangle.demos.initAuthorizationDemo = function(params) {
 		var wrapper, avatar, userName, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType,
 		remarkableType, remarkable, /*moderationType, moderation,*/
 		aUserName, demo, monitor;
