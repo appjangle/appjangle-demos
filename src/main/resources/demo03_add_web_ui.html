@@ -131,19 +131,38 @@
 					Following a list of the key changes made to the app in comparison
 					to <a href="#dataTypes">demo 02</a>.
 				<h5>Added JQuery UI</h5>
-				
+
 				<p style="margin-left: 25px;">
 					The interactive user interface of this demo is defined building on
-					the <a href="http://jquery.com/">JQuery</a> library. 
+					the <a href="http://jquery.com/">JQuery</a> library.
 				</p>
-				<h5>Using Embedded Appjangle Cloud</h5>
-				<p style="margin-left: 25px;">An embedded version of the
-					Appjangle Cloud has been used. This embedded Appjangle Cloud runs
-					completely in the memory of the JavaScript application and is great
-					for building quick prototypes.</p>
+				<p style="margin-left: 25px;">The two key links between UI and
+					database are the routines to make a new post (demo.submitPost) and
+					the routine to render posts to the user interface
+					(demo.updatePosts). Find the demo.submitPost method printed below,
+					the demo.updatePosts method is listed below in the full annotated
+					source code.</p>
+				<pre style="margin-left: 25px;" class="prettyprint">
+demo.submitPost = function() {
+    posts.append($(".postInput", wrapper).val()).append(aPost);
+    $(".postInput", wrapper).val("");
+    session.commit().get(function() {		
+        demo.updatePosts();
+        demo.updateTotal();	
+    });
+};
+				</pre>
+
 				<h5>Adding calculation of total number of posts</h5>
 				<p style="margin-left: 25px;">A small subroutine has been added,
-					which displays the total number of posts.</p>
+					which displays the total number of posts (demo.updateTotal).</p>
+				<pre style="margin-left: 25px;" class="prettyprint">demo.updateTotal = function() {
+    posts.selectAll(aPost).get(function(postsList) {
+        $(".totalPosts", wrapper).text(postsList.size());
+    });
+};</pre>
+
+
 				<p>
 					For details regarding the described changes, please check the
 					complete annotated source code below, or explore the source code on
