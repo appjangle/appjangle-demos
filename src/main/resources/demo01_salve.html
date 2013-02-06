@@ -49,24 +49,27 @@
 		<p>This first model is without doubt overly simplistic. But no
 			worries, we will extend it later.</p>
 		<h5>JavaScript Implementation</h5>
-		<p>The following JavaScript application uploads some data
-			according to the defined data model to the Appjangle cloud. Please
-			note that the uploaded data satisfies both the abstract and concrete
-			model defined above.</p>
+		<p>The following JavaScript application creates some data
+			according to the defined data model. Please note that the uploaded
+			data satisfies both the abstract and concrete model defined above.</p>
 	</div>
 </div>
 
 <div class="jsexample" id="salveExample">
-	<pre class="jscode">var session = Nextweb.createSession();
+	<pre class="jscode">var server = Nextweb.startServer(12321);
+var session = Nextweb.createSession();
 
-var posts = session.seed();
+var posts = session.seed("local");
 
 posts.append("Salve, Munde.");
 posts.append("Salve, Nubes!");
 
-session.commit().get(function(success) {
-    console.log("Upload completed to: "+posts.get().uri());
-    session.close().get(function(success) { });
+posts.selectAll().get(function(posts) {
+    console.log("Posts defined: "+posts.values());
+    
+    session.close().get(function() {
+        server.shutdown().get(function() {});
+    });
 });
 </pre>
 
@@ -103,14 +106,64 @@ session.commit().get(function(success) {
 
 <div class="row-fluid">
 	<div class="span12">
-		<p>Click the Run button to execute the application. You can click
-			on the generated link to see the data uploaded to the Appjangle
-			cloud. You can also click the Edit button to make extensions and
-			changes to the example, if you wish.</p>
+		<p>Click the Run button to execute the application. The
+			application should print out the list of all posts that have been
+			defined. You can edit the application by clicking Edit on the top
+			right of the example. You can, for instance, add/remove posts by
+			defining or removing more append() operations.</p>
+		<p>Please find in the following an annotated version of the script
+			with pointers to further documentation:</p>
+		<div style="padding: 15px;">
+			<div class="row-fluid">
+				<div class="span6">
+					<pre class="prettyprint" style="border: none;">var server = Nextweb.startServer(12321);
+</pre>
+				</div>
+				<div class="span6">
+					<p style="margin-left: 40px; font-size: 90%;">
+						An in memory databases server is started (see <a
+							href="http://nextweb.io/docs/nextweb-embeddedServer.value.html">Embedded
+							Servers</a>).
+					</p>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span6">
+					<pre class="prettyprint" style="border: none;">var session = Nextweb.createSession();
+</pre>
+				</div>
+				<div class="span6">
+					<p style="margin-left: 40px; font-size: 90%;">
+						An client session to write and read data is created (see <a
+							href="http://nextweb.io/docs/nextweb-session.value.html">Sessions</a>).
+					</p>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span6">
+					<pre class="prettyprint" style="border: none;">var posts = session.seed("local");
+</pre>
+				</div>
+				<div class="span6">
+					<p style="margin-left: 40px; font-size: 90%;">
+						A new root node is created, to which all app data will be appended
+						(see <a
+							href="http://nextweb.io/docs/nextweb-seed-local.value.html">seed(local)</a>).
+					</p>
+				</div>
+			</div>
+
+
+
+		</div>
+
 		<p>To learn more about the operations used in the example, check
 			the Nextweb API documentation:</p>
 		<ul>
-			<li><a href="http://nextweb.io/docs/nextweb-session.value.html">creareSession
+
+			<li><a href="http://nextweb.io/docs/nextweb-session.value.html">createSession
 					and close</a>
 			<li><a href="http://nextweb.io/docs/nextweb-seed.value.html">seed</a>
 			<li><a
