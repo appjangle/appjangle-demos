@@ -26,9 +26,7 @@
 		posts = session.node(params[0], params[1]);        
 
         moderations = session.node(params[2], params[3]);
-        
-       
-        
+
         Appjangle.demos.initModerationDemo({
             wrapper : $(".client1"),
             posts : posts,
@@ -102,7 +100,7 @@
 							</a>
 							<div class="media-body">
 								<h4 class="media-heading" style="font-size: 80%;">
-									<button class="markAsRemarkable btn pull-right">Mark as Remarkable</button>
+									<button class="markAsRemarkable btn pull-right" disabled="disabled">Mark as Remarkable</button>
 									<span class="postTime hide">2:29</span> <span
 										class="postAuthor"></span>
 								</h4>

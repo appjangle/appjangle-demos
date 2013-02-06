@@ -108,8 +108,14 @@ window.Appjangle = window.Appjangle || {};
 			moderation.catchUndefined(ignore);
 			moderation.get(function(moderationNode) {
 				moderationNode.selectAllLinks().get(function(linklist) {
-					if (linklist.contains(aRemarkablePost)) {
-						$(".remarkablePostMarker", item).show();
+					console.log("found: "+linklist.contains(aRemarkablePost.uri()));
+					if ($.inArray(aRemarkablePost.uri(), linklist.uris()) !== -1/*linklist.contains(aRemarkablePost)*/) {
+						console.log("HIGHLIGHT! "+$(".remarkablePostMarker", item).length);
+						$(".remarkablePostMarker", item).removeClass("hide");
+						$(".remarkablePostMarker", item).attr("style", "");
+						$(".markAsRemarkable", item).attr("disabled", "disabled");
+					} else {
+						$(".markAsRemarkable", item).removeAttr("disabled");
 					}
 				});
 			});
@@ -118,10 +124,12 @@ window.Appjangle = window.Appjangle || {};
 			$(".markAsRemarkable", item).click(function(evt) {
 				evt.preventDefault();
 				
-				moderations.append("Remarkable").append(aRemarkablePost);
+				var remarkableEntry = moderations.append("Remarkable");
+				remarkableEntry.append(aRemarkablePost);
+				remarkableEntry.append(session.node(post));
 				
-				demo.update();
-				session.commit().get(function() {});
+				
+				session.commit().get(function() { demo.update(); });
 			});
 			
 		};
