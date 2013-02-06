@@ -68,10 +68,10 @@ session.commit();
 
 posts.selectAll().get(function(posts) {
     console.log("Posts defined: "+posts.values());
-});
-
-session.close().get(function() {
-    server.shutdown().get(function() {});
+    
+    session.close().get(function() {
+         server.shutdown().get(function() {});
+     });
 });
 </pre>
 
