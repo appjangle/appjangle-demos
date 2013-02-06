@@ -56,13 +56,15 @@
 </div>
 
 <div class="jsexample" id="salveExample">
-	<pre class="jscode">var server = Nextweb.startServer(12321);
+	<pre class="jscode">var server = Nextweb.startServer(14142);
 var session = Nextweb.createSession();
 
-var posts = session.seed("local");
+var posts = session.seed("local").append("posts");
 
 posts.append("Salve, Munde.");
 posts.append("Salve, Nubes!");
+
+session.commit();
 
 posts.selectAll().get(function(posts) {
     console.log("Posts defined: "+posts.values());
@@ -116,7 +118,7 @@ posts.selectAll().get(function(posts) {
 		<div style="padding: 15px;">
 			<div class="row-fluid">
 				<div class="span6">
-					<pre class="prettyprint" style="border: none;">var server = Nextweb.startServer(12321);
+					<pre class="prettyprint" style="border: none;">var server = Nextweb.startServer(14142);
 </pre>
 				</div>
 				<div class="span6">
@@ -143,33 +145,84 @@ posts.selectAll().get(function(posts) {
 
 			<div class="row-fluid">
 				<div class="span6">
-					<pre class="prettyprint" style="border: none;">var posts = session.seed("local");
+					<pre class="prettyprint" style="border: none;">var posts = session.seed("local").append("posts");
 </pre>
 				</div>
 				<div class="span6">
 					<p style="margin-left: 40px; font-size: 90%;">
-						A new root node is created, to which all app data will be appended
-						(see <a
+						A new 'seed' node is created, to which all app data will be
+						appended as child nodes (see <a
 							href="http://nextweb.io/docs/nextweb-seed-local.value.html">seed(local)</a>).
+						To this node, we append a node to hold store all posts.
+					</p>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span6">
+					<pre class="prettyprint" style="border: none;">posts.append("Salve, Munde.");
+posts.append("Salve, Nubes!");
+</pre>
+				</div>
+				<div class="span6">
+					<p style="margin-left: 40px; font-size: 90%;">
+						Two posts are appended as text to the seed node (see <a
+							href="http://nextweb.io/docs/nextweb-append-value.value.html">append(value)</a>).
+					</p>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span6">
+					<pre class="prettyprint" style="border: none;">session.commit();
+</pre>
+				</div>
+				<div class="span6">
+					<p style="margin-left: 40px; font-size: 90%;">
+						All changes made in the client session are synchronized with the
+						embedded server (see <a
+							href="http://nextweb.io/docs/nextweb-commit.value.html">commit</a>)
+					</p>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span6">
+					<pre class="prettyprint" style="border: none;">posts.selectAll().get(function(posts) {
+    console.log("Posts defined: "+posts.values());
+</pre>
+				</div>
+				<div class="span6">
+					<p style="margin-left: 40px; font-size: 90%;">
+						All child nodes of the seed node (<em>posts</em>) are selected and
+						their values printed to the console (see <a
+							href="http://nextweb.io/docs/nextweb-selectAll.value.html">selectAll</a>).
+					</p>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span6">
+					<pre class="prettyprint" style="border: none;">    session.close().get(function() {
+        server.shutdown().get(function() {});
+    });
+});
+</pre>
+				</div>
+				<div class="span6">
+					<p style="margin-left: 40px; font-size: 90%;">
+						Resources for session and server are released (see <a
+							href="http://nextweb.io/docs/nextweb-session.value.html">sessions</a>
+						and <a
+							href="http://nextweb.io/docs/nextweb-embeddedServer.value.html">embedded
+							servers</a>)
 					</p>
 				</div>
 			</div>
 
 
-
 		</div>
 
-		<p>To learn more about the operations used in the example, check
-			the Nextweb API documentation:</p>
-		<ul>
-
-			<li><a href="http://nextweb.io/docs/nextweb-session.value.html">createSession
-					and close</a>
-			<li><a href="http://nextweb.io/docs/nextweb-seed.value.html">seed</a>
-			<li><a
-				href="http://nextweb.io/docs/nextweb-append-value.value.html">append</a>
-			<li><a href="http://nextweb.io/docs/nextweb-commit.value.html">commit</a>
-		</ul>
 		<h5>Java Implementation</h5>
 		<p>
 			We can implement the same application in Java. You can copy the
@@ -178,15 +231,19 @@ posts.selectAll().get(function(posts) {
 			link the Appjangle Java library from the <a
 				href="http://appjangle.com/downloads">downloads</a> page.
 		</p>
-		<pre class="prettyprint language-java">Session session = Nextweb.createSession();
+		<pre class="prettyprint language-java">Server server = Nextweb.startServer(14142);
+Session session = Nextweb.createSession();
 
-Query posts = session.seed();
+Query posts = session.seed("local").;
 
 posts.append("Salve, Munde.");
 posts.append("Salve, Nubes!");
 
 session.commit().get();
-System.out.println("Upload completed to: "+posts.get().uri());
+
+NodeList posts = posts.selectAll().get();
+
+System.out.println("Posts defined: "+posts.values());
 
 session.close().get();
 </pre>
