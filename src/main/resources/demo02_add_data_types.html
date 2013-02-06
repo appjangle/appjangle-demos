@@ -77,7 +77,7 @@ var aPost = typesRoot.append("A post on a message board, wall or chat room.", ".
 session.commit().get(function(success) {
     console.log("URI: "+aPost.get().uri());
     console.log("Secret: "+aPost.get().secret());
-    session.close().get(function(success) { });
+    session.close().get(function() { });
 });
 </pre>
 
@@ -102,40 +102,47 @@ session.commit().get(function(success) {
 <p>
 	After we have created the new data type node, we can readily use it to
 	enhance the original application from <a href="#salve">demo 01</a>. For
-	this we utilize the <a
+	this, we utilize the <a
 		href="http://nextweb.io/docs/nextweb-append-value.value.html">append
 		operation</a> as before. This time, however, we also use it to append our
 	new data type node!
 </p>
 
-<p>Also, In order to use the node we have defined in our
-	application, we need to reference it using the
+<p>
+	Also, In order to use the node we have defined in our application, we
+	need to reference it using the <a
+		href="http://nextweb.io/docs/nextweb-node-operation.value.html">node</a>
+	operation.
 <p>
 	In addition to adding the data types, we also retrieve the defined
-	posts with the defined data type using the <a
-		href="http://nextweb.io/docs/nextweb-selectAll-property.value.html">selectAll(property)</a>
-	operation.
+	posts with the defined data type not with the <a
+		href="http://nextweb.io/docs/nextweb-selectAll.value.html">selectAll()</a>
+	operation but using the <a
+		href="http://nextweb.io/docs/nextweb-selectAll-property.value.html">selectAll(type)</a>
+	operation, which allows to select only nodes marked with the designated
+	type.
 </p>
 <div class="jsexample" id="salveExampleWithTypes">
-	<pre class="jscode">var session = Nextweb.createSession();
+	<pre class="jscode">var server = Nextweb.startServer(14142);
+var session = Nextweb.createSession();
 
 var aPost = session.node("http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1");
 
-var posts = session.seed();
+var posts = session.seed("local").append("posts");
 
 posts.append("Salve, Munde.").append(aPost);
 posts.append("Salve, Nubes!").append(aPost);
 
-session.commit().get(function(success) {
-    console.log("Upload completed to: "+posts.get().uri());
+session.commit();
     
-    console.log("Now loading posts ...");
-    posts.selectAll(aPost).get(function(nodelist) {
-       console.log(nodelist.values());
-    });
-    
-    session.close().get(function(success) { });
+posts.selectAll(aPost).get(function(nodelist) {
+    console.log(nodelist.values());
 });
+    
+session.close().get(function() { 
+    server.shutdown().get(function() {});
+});
+
 </pre>
 
 </div>

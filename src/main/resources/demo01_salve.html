@@ -68,10 +68,10 @@ session.commit();
 
 posts.selectAll().get(function(posts) {
     console.log("Posts defined: "+posts.values());
-    
-    session.close().get(function() {
-        server.shutdown().get(function() {});
-    });
+});
+
+session.close().get(function() {
+    server.shutdown().get(function() {});
 });
 </pre>
 
@@ -246,6 +246,7 @@ NodeList posts = posts.selectAll().get();
 System.out.println("Posts defined: "+posts.values());
 
 session.close().get();
+server.shutdown().get();
 </pre>
 		<p>
 			<i class="icon-arrow-right"></i> <a href="#dataTypes">Continue to
