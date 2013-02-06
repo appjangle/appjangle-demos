@@ -127,10 +127,8 @@ window.Appjangle = window.Appjangle || {};
 						//console.log("HIGHLIGHT! "+$(".remarkablePostMarker", item).length);
 						$(".remarkablePostMarker", item).removeClass("hide");
 						$(".remarkablePostMarker", item).attr("style", "");
-						$(".markAsRemarkable", item).attr("disabled", "disabled");
-					} else {
-						$(".markAsRemarkable", item).removeAttr("disabled");
-					}
+						
+					} 
 				});
 			});
 
