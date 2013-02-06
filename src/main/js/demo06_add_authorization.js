@@ -121,15 +121,11 @@ window.Appjangle = window.Appjangle || {};
 			moderation = moderations.select(session.node(post));
 			moderation.catchUndefined(ignore);
 			moderation.get(function(moderationNode) {
-				moderationNode.selectAllLinks().get(function(linklist) {
-					//console.log("found: "+linklist.contains(aRemarkablePost.uri()));
-					if ($.inArray(aRemarkablePost.uri(), linklist.uris()) !== -1/*linklist.contains(aRemarkablePost)*/) {
-						//console.log("HIGHLIGHT! "+$(".remarkablePostMarker", item).length);
-						$(".remarkablePostMarker", item).removeClass("hide");
-						$(".remarkablePostMarker", item).attr("style", "");
-						
-					} 
-				});
+				if (moderationNode.children().contains(aRemarkablePost).valueOf()) {
+					$(".remarkablePostMarker", item).removeClass("hide");
+					$(".remarkablePostMarker", item).attr("style", "");
+				}
+
 			});
 
 		};

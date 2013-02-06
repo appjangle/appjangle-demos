@@ -109,18 +109,16 @@ window.Appjangle = window.Appjangle || {};
 				$(".markAsRemarkable", item).removeAttr("disabled");
 			});
 			moderation.get(function(moderationNode) {
-				moderationNode.selectAllLinks().get(function(linklist) {
-					//console.log("found: "+linklist.contains(aRemarkablePost.uri()));
-					if ($.inArray(aRemarkablePost.uri(), linklist.uris()) !== -1/*linklist.contains(aRemarkablePost)*/) {
-						console.log("HIGHLIGHT! "+$(".remarkablePostMarker", item).length);
-						$(".remarkablePostMarker", item).removeClass("hide");
-						$(".remarkablePostMarker", item).attr("style", "");
-						$(".markAsRemarkable", item).attr("disabled", "disabled");
-					} else {
-						console.log("dont highliught");
-						$(".markAsRemarkable", item).removeAttr("disabled");
-					}
-				});
+				if (moderationNode.children().contains(aRemarkablePost).valueOf()) {
+					
+					$(".remarkablePostMarker", item).removeClass("hide");
+					$(".remarkablePostMarker", item).attr("style", "");
+					$(".markAsRemarkable", item).attr("disabled", "disabled");
+				} else {
+					console.log("dont highliught");
+					$(".markAsRemarkable", item).removeAttr("disabled");
+				}
+				
 			});
 
 			
