@@ -14,7 +14,21 @@ window.Appjangle = window.Appjangle || {};
 		var posts = params.posts;
 		var Nextweb = params.engine;
 
-		
+		// init ui
+		(function() {
+			$(".showRegistration").click(function(evt) {
+				evt.preventDefault();
+				$(".registerPanel").show();
+				$(".loginPanel").hide();
+			})
+			
+			$(".showLogin").click(function(evt) {
+				evt.preventDefault();
+				$(".loginPanel").show();
+				$(".registerPanel").hide();
+			});
+			
+		}());
 		
 		return {
 			wrapper : wrapper,
