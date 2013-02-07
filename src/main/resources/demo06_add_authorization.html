@@ -109,7 +109,7 @@
 			<p>Extending the model 'vertically' for this demo allows us to
 				easily assign different authorizations for posts and moderations. In
 				particular, we define the following authorization tokens:</p>
-			<table class="table table-bordered table-condensed table-hover">
+			<table class="table table-bordered table-condensed table-hover" style="font-size: 90%;">
 				<tr>
 					<th>Token</th>
 					<th>Grants</th>
@@ -156,7 +156,7 @@ moderations.appendValue(clientsReadToken);
 					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_spawn.js">demo06_spawn.js</a>
 				to the user client and the moderation client as follows:
 			</p>
-			<table class="table table-bordered table-condensed table-hover">
+			<table class="table table-bordered table-condensed table-hover" style="font-size: 90%;">
 				<tr>
 					<th>Token</th>
 					<th>Client</th>
@@ -213,12 +213,46 @@ moderation.get(function(moderationNode) {
 			</p>
 		</div>
 	</div>
-	
+
 	<div class="row-fluid">
 		<div class="span12">
 			<h4 style="margin-top: 30px;">Files</h4>
+			<table class="table table-hover table-condensed"
+				style="font-size: 90%;">
+				<tr>
+					<td><a
+						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo05_add_synchronization.js">demo05_add_synchronization.js</a></td>
+					<td>The enhanced client application which displayes nodes
+						marked as remarkable (based on <a
+						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo05_add_synchronization.js">demo05_add_synchronization.js</a>).
+					</td>
+				</tr>
+				<tr>
+					<td><a
+						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/resources/demo06_app.html"></a></td>
+					<td>The HTML page for the user client.</td>
+				</tr>
+
+				<tr>
+					<td><a
+						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_moderation_app.js">demo06_moderation_app.js</a></td>
+					<td>The logic for the moderator client.</td>
+				</tr>
+				<tr>
+					<td><a
+						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/resources/demo06_moderation_app.html">demo06_moderation_app.html</a></td>
+					<td>The HTML page for the moderator client.</td>
+				</tr>
+				<tr>
+					<td><a
+						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_spawn.js">demo06_spawn.js</a></td>
+					<td>The logic for spawning and assigning authorizations for
+						user and moderator clients (embedded in this webpage).</td>
+				</tr>
+
+			</table>
 		</div>
 	</div>
-	
+
 </div>
 <!-- one.end -->
