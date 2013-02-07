@@ -13,9 +13,10 @@
 			merit. Users are prevented not only by their UI but by the underlying
 			database model, to highlight their own posts as remarkable for
 			obvious reasons!</p>
-		<p>Check the live demo
-			below and find the key changes and additions in comparison to <a
-				href="#stateSynchronization">demo 05</a> explained below.
+		<p>
+			Check the live demo below and find the key changes and additions in
+			comparison to <a href="#stateSynchronization">demo 05</a> explained
+			below.
 		</p>
 	</div>
 
@@ -59,8 +60,8 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div class="row-fluid">
 		<div class="span12">
 			<h4 style="margin-top: 30px;">Key Changes</h4>
@@ -69,9 +70,155 @@
 					href="#stateSynchronization">demo 05</a>.
 			<h5>Extending data model for remarkable posts</h5>
 			<p>
-			https://docs.google.com/drawings/d/1nmlapRh6zrcmpeDq04CP0vvogN1VO1R_R1vConUgZtQ/pub?w=396&h=216
+				In order to be able to highlight particular posts as remarkable, we
+				need to extend the data model developed in <a
+					href="#stateSynchronization">demo 05</a>. However, in difference to
+				the previous extensions, which were <em>horizontal</em> in that we <em>appended</em>
+				nodes with richer information to the nodes we had already defined
+				(e.g. appending user name and avatar to 'post' nodes), we extend the
+				model <em>vertical</em> this time.
+			</p>
+			<p>
+				A vertical extension to a model involves to create new 'independent'
+				nodes, which are no direct child nodes of the nodes to be enriched.
+				In our example, we introduce a node <em>moderations</em>. This node
+				is not a child node of <em>posts</em>. The children of moderations
+				then contain a reference to our initially defined posts.
+			</p>
+			<div style="text-align: center; margin: 10px;">
+				<img
+					src="https://docs.google.com/drawings/d/1nmlapRh6zrcmpeDq04CP0vvogN1VO1R_R1vConUgZtQ/pub?w=396">
+				<p style="text-size: 90%">
+					<em>Figure: Abstract data model with added moderations</em>
+				</p>
+			</div>
+			<h5>Creating dedicated moderator client</h5>
+			<p>
+				Apart from the normal 'user clients', which are based on the app
+				developed in <a href="#stateSynchronization">demo 05</a>, we add a
+				second application, a 'moderator client'. This client allows to a
+				dedicated moderator to mark posts as 'remarkable'.
+			</p>
+			<p>
+				The moderator client is defined in <a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_moderation_app.js">demo06_moderation_app.js</a>
+				and <a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/resources/demo06_moderation_app.html">demo06_moderation_app.html</a>.
+			</p>
+			<h5>Defining authorizations for nodes</h5>
+			<p>Extending the model 'vertically' for this demo allows us to
+				easily assign different authorizations for posts and moderations. In
+				particular, we define the following authorization tokens:</p>
+			<table class="table table-bordered table-condensed table-hover">
+				<tr>
+					<th>Token</th>
+					<th>Grants</th>
+					<th>For Node</th>
+				</tr>
+				<tr>
+					<td><code>clientsReadWriteToken </code></td>
+					<td>read/write</td>
+					<td>posts</td>
+				</tr>
+				<tr>
+					<td><code>clientsReadToken</code></td>
+					<td>read</td>
+					<td>moderations</td>
+				</tr>
+				<tr>
+					<td><code>moderatorToken</code></td>
+					<td>read/write</td>
+					<td>moderations</td>
+				</tr>
+			</table>
+			<p>
+				These authorization tokens are created in <a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_spawn.js">demo06_spawn.js</a>
+				as follows:
+			</p>
+			<pre class="prettyprint">var clientsReadWriteToken = 
+    factory.createToken(session, "adf34fsf", "readwrite", "");
+var clientsReadToken = 
+    factory.createToken(session, "fuehfqd", "read", "");
+var moderatorToken = 
+    factory.createToken(session, "se4efga", "readwrite", "");</pre>
+			<p>
+				The authorization tokens are also assigned to the respective nodes
+				in <a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_spawn.js">demo06_spawn.js</a>:
+			</p>
+			<pre class="prettyprint">posts.appendValue(clientsReadWriteToken);
+moderations.appendValue(moderatorToken);
+moderations.appendValue(clientsReadToken);
+			</pre>
+			<p>
+				The tokens are then passed from <a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_spawn.js">demo06_spawn.js</a>
+				to the user client and the moderation client as follows:
+			</p>
+			<table class="table table-bordered table-condensed table-hover">
+				<tr>
+					<th>Token</th>
+					<th>Client</th>
+				</tr>
+				<tr>
+					<td><code>clientsReadWriteToken</code></td>
+					<td>User Client (<a
+						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_add_authorization.js">demo06_add_authorization.js</a>)
+					</td>
+				</tr>
+				<tr>
+					<td><code>clientsReadToken</code></td>
+					<td>User Client (<a
+						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_add_authorization.js">demo06_add_authorization.js</a>)
+					</td>
+				</tr>
+				<tr>
+					<td><code>moderatorToken</code></td>
+					<td>Moderator Client (<a
+						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_moderation_app.js">demo06_moderation_app.js</a>)
+					</td>
+				</tr>
+			</table>
+			<p>
+				Note that defining these authorization does not require us to change
+				the main application we have developed from demo 03 to demo 05. The
+				main client UI can still work with the passed
+				<code>posts</code>
+				node as before!
+			</p>
+			<h5>Extending UI logic</h5>
+			<p>
+				We have to make a small change to the UI logic, in order to show
+				users, which posts are highlighted as remarkable. The relevant
+				routine in <a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_add_authorization.js">demo06_add_authorization.js</a>
+				is:
+			</p>
+			<pre class="prettyprint">moderation = moderations.select(session.node(post));
+moderation.catchUndefined(ignore);
+moderation.get(function(moderationNode) {
+	if (moderationNode.children().contains(aRemarkablePost).valueOf()) {
+		$(".remarkablePostMarker", item).removeClass("hide");
+	}
+});</pre>
+			<p>
+				Note that this routine utilizes the <a
+					href="http://nextweb.io/docs/nextweb-data-pattern.value.html#property">property
+					pattern</a> in a novel way. Rather than using it to identify whether a
+				node is marked with a fixed type node (as was the case for <em>aPost</em>,
+				<em>aUserName</em> and <em>anAvatar</em>), we use it to identify
+				whether a node is 'marked' with the post node we are currently
+				rendering (<em>post</em>).
+			</p>
 		</div>
 	</div>
-
+	
+	<div class="row-fluid">
+		<div class="span12">
+			<h4 style="margin-top: 30px;">Files</h4>
+		</div>
+	</div>
+	
 </div>
 <!-- one.end -->
