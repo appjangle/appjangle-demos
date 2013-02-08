@@ -55,16 +55,7 @@
 				user after signing up.</p>
 			<p>For our simple example, we store the name of the historical
 				figure the user wants to impersonate as well as the avatar picture.
-
-
-
-
-
-
-
-
-
-			
+			</p>
 			<div style="text-align: center; margin: 10px;">
 				<img
 					src="https://docs.google.com/drawings/d/1PWnmtWLYplpvlqslZIQ20X0EeBog6CLUu8eDxObq4oY/pub?w=333">
@@ -104,7 +95,7 @@
 			<p>The key operations in this login form are briefly discussed in
 				the following:</p>
 			<p>
-				<em>Initializing user data</em>
+				<strong><em>Initializing user data</em></strong>
 			</p>
 			<p>
 				Data for new users must be initialized upon registration to the
@@ -125,7 +116,7 @@
     });
 };</pre>
 			<p>
-				<em>Reading user data</em>
+				<strong><em>Reading user data</em></strong>
 			</p>
 			<p>
 				While the user data needs to be initialized for newly registered
@@ -147,7 +138,7 @@
     });
 };</pre>
 			<p>
-				<em>Registering new users</em>
+				<strong><em>Registering new users</em></strong>
 			</p>
 			<p>
 				For signing up a new user, the <a
@@ -170,12 +161,13 @@ request.get(function(user) {
 
 });</pre>
 			<p>
-				<em>Logging in user</em>
+				<strong><em>Logging in user</em></strong>
 			</p>
 			<p>
 				For logging in an already registered users, we use the <a
 					href="http://nextweb.io/docs/nextweb-login-users.value.html">login
-					operation</a> of the Nextweb API.</p>
+					operation</a> of the Nextweb API.
+			</p>
 			<pre class="prettyprint">login.login = function() {
     ...
 
@@ -188,6 +180,11 @@ request.get(function(user) {
         login.startClient(user);
     });
 };</pre>
+			<p>
+				Please note that we have not made any changes to the user client
+				itself, which is identical to the one used in <a
+					href="#http://appjangle.com/showcase#fineGrainedSharing">demo
+					06</a>.
 		</div>
 	</div>
 
