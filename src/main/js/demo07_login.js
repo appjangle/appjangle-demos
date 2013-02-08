@@ -28,7 +28,7 @@ window.Appjangle = window.Appjangle || {};
 			var password = $(".registerPassword").val();
 			var avatar = $('.registerForm input[type=radio]:checked').val();
 
-			if (!checkInputs(email, password)) {
+			if (!login.checkInputs(email, password)) {
 				return;
 			}
 
@@ -76,7 +76,7 @@ window.Appjangle = window.Appjangle || {};
 			var email = $(".loginEmail").val();
 			var password = $(".loginPassword").val();
 
-			if (!checkInputs(email, password)) {
+			if (!login.checkInputs(email, password)) {
 				return;
 			}
 
