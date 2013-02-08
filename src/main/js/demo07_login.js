@@ -32,7 +32,7 @@ window.Appjangle = window.Appjangle || {};
 				return;
 			}
 
-			var request = session.registerUser(email, password, session
+			var request = session.register(email, password, session
 					.node(wall));
 
 			request.catchLoginFailures({
@@ -81,7 +81,7 @@ window.Appjangle = window.Appjangle || {};
 			}
 
 			var request = session
-					.loginUser(email, password, session.node(wall));
+					.login(email, password, session.node(wall));
 
 			request.catchLoginFailures({
 				onNotRegisteredForApplication : function() {
