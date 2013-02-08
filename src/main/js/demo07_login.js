@@ -37,13 +37,13 @@ window.Appjangle = window.Appjangle || {};
 
 			request.catchLoginFailures({
 				onUserAlreadyRegistered : function() {
-					alert("User already registered for application.");
+					login.reportError("User already registered for application.");
 				},
 				onInvalidDetails : function() {
-					alert("Invalid username/password.")
+					login.reportError("Invalid username/password.")
 				},
 				onChallenged : function() {
-					alert("Unexpected challenge received.");
+					login.reportError("Unexpected challenge received.");
 				}
 			});
 
@@ -86,15 +86,17 @@ window.Appjangle = window.Appjangle || {};
 			var request = session
 					.login(email, password, session.node(wall));
 
+			
 			request.catchLoginFailures({
-				onNotRegisteredForApplication : function() {
-					alert("User not registered for application.");
+				onUserNotRegisteredForApplication : function() {
+					login.reportError("User not registered for application.");
+					
 				},
 				onInvalidDetails : function() {
-					alert("Invalid username/password.")
+					login.reportError("Invalid username/password.")
 				},
 				onChallenged : function() {
-					alert("Unexpected challenge received.");
+					login.reportError("Unexpected challenge received.");
 				}
 			});
 
@@ -141,12 +143,12 @@ window.Appjangle = window.Appjangle || {};
 
 		login.checkInputs = function(email, password) {
 			if (!email) {
-				alert("Please specify an email.");
+				login.reportError("Please specify an email.");
 				return false;
 			}
 
 			if (!password) {
-				alert("Please specify a password.");
+				login.reportError("Please specify a password.");
 				return false;
 			}
 
@@ -169,6 +171,13 @@ window.Appjangle = window.Appjangle || {};
 			throw "No avatar picture available for " + avatar;
 		};
 
+
+		login.reportError = function(message) {
+			alert(message);
+			$(".forms").show();
+			$(".progressIndicator").hide();
+		};
+		
 		// init ui
 		(function() {
 
@@ -197,7 +206,9 @@ window.Appjangle = window.Appjangle || {};
 				$(".showRegistration").removeClass("btn-inverse");
 				$(".showLogin").addClass("btn-inverse");
 			});
-
+			
+			
+			
 		}());
 
 		return {
