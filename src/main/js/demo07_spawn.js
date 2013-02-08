@@ -51,8 +51,6 @@ window.Appjangle = window.Appjangle || {};
 											"href",
 											assembledAppUrl);
 
-							
-
 							$(".spawnModerator", elem).attr(
 									"href",
 									moderationAppUrl + "#" + posts.uri() + "&"

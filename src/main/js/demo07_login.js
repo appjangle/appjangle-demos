@@ -24,8 +24,8 @@ window.Appjangle = window.Appjangle || {};
 		var login = {};
 
 		login.register = function() {
-			var email = $(".registerEmail").value();
-			var password = $(".registerPassword").value();
+			var email = $(".registerEmail").val();
+			var password = $(".registerPassword").val();
 			var avatar = $('.registerForm input[type=radio]:checked').val();
 
 			if (!checkInputs(email, password)) {
@@ -73,8 +73,8 @@ window.Appjangle = window.Appjangle || {};
 		};
 
 		login.login = function() {
-			var email = $(".loginEmail").value();
-			var password = $(".loginPassword").value();
+			var email = $(".loginEmail").val();
+			var password = $(".loginPassword").val();
 
 			if (!checkInputs(email, password)) {
 				return;
