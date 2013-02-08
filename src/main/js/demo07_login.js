@@ -57,6 +57,9 @@ window.Appjangle = window.Appjangle || {};
 				});
 
 			});
+			
+			$(".forms").hide();
+			$(".progressIndicator").show();
 
 		};
 
@@ -102,6 +105,9 @@ window.Appjangle = window.Appjangle || {};
 			request.get(function(user) {
 				login.startClient(user);
 			});
+			
+			$(".forms").hide();
+			$(".progressIndicator").show();
 
 		};
 
@@ -125,6 +131,11 @@ window.Appjangle = window.Appjangle || {};
 				+ moderations.getSecret();
 				
 				document.location.href = assembledAppUrl + "&" + avatarName.value() +"&" + avatarPic.value();
+				$(".forwardLink").attr('href', document.location.href);
+				
+				$(".progressIndicator").hide();
+				$(".forward").show();
+				
 			});
 		};
 
