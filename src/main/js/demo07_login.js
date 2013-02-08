@@ -11,7 +11,7 @@ window.Appjangle = window.Appjangle || {};
 	Appjangle.demos.initLoginDemo = function(params) {
 		var wrapper = params.wrapper;
 		var posts = params.posts;
-		var modeations = params.moderations;
+		var moderations = params.moderations;
 		var wall = params.wall;
 		var session = params.posts.getSession();
 
@@ -48,7 +48,7 @@ window.Appjangle = window.Appjangle || {};
 			});
 
 			request.catchExceptions(function(ex) {
-				alert("Unexpected exception during registration: " + ex);
+				alert("Unexpected exception during registration: " + JSON.stringify(ex));
 			});
 
 			request.get(function(user) {
@@ -64,7 +64,7 @@ window.Appjangle = window.Appjangle || {};
 			var settings = user.userNode().select("./settings", "settings");
 
 			settings.append(avatar).append(aUserName);
-			settings.append(getAvatarPic(avatar)).append(anAvatar);
+			settings.append(login.getAvatarPic(avatar)).append(anAvatar);
 
 			session.commit().get(function() {
 				callback();
@@ -124,7 +124,7 @@ window.Appjangle = window.Appjangle || {};
 				+ "&" + moderations.uri() + "&"
 				+ moderations.getSecret();
 				
-				document.location.href = assembledAppUrl + "&" + avatarName +"&" + avatarPic;
+				document.location.href = assembledAppUrl + "&" + avatarName.value() +"&" + avatarPic.value();
 			});
 		};
 
