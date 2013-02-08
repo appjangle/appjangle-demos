@@ -77,7 +77,6 @@ window.Appjangle = window.Appjangle || {};
 			session.commit().get(function() {
 				callback();
 			});
-
 		};
 
 		login.login = function() {

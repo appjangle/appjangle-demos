@@ -58,10 +58,6 @@
 
 
 
-
-
-
-
 			
 			<div style="text-align: center; margin: 10px;">
 				<img
@@ -88,15 +84,63 @@
 				application is created every time the showcase page is reloaded (We
 				can do that since creating nodes on Appjangle is a 'cheap'
 				operation).</p>
+			<p>(By the way, maybe you have already suspected it, but every
+				page on appjangle.com and nextweb.io is a node on Appjangle, so is
+				every live demo application in this showcase!)</p>
 			<h5>Building a login dialog</h5>
 			<p>
 				We need to build additional UI logic to allow users to sign up and
 				register. The new form is defined in <a
 					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/resources/demo07_login.html">demo07_login.html</a>.
 				The logic for the form is defined in <a
-					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo07_login.js">demo07_login.js</a>.</p>
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo07_login.js">demo07_login.js</a>.
+			</p>
+			<p>The key operations in this login form are briefly discussed in
+				the following:</p>
+			<em>Initializing user data</em>
 			<p>
-			
+				Data for new users must be initialized upon registration to the
+				user. The following routine appends data according the data model
+				given above to the <em>userNode</em>. The <em>user</em> object,
+				which contains a reference to the <em>userNode</em>, is supplied by
+				the register and login operations described below.
+			</p>
+
+			<pre class="prettyprint">login.initUserData = function(user, avatar, callback) {
+    var settings = user.userNode().select("./settings", "settings");
+
+    settings.append(avatar).append(aUserName);
+    settings.append(login.getAvatarPic(avatar)).append(anAvatar);
+
+    session.commit().get(function() {
+        callback();
+    });
+};</pre>
+			<em>Reading user data</em>
+			<p>While the user data needs to be initialized for 
+			<em>Registering new users</em>
+			<p>
+				For signing up a new user, the <a
+					href="http://nextweb.io/docs/nextweb-register-users.value.html">register
+					operation</a> of the Nextweb API is used.
+			</p>
+			<p>
+				This operation (when supplied with valid parameters) will return a <em>user</em>
+				object after the registration has been confirmed by the server.
+				Check <a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo07_login.js">demo07_login.js</a>
+				for further details, especially the error handling logic.
+			</p>
+			<pre class="prettyprint">var request = session.register(email, password, session.node(wall));
+...
+request.get(function(user) {
+    login.initUserData(user, avatar, function() {
+        login.startClient(user);
+    });
+
+});</pre>
+       
+
 		</div>
 	</div>
 
