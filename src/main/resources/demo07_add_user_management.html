@@ -58,6 +58,12 @@
 
 
 
+
+
+
+
+
+
 			
 			<div style="text-align: center; margin: 10px;">
 				<img
@@ -97,7 +103,9 @@
 			</p>
 			<p>The key operations in this login form are briefly discussed in
 				the following:</p>
-			<em>Initializing user data</em>
+			<p>
+				<em>Initializing user data</em>
+			</p>
 			<p>
 				Data for new users must be initialized upon registration to the
 				user. The following routine appends data according the data model
@@ -116,9 +124,31 @@
         callback();
     });
 };</pre>
-			<em>Reading user data</em>
-			<p>While the user data needs to be initialized for 
-			<em>Registering new users</em>
+			<p>
+				<em>Reading user data</em>
+			</p>
+			<p>
+				While the user data needs to be initialized for newly registered
+				users, it needs to be retrieved for returning users. This is
+				accomplished within the routine login.startClient (see <a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo07_login.js">demo07_login.js</a>
+				for the full source) as follows:
+			</p>
+			<pre class="prettyprint">login.startClient = function(user) {
+    ...
+    var settings = user.userNode().select("./settings", "settings");
+    settings.catchUndefined(dataMissing);
+    
+    var avatarName = settings.select(aUserName);
+    var avatarPic = settings.select(anAvatar);
+    
+    session.getAll(avatarName, avatarPic, function(avatarName, avatarPic) {
+        ...
+    });
+};</pre>
+			<p>
+				<em>Registering new users</em>
+			</p>
 			<p>
 				For signing up a new user, the <a
 					href="http://nextweb.io/docs/nextweb-register-users.value.html">register
@@ -139,8 +169,25 @@ request.get(function(user) {
     });
 
 });</pre>
-       
+			<p>
+				<em>Logging in user</em>
+			</p>
+			<p>
+				For logging in an already registered users, we use the <a
+					href="http://nextweb.io/docs/nextweb-login-users.value.html">login
+					operation</a> of the Nextweb API.</p>
+			<pre class="prettyprint">login.login = function() {
+    ...
 
+    var request = session
+            .login(email, password, session.node(wall));
+ 
+   ...
+
+    request.get(function(user) {
+        login.startClient(user);
+    });
+};</pre>
 		</div>
 	</div>
 

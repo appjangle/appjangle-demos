@@ -117,17 +117,17 @@ window.Appjangle = window.Appjangle || {};
 		};
 
 		login.startClient = function(user) {
-
+	
 			var dataMissing = function() {
 				alert("No avatar for user defined.");
 			};
-
+	
 			var settings = user.userNode().select("./settings", "settings");
 			settings.catchUndefined(dataMissing);
-
+	
 			var avatarName = settings.select(aUserName);
 			var avatarPic = settings.select(anAvatar);
-
+	
 			session.getAll(avatarName, avatarPic, function(avatarName, avatarPic) {
 				var appUrl = "http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo06_app.value.html";
 				var assembledAppUrl = appUrl + "#" + posts.uri()
