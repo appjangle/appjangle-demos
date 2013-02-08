@@ -32,6 +32,11 @@ window.Appjangle = window.Appjangle || {};
 				return;
 			}
 
+			if ($('input[type=checkbox]:checked').size() <= 0) {
+				login.reportError("Please agree to the Appjangle Terms of Service to proceed.");
+				return;
+			}
+			
 			var request = session.register(email, password, session
 					.node(wall));
 
@@ -90,7 +95,6 @@ window.Appjangle = window.Appjangle || {};
 			request.catchLoginFailures({
 				onUserNotRegisteredForApplication : function() {
 					login.reportError("User not registered for application.");
-					
 				},
 				onInvalidDetails : function() {
 					login.reportError("Invalid username/password.")
@@ -152,6 +156,16 @@ window.Appjangle = window.Appjangle || {};
 				return false;
 			}
 
+			var validateEmail = function (email) { 
+			    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			    return re.test(email);
+			};
+			
+			if (!validateEmail(email)) {
+				login.reportError("Please provide a valid email address.");
+				return false;
+			}
+			
 			return true;
 		};
 

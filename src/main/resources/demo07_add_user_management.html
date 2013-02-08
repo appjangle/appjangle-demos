@@ -28,7 +28,7 @@
 									src="http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50">
 									Start User Client</a></td>
 						</tr>
-						
+
 						<tr>
 
 							<td><a class="spawnModerator" href="#" target="_blank"><img
@@ -48,152 +48,55 @@
 			<h4 style="margin-top: 30px;">Key Changes</h4>
 			<p>
 				Following a list of the key changes introduced in comparison to <a
-					href="#stateSynchronization">demo 05</a>.
-			<h5>Extending data model for remarkable posts</h5>
-			<p>
-				In order to be able to highlight particular posts as remarkable, we
-				need to extend the data model developed in <a
-					href="#stateSynchronization">demo 05</a>. However, in difference to
-				the previous extensions, which were <em>horizontal</em> in that we <em>appended</em>
-				nodes with richer information to the nodes we had already defined
-				(e.g. appending user name and avatar to 'post' nodes), we extend the
-				model <em>vertical</em> this time.
-			</p>
-			<p>
-				A vertical extension to a model involves to create new 'independent'
-				nodes, which are no direct child nodes of the nodes to be enriched.
-				In our example, we introduce a node <em>moderations</em>. This node
-				is not a child node of <em>posts</em>. The children of moderations
-				then contain a reference to our initially defined posts.
-			</p>
+					href="#fineGrainedAuthorization">demo 06</a>.
+			<h5>Defining user-specific data</h5>
+			<p>With allowing users to 'sing up' for the Wall of the Wise, we
+				can manage user-specific data. This data is only to the respective
+				user after signing up.</p>
+			<p>For our simple example, we store the name of the historical
+				figure the user wants to impersonate as well as the avatar picture.
+
+
+
+
+
+
+
+			
 			<div style="text-align: center; margin: 10px;">
 				<img
-					src="https://docs.google.com/drawings/d/1nmlapRh6zrcmpeDq04CP0vvogN1VO1R_R1vConUgZtQ/pub?w=396">
+					src="https://docs.google.com/drawings/d/1PWnmtWLYplpvlqslZIQ20X0EeBog6CLUu8eDxObq4oY/pub?w=333">
 				<p style="text-size: 90%">
-					<em>Figure: Abstract data model with added moderations</em>
+					<em>Figure: Abstract data model for user data</em>
 				</p>
 			</div>
-			<h5>Creating dedicated moderator client</h5>
+			<h5>Defining an application</h5>
 			<p>
-				Apart from the normal 'user clients', which are based on the app
-				developed in <a href="#stateSynchronization">demo 05</a>, we add a
-				second application, a 'moderator client'. This client allows to a
-				dedicated moderator to mark posts as 'remarkable'.
+				The user management facilities of the Nextweb API require to define
+				an application for which users can be registered (see <a
+					href="http://nextweb.io/docs/nextweb-define-an-application.value.html">Define
+					and Application</a>).
 			</p>
 			<p>
-				The moderator client is defined in <a
-					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_moderation_app.js">demo06_moderation_app.js</a>
-				and <a
-					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/resources/demo06_moderation_app.html">demo06_moderation_app.html</a>.
+				To define an application is easy. We can designate any node on
+				Appjangle to henceforth represent the application. For this demo, we
+				use the <em>wall</em> node as the node identifying our application
+				(that is the node that <em>posts</em> and <em>moderations</em> are
+				assigned to).
 			</p>
-			<h5>Defining authorizations for nodes</h5>
-			<p>Extending the model 'vertically' for this demo allows us to
-				easily assign different authorizations for posts and moderations. In
-				particular, we define the following authorization tokens:</p>
-			<table class="table table-bordered table-condensed table-hover"
-				style="font-size: 90%;">
-				<tr>
-					<th>Token</th>
-					<th>Grants</th>
-					<th>For Node</th>
-				</tr>
-				<tr>
-					<td><code>clientsReadWriteToken </code></td>
-					<td>read/write</td>
-					<td>posts</td>
-				</tr>
-				<tr>
-					<td><code>clientsReadToken</code></td>
-					<td>read</td>
-					<td>moderations</td>
-				</tr>
-				<tr>
-					<td><code>moderatorToken</code></td>
-					<td>read/write</td>
-					<td>moderations</td>
-				</tr>
-			</table>
+			<p>Due to the way that the demos are wired here, a new 'wall'
+				application is created every time the showcase page is reloaded (We
+				can do that since creating nodes on Appjangle is a 'cheap'
+				operation).</p>
+			<h5>Building a login dialog</h5>
 			<p>
-				These authorization tokens are created in <a
-					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_spawn.js">demo06_spawn.js</a>
-				as follows:
-			</p>
-			<pre class="prettyprint">var clientsReadWriteToken = 
-    factory.createToken(session, "adf34fsf", "readwrite", "");
-var clientsReadToken = 
-    factory.createToken(session, "fuehfqd", "read", "");
-var moderatorToken = 
-    factory.createToken(session, "se4efga", "readwrite", "");</pre>
+				We need to build additional UI logic to allow users to sign up and
+				register. The new form is defined in <a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/resources/demo07_login.html">demo07_login.html</a>.
+				The logic for the form is defined in <a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo07_login.js">demo07_login.js</a>.</p>
 			<p>
-				The authorization tokens are also assigned to the respective nodes
-				in <a
-					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_spawn.js">demo06_spawn.js</a>:
-			</p>
-			<pre class="prettyprint">posts.appendValue(clientsReadWriteToken);
-moderations.appendValue(moderatorToken);
-moderations.appendValue(clientsReadToken);
-			</pre>
-			<p>
-				The tokens are then passed from <a
-					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_spawn.js">demo06_spawn.js</a>
-				to the user client and the moderation client as follows:
-			</p>
-			<table class="table table-bordered table-condensed table-hover"
-				style="font-size: 90%;">
-				<tr>
-					<th>Token</th>
-					<th>Client</th>
-				</tr>
-				<tr>
-					<td><code>clientsReadWriteToken</code></td>
-					<td>User Client (<a
-						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_add_authorization.js">demo06_add_authorization.js</a>)
-					</td>
-				</tr>
-				<tr>
-					<td><code>clientsReadToken</code></td>
-					<td>User Client (<a
-						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_add_authorization.js">demo06_add_authorization.js</a>)
-					</td>
-				</tr>
-				<tr>
-					<td><code>moderatorToken</code></td>
-					<td>Moderator Client (<a
-						href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_moderation_app.js">demo06_moderation_app.js</a>)
-					</td>
-				</tr>
-			</table>
-			<p>
-				Note that defining these authorization does not require us to change
-				the main application we have developed from demo 03 to demo 05. The
-				main client UI can still work with the passed
-				<code>posts</code>
-				node as before!
-			</p>
-			<h5>Extending UI logic</h5>
-			<p>
-				We have to make a small change to the UI logic, in order to show
-				users, which posts are highlighted as remarkable. The relevant
-				routine in <a
-					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_add_authorization.js">demo06_add_authorization.js</a>
-				is:
-			</p>
-			<pre class="prettyprint">moderation = moderations.select(session.node(post));
-moderation.catchUndefined(ignore);
-moderation.get(function(moderationNode) {
-	if (moderationNode.children().contains(aRemarkablePost).valueOf()) {
-		$(".remarkablePostMarker", item).removeClass("hide");
-	}
-});</pre>
-			<p>
-				Note that this routine utilizes the <a
-					href="http://nextweb.io/docs/nextweb-data-pattern.value.html#property">property
-					pattern</a> in a novel way. Rather than using it to identify whether a
-				node is marked with a fixed type node (as was the case for <em>aPost</em>,
-				<em>aUserName</em> and <em>anAvatar</em>), we use it to identify
-				whether a node is 'marked' with the post node we are currently
-				rendering (<em>post</em>).
-			</p>
+			
 		</div>
 	</div>
 
