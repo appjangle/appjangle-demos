@@ -128,7 +128,7 @@ window.Appjangle = window.Appjangle || {};
 			});
 		};
 
-		login.checkInput = function(email, password) {
+		login.checkInputs = function(email, password) {
 			if (!email) {
 				alert("Please specify an email.");
 				return false;
