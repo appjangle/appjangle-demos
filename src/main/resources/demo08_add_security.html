@@ -39,9 +39,12 @@
 
 					<tr>
 
-						<td><a class="spawnModerator" href="#" target="_blank"><img
-								src="http://docs.google.com/drawings/d/1EWIcN53_qhSSL5uYaUjzgqvU5F5TxqkM6BVsXc39GJ4/pub?w=50">
-								<i class="icon-lock"></i> Start Moderator Client</a></td>
+						<td><img
+							src="http://docs.google.com/drawings/d/1EWIcN53_qhSSL5uYaUjzgqvU5F5TxqkM6BVsXc39GJ4/pub?w=50">
+							<img
+							src="https://docs.google.com/drawings/d/1wpkWJ7WyjDotpsAo1SWFP95NMPmisJimL8O1nYzqRQw/pub?w=15">
+							<a class="spawnModerator" href="#" target="_blank">Start
+								Secure Moderator Client</a></td>
 					</tr>
 				</table>
 
@@ -57,13 +60,33 @@
 			clients are started up.</p>
 		<p>In particular, we have changed the URL pointing to the
 			moderator client from:</p>
-		<blockquote>http://appjangle.com/showcases/moderatorClient</blockquote>
+		<pre class="prettyprint">http://appjangle.com/showcases/moderatorClient</pre>
 		<p>to:</p>
-		<blockquote>https://appjangle.com/showcases/moderatorClient</blockquote>
+		<pre class="prettprint">https://appjangle.com/showcases/moderatorClient</pre>
 		<p>Now, the parameter we pass to the moderator client containing
 			the access token for the moderator node, as well as all communication
 			between the moderator client and the Appjangle cloud will be
 			encrypted through the SSL protocol.</p>
+		
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<h4 style="margin-top: 30px;">Files</h4>
+		<p>
+			All source files expect the spawn module listed below are identical
+			to the ones used in <a href="#userManagement">demo 07</a>.
+		<table class="table table-hover table-condensed"
+			style="font-size: 90%;">
+			<tr>
+				<td><a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo07_spawn.js">demo07_spawn.js</a></td>
+				<td>The logic embedded in this page to start new clients.</td>
+			</tr>
+
+
+		</table>
 	</div>
 </div>
 
