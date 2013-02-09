@@ -12,9 +12,7 @@ window.Appjangle = window.Appjangle || {};
 	Appjangle.demos = Appjangle.demos || {};
 
 	Appjangle.demos.initModerationDemo = function(params) {
-		var wrapper, avatar, userName, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType,
-		remarkableType, remarkable, moderationType, moderation,
-		aUserName, demo, monitor;
+		var wrapper, avatar, userName, Nextweb, server, session, posts, postType, aPost, avatarType, anAvatar, userNameType, remarkableType, remarkable, moderationType, moderation, aUserName, demo, monitor;
 
 		demo = {};
 
@@ -26,7 +24,7 @@ window.Appjangle = window.Appjangle || {};
 		session = params.posts.getSession();
 		posts = params.posts;
 		moderations = params.moderations;
-		
+
 		monitor = null;
 
 		postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
@@ -41,10 +39,10 @@ window.Appjangle = window.Appjangle || {};
 
 		remarkableType = "http://slicnet.com/seed1/seed1/4/5/0/2/h/sd/remarkable";
 		aRemarkablePost = session.node(remarkableType);
-		
-		moderationType= "http://slicnet.com/seed1/seed1/4/5/0/2/h/sd/moderation";
-		aModeration = session.node(moderationType); 
-		
+
+		moderationType = "http://slicnet.com/seed1/seed1/4/5/0/2/h/sd/moderation";
+		aModeration = session.node(moderationType);
+
 		var updatePending = false;
 		demo.update = function() {
 			if (updatePending) {
@@ -97,20 +95,21 @@ window.Appjangle = window.Appjangle || {};
 			userNameNode.get(function(userNameNode) {
 				$(".postAuthor", item).text(userNameNode.value());
 			});
-			
+
 			avatarNode = post.select(anAvatar);
 			avatarNode.catchUndefined(ignore);
 			avatarNode.get(function(avatarNode) {
 				$(".media-object", item).attr("src", avatarNode.value());
 			});
-			
+
 			moderation = moderations.select(session.node(post));
 			moderation.catchUndefined(function() {
 				$(".markAsRemarkable", item).removeAttr("disabled");
 			});
 			moderation.get(function(moderationNode) {
-				if (moderationNode.children().contains(aRemarkablePost).valueOf()) {
-					
+				if (moderationNode.children().contains(aRemarkablePost)
+						.valueOf()) {
+
 					$(".remarkablePostMarker", item).removeClass("hide");
 					$(".remarkablePostMarker", item).attr("style", "");
 					$(".markAsRemarkable", item).attr("disabled", "disabled");
@@ -118,21 +117,23 @@ window.Appjangle = window.Appjangle || {};
 					console.log("dont highliught");
 					$(".markAsRemarkable", item).removeAttr("disabled");
 				}
-				
+
 			});
 
-			
 			$(".markAsRemarkable", item).click(function(evt) {
 				evt.preventDefault();
-				
+
 				var remarkableEntry = moderations.append("Remarkable");
 				remarkableEntry.append(aRemarkablePost);
 				remarkableEntry.append(session.node(post));
+
+				session.commit().get(function() {
+					
+				});
 				
-				
-				session.commit().get(function() { demo.update(); });
+				demo.update();
 			});
-			
+
 		};
 
 		demo.initUi = function() {
@@ -166,12 +167,13 @@ window.Appjangle = window.Appjangle || {};
 
 			});
 
-			monitorModerations = moderations.monitor().setInterval("1000").setDepth(1).addListener(function(context) {
-				demo.update();
-			});
-			
-monitorModerations.get(function(monitor) {
-				
+			monitorModerations = moderations.monitor().setInterval("1000")
+					.setDepth(1).addListener(function(context) {
+						demo.update();
+					});
+
+			monitorModerations.get(function(monitor) {
+
 			});
 		});
 
