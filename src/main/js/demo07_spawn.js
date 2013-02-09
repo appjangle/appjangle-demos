@@ -40,7 +40,7 @@ window.Appjangle = window.Appjangle || {};
 							var postsUrl = params.postsUrl;
 							var postsSecret = params.postsSecret;
 							var appUrl = "http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo07_login.value.html";
-							var moderationAppUrl = "http://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo06_moderation_app.value.html";
+							var moderationAppUrl = "http://appjangle.com/showcases/moderatorClient";
 							var assembledAppUrl = appUrl + "#" + posts.uri()
 									+ "&" + clientsReadWriteToken.getSecret()
 									+ "&" + moderations.uri() + "&"

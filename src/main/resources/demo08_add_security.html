@@ -18,34 +18,52 @@
 	</div>
 </div>
 
-<div class="ajdemo"
-		style="padding: 5px; border: 1px solid rgb(76, 60, 27)">
-		<div class="row-fluid">
-			<div class="span12">
-				<div class="secureClientSpawn hide">
-					<table class="table table-hover">
-						<tr>
-							<td><a class="spawnUserClient" href="#" target="_blank"><img
-									src="http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50">
-									Start User Client</a></td>
-						</tr>
-
-						<tr>
-
-							<td><a class="spawnModerator" href="#" target="_blank"><img
-									src="http://docs.google.com/drawings/d/1EWIcN53_qhSSL5uYaUjzgqvU5F5TxqkM6BVsXc39GJ4/pub?w=50">
-									Start Moderator Client</a></td>
-						</tr>
-					</table>
-
-				</div>
-			</div>
-		</div>
-	</div>
-
 <div class="row-fluid">
 	<div class="span12">
 		<h4 style="margin-top: 30px;">Live Demo</h4>
+	</div>
+</div>
+
+
+<div class="ajdemo"
+	style="padding: 5px; border: 1px solid rgb(76, 60, 27)">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="secureClientSpawn hide">
+				<table class="table table-hover">
+					<tr>
+						<td><a class="spawnUserClient" href="#" target="_blank"><img
+								src="http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50">
+								Start User Client</a></td>
+					</tr>
+
+					<tr>
+
+						<td><a class="spawnModerator" href="#" target="_blank"><img
+								src="http://docs.google.com/drawings/d/1EWIcN53_qhSSL5uYaUjzgqvU5F5TxqkM6BVsXc39GJ4/pub?w=50">
+								<i class="icon-lock"></i> Start Moderator Client</a></td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<h4 style="margin-top: 30px;">Key Changes</h4>
+		<p>The only change we had to make was to change the way moderator
+			clients are started up.</p>
+		<p>In particular, we have changed the URL pointing to the
+			moderator client from:</p>
+		<blockquote>http://appjangle.com/showcases/moderatorClient</blockquote>
+		<p>to:</p>
+		<blockquote>https://appjangle.com/showcases/moderatorClient</blockquote>
+		<p>Now, the parameter we pass to the moderator client containing
+			the access token for the moderator node, as well as all communication
+			between the moderator client and the Appjangle cloud will be
+			encrypted through the SSL protocol.</p>
 	</div>
 </div>
 
