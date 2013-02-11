@@ -1,21 +1,23 @@
 <!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/impersonate-unit-tests -->
 <div class="row-fluid">
 	<div class="span12">
-		<h4>Demo 09: Add Unit Tests</h4>
+		<h4>Demo 10: Add Unit Tests</h4>
+		<hr>
 		<p>We have been naughty developers so far and did not define
-			proper unit tests like good craftsmen should!</p>
+			proper unit tests!</p>
 		<p>However, using the Appjangle platform does not prevent us from
 			writing unit tests neither does it impose to do it in the infamous
 			tests-last style. Indeed, Appjangle has been architected from the
 			ground up to support writing tests conveniently and effectively.</p>
-		<p>The main device to support testability is the full-blown
-			database engine embedded in the Appjangle client libraries. Using the
-			Appjangle client libraries allows to create complex in-memory
-			databases, which provide an almost identical set of features as the
-			Appjangle cloud. In particular, almost all operations of the Nextweb
-			API are supported by the embedded databases.</p>
+		<p>The main device to support testability is the stand-alone test
+			cloud embedded in the Appjangle client libraries.</p>
 		<p>The following two examples illustrate, how a unit test for our
 			application could look like!</p>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
 		<h5>QUnit Test</h5>
 		<p>
 			The following test utilizes the <a href="http://qunitjs.com/">QUnit</a>
@@ -54,11 +56,16 @@ test("Calculate total number of posts", function() {
     });
 });
 </pre>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
 		<h5>JUnit Test</h5>
 		<p>
 			We can likewise use good, old <a
-				href="https://github.com/KentBeck/junit">JUnit 4.x</a> to define a test
-			in Java.
+				href="https://github.com/KentBeck/junit">JUnit 4.x</a> to define a
+			test in Java.
 		</p>
 		<p>
 			The following JUnit test also tests a method, which calculates the
@@ -66,10 +73,11 @@ test("Calculate total number of posts", function() {
 			it more natural to JUnits synchronous testing style (but note that we
 			could also write this logic in an asynchronous style using the
 			asynchronous <a href="http://nextweb.io/docs/nextweb-get.value.html">get
-				operation</a> in the Nextweb Java API).</p>
-				
-	</div>
-<pre class="prettyprint language-java">
+				operation</a> in the Nextweb Java API).
+		</p>
+
+
+		<pre class="prettyprint language-java">
 public class TestCalculateTotal {
    
    private String aPost = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
@@ -94,5 +102,7 @@ public class TestCalculateTotal {
    }
 }
 </pre>
+	</div>
 </div>
+
 <!-- one.end -->
