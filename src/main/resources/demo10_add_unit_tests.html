@@ -10,9 +10,10 @@
 			tests-last style. Indeed, Appjangle has been architected from the
 			ground up to support writing tests conveniently and effectively.</p>
 		<p>The main device to support testability is the stand-alone test
-			cloud embedded in the Appjangle client libraries.</p>
-		<p>The following two examples illustrate, how a unit test for our
-			application could look like!</p>
+			cloud embedded in the Appjangle client libraries. The following two
+			examples illustrate, how a unit test for our application could look
+			like!</p>
+		 
 	</div>
 </div>
 
@@ -31,9 +32,9 @@
 		<pre class="prettyprint">var aPost = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
 
 function calculateNumberOfPosts(posts, callback) {
-			posts.selectAll(session.node(aPost)).get(function(postsList) {
-				callback(postsList.size());
-			});
+    posts.selectAll(session.node(aPost)).get(function(postsList) {
+        callback(postsList.size());
+    });
 };
 
 test("Calculate total number of posts", function() {
