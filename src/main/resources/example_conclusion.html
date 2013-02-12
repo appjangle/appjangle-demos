@@ -11,10 +11,23 @@
 		<p>In this conclusion, we would like to highlighted a number of
 			benefits from using the Appjangle platform, which are illustrated by
 			the demos. Please find these benefits listed below.</p>
+
 		<h5>No Database Configuration and Server Code</h5>
 		<p>While our application persists data in the cloud and supports
 			the synchronization between multiple users, we did not have to write
 			a single line of classical 'server' code.</p>
+
+		<h5>Smooth Cross-Platform Development</h5>
+		<p>
+			In <a href="#javaClient">demo 09</a>, we could easily implement a
+			Java client for our previously JavaScript-only application.
+		</p>
+		<p>For this, we could ignore the fact that we are accessing data
+			created in a JavaScript environment. All data type mapping/data
+			conversion/etc is silently taken care of in the background and we can
+			focus on building the application logic we are about.</p>
+
+
 		<h5>Concise Database Logic</h5>
 		<p>Although our clients are not mere 'UI wrappers' of the required
 			functionality but embed the entire app features, the logic to
@@ -24,10 +37,89 @@
 			For instance, the most advanced version of the application to make
 			posts to the wall <a
 				href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_add_authorization.js">demo06_add_authorization.js</a>
-			contains only 30 lines of code, which contain a reference to the
+			contains only 30 lines of code, which contain references to the
 			Nextweb API.
 		</p>
-		<h5></h5>
+
+		<h5>High Modularity</h5>
+		<p>We have created the more complex demos out of a number loosely
+			coupled modules. Demo 07, for instance, consists of four modules:</p>
+		<table class="table table-bordered table-hover table-condensed">
+			<tr>
+				<th>Module</th>
+				<th>Script</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>Spawn</td>
+				<td>demo07_spawn.js</td>
+				<td>To start clients apps and moderator app.</td>
+			</tr>
+			<tr>
+				<td>Login</td>
+				<td>demo07_login.js</td>
+				<td>To allow users to register or sign in using email address
+					and password.</td>
+			</tr>
+			<tr>
+				<td>Wall</td>
+				<td>demo06_add_authorization.js</td>
+				<td>To make posts to the Wall of the Wise.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+
+		<h5>Easy Data Structure Extensability and Evolveability</h5>
+		<p>
+			Starting with a very simple model developed in <a href="#salve">demo
+				01</a>, we have evolved the data model of our application in small
+			incremental steps:
+		</p>
+		<ul>
+			<li>Demo 02 added a data type 'aPost' to identify posts.
+			<li>Demo 05 added the data types 'anAvatar' and 'aUserName'.
+			<li>Demo 06 added a data type 'aRemarkablePost'.
+		</ul>
+		<p>All these changes did not affect the 'backward compatibility'
+			of the data stored by our server. For instance, a wall created with
+			demo 06 could without problems be loaded by the client in demo 05.</p>
+		<h5>Rapid Application Evolution</h5>
+		<p>From the very simple text-only prototype developed in demo 01,
+			we were able to rapidly extend the functionality of our application
+			by drawing on the ready-made building blocks, the Appjangle platform
+			provided.</p>
+		<p>For instance, the following key steps in the development of our
+			application usually require significant resources to be implemented:</p>
+		<ul>
+			<li>From <a href="#instantData">demo 03</a> to <a
+				href="#transparentCloudPersistence">demo 04</a>, we changed only a
+				couple of lines of code, yet our application was transformed from a
+				JavaScript-only client-based application to an application which
+				persists its state in a centralized database.
+			</li>
+			<li>From <a href="#transparentCloudPersistence">demo 04</a> to <a
+				href="#stateSynchronization">demo 05</a>, we allowed our application
+				to be 'collaborative' in that multiple users are enabled to see each
+				others actions.
+			</li>
+			<li>From <a href="#fineGrainedSharing">demo 06</a> to <a
+				href="#userManagement">demo 07</a>, we added a 'traditional' user
+				registration and login dialog. We could accomplish this by reusing
+				the Appjangle user management facilities and could leave the logic
+				of our main application unaltered.
+			</li>
+		</ul>
+		<p>These steps are not only noteable due to velocity in which they
+			could be accomplished but also because they solve 'hard' problems,
+			which can easily 'make or break' an application. For instance,
+			turning a client-only prototype into an application, which draws its
+			data from a central database and does so with acceptable performance,
+			can take up the majority of development time. In Appjangle, we get
+			this feature virtually for free.</p>
 	</div>
 </div>
 <!-- one.end -->
