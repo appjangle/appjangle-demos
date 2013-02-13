@@ -24,14 +24,14 @@
 </div>
 
 <div class="ajdemo"
-	style="padding: 5px; border: 1px solid rgb(76, 60, 27)">
+	style="padding: 20px; border: 1px solid rgb(76, 60, 27)">
 	<div class="row-fluid">
 		<div class="span12">
-			<p>Please follow the following steps to explore the Java demo:</p>
-			<h5>Download JAR</h5>
+			<p>Please follow the steps below to explore the Java demo:</p>
+			<h5 style="margin-top: 30px;">1. Download JAR</h5>
 			<table class="table table-bordered table-hover">
 				<tr>
-					<td><a
+					<td width="20"><a
 						href="http://dl.dropbox.com/u/957046/onedb/mvn-releases/com/appjangle/demos/appjangle-java-demo/0.1.1/appjangle-java-demo-0.1.1-jar-with-dependencies.jar"><img
 							src="http://docs.google.com/drawings/d/13cIM_U81UGopb4EggU__u_4D1REzi19IAwej9wIBYrg/pub?w=30"
 							alt="Download Icon"></a></td>
@@ -44,22 +44,22 @@
 			<p>You need to download a self-container JAR file from the link
 				above. After you start the application (double click on the
 				downloaded JAR file or by 'java -jar ...'),</p>
-			<h5>Provide Wall URL</h5>
+			<h5 style="margin-top: 30px;">2. Provide Wall URL</h5>
 			<p>
 				You need to open <a href="#stateSynchronization">demo 05</a>, <a
 					href="#fineGrainedSharing">demo 06</a>, <a href="#userManagement">demo
 					07</a> or <a href="#security">demo 08</a>. After you have opened the
-				client to post messages, copy the URL displayed on the
-				bottom of the page.
+				client to post messages, copy the URL displayed on the bottom of the
+				page.
 			</p>
 			<img
 				src="http://docs.google.com/drawings/d/1pDWDBNVmL7f1ESIqt2JyD-f9LqhCYsJchmhB4xULwJs/pub?w=332">
 
-			<p>Then, paste this URL into the Java application and
-				click submit.</p>
+			<p>Then, paste this URL into the Java application and click
+				submit.</p>
 			<img
 				src="http://docs.google.com/drawings/d/1G_OIHF_McY_kj3XezVLhsmc53DQ8Megit78PuE7ey64/pub?w=425">
-			<h5>Observe Post Counts</h5>
+			<h5 style="margin-top: 30px;">3. Observe Post Counts</h5>
 			<p>The post counts for the wall will be displayed in a simple
 				table on the Java application. Make more posts to the wall from
 				where you have copied the URL to see the post counts in the Java app
@@ -72,10 +72,183 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span12">
-        <h4 style="margin-top: 30px;">Key Components</h4>
-        <p>
-    </div>
+	<div class="span12">
+		<h4 style="margin-top: 30px;">Key Components</h4>
+		<p>The following descriptions provide a brief overview of the role
+			of a number of key classes in the demo application.</p>
+		<h5>ProvideWallUrlPanel</h5>
+		<p>
+			The class <a
+				href="https://github.com/mxro/appjangle-java-demo/blob/master/appjangle-java-demo/src/main/java/com/appjangle/demos/appjanglejavademo/panels/ProvideWallUrlPanel.java">ProvideWallUrlPanel</a>
+			provides a simple user interface to enter the URL of a 'Wall of the
+			Wise'
+		</p>
+		<p>When the submit button is clicked, a new Nextweb session is
+			created and the node with the specified URL is loaded. A message is
+			displayed if an error occured. In case the node is loaded
+			successfully, the page to display the post counts is opened.</p>
+		<pre class="prettyprint language-java">private void submitButtonActionPerformed(...) {
+    this.mw.display(new LoadingPanel());
+    String url = wallUrlTextField.getText();
+
+    final Session session = Nextweb.createSession();
+    try {
+        Link posts = session.node(url);
+
+        posts.catchExceptions(new ExceptionListener() {
+
+            public void onFailure(ExceptionResult r) {
+                mw.display(new ErrorPanel());
+                session.close();
+            }
+            
+        });
+
+        posts.get(new Closure<Node>() {
+
+            public void apply(Node n) {
+                DisplayPostCountsPanel panel = new DisplayPostCountsPanel();
+                mw.display(panel);
+                panel.init(n);
+            }
+            
+        });
+    } catch (Throwable t) {
+        mw.display(new ErrorPanel());
+        session.close();
+    }
+}
+		
+		</pre>
+		<h5>DisplayPostsCountsPanel</h5>
+		<p>
+			The class <a
+				href="https://github.com/mxro/appjangle-java-demo/blob/master/appjangle-java-demo/src/main/java/com/appjangle/demos/appjanglejavademo/panels/DisplayPostCountsPanel.java">DisplayPostsCountsPanel</a>
+			provides a user interface to display the number of messages per
+			avatar on the wall. This class also manages the background
+			synchronization process, which will update the posts counts if uses
+			make new posts.
+		</p>
+		<p>
+			The method installMonitor will install a monitor with similar
+			settings as the monitors used from <a href="#stateSynchronization">demo
+				05</a> upwards. It creates a dedicated Nextweb session to run the
+			monitor (monitorSession) and if a change is detected, reloads the
+			node in the main session (in which the node posts is defined).
+		</p>
+		<pre class="prettyprint language-java">private void installMonitor(final Node posts) {
+    Session monitorSession = Nextweb.createSession();
+    monitorSession.node(posts).monitor().setInterval(Interval.FAST)
+                                        .setDepth(2)
+                                        .addListener(new NodeListener() {
+
+        public void onWhenNodeChanged(MonitorContext context) {
+            posts.reload(2).get(new Closure<Node>() {
+                
+                @Override
+                public void apply(Node n) {
+                     updateData(posts);
+                }
+                
+            });
+           
+        }
+    }).get(new Closure<Monitor>() {
+
+        public void apply(Monitor m) {
+        }
+    });
+}
+		
+		</pre>
+		<p>The method updateData will start a new thread, in which the
+			calculation of posts is performed. The actual calculation is done by
+			the class Calculation (see below).</p>
+		<p>We are starting a new thread here, since the Calculation class
+			uses the synchronous/blocking methods of the Nextweb API (.get()
+			instead of .get(Closure)).</p>
+		<p>The synchronous version usually results in easier to understand
+			Java code but might block the thread it is working in for some time
+			(if the operations require data to be sent/received from the server).
+			We are also running the monitor in a separate session for the same
+			reason.</p>
+		<pre class="prettyprint language-java">private void updateData(final Node posts) {
+
+    new Thread() {
+
+        @Override
+        public void run() {
+            Calculations c = new Calculations(posts.getSession());
+            Map<String , Integer> results = c.calculatePostsPerUser(posts);
+            
+            displayData(toStringMap(results));
+        }
+    }.start();
+}
+		
+		</pre>
+		<h5>Calculations</h5>
+		<p>
+			The class <a
+				href="https://github.com/mxro/appjangle-java-demo/blob/master/appjangle-java-demo/src/main/java/com/appjangle/demos/appjanglejavademo/Calculations.java">Calculations</a>
+			contains the logic to determine how many posts are made by each
+			historical figure.
+		</p>
+		<p>Starting from a posts node, the algorithm will select all post
+			nodes from this node and then select the user names associated to
+			each posts. A list with of all user names results. It is then counted
+			how many times each user name appears.</p>
+		<pre class="prettyprint language-java">public class Calculations {
+    ...
+    
+    public Map<String , Integer> calculatePostsPerUser(Node posts) {
+        Map<String , Integer> res = new HashMap<String
+				, Integer>();
+
+        NodeList allUserNames = posts.selectAll(t.aPost())
+                                     .selectAll(t.aUserName()).get();
+
+        for (Node userName : allUserNames) {
+            incrementUserPostCount(userName.value(String.class), res);
+        }     
+
+        return res;
+    }
+
+    private void incrementUserPostCount(String userName, Map<String
+				, Integer> counts) {
+        if (!counts.containsKey(userName)) {
+            counts.put(userName, 1);
+            return;
+        }
+        
+        counts.put(userName, counts.get(userName) +1);
+    }
+    
+    ...
+}
+		
+		</pre>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<h4 style="margin-top: 30px;">Files</h4>
+		<p>
+			All files used in this example can be explored on the github project
+			<a href="https://github.com/mxro/appjangle-java-demo">appjangle-java-demo</a>.
+		
+		<p>All classes are in the packages:</p>
+		<p style="margin-left: 20px;">
+			<a
+				href="https://github.com/mxro/appjangle-java-demo/tree/master/appjangle-java-demo/src/main/java/com/appjangle/demos/appjanglejavademo">com.appjangle.demos.appjanglejavademo</a>
+			
+		</p>
+		<p style="margin-left: 20px;">
+			<a
+				href="https://github.com/mxro/appjangle-java-demo/tree/master/appjangle-java-demo/src/main/java/com/appjangle/demos/appjanglejavademo/panels">com.appjangle.demos.appjanglejavademo.panels</a>
+	</div>
 </div>
 
 <!-- one.end -->

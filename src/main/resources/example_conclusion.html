@@ -1,4 +1,158 @@
 <!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/impersonate-conclusion -->
+<div class="row-fluid">
+	<div class="span12">
+		<h4>Conclusion</h4>
+		<p>The previous 10 demos showcase various capabilities of the
+			Appjangle platform. In particular, we have explored the iterative
+			development of a simple application 'The Wall of the Wise'.</p>
+		<p>While this application is by no means complete as yet, we can
+			say with confidence that we have assembled a fairly substantial
+			prototype thus far.</p>
+		<p>In this conclusion, we would like to highlighted a number of
+			benefits from using the Appjangle platform, which are illustrated by
+			the demos. Please find these benefits listed below.</p>
+
+		<h5 style="margin-top: 40px;">No Database Configuration and Server Code</h5>
+		<p>While our application persists data in the cloud and supports
+			the synchronization between multiple users, we did not have to write
+			a single line of classical 'server' code.</p>
+
+		<h5 style="margin-top: 40px;">Smooth Cross-Platform Development</h5>
+		<p>
+			In <a href="#javaClient">demo 09</a>, we could easily implement a
+			Java client for our previously JavaScript-only application.
+		</p>
+		<p>For this, we could ignore the fact that we are accessing data
+			created in a JavaScript environment. All data type mapping/data
+			conversion/etc is silently taken care of in the background and we can
+			focus on building the application logic we are about.</p>
 
 
+		<h5 style="margin-top: 40px;">Concise Database Logic</h5>
+		<p>Although our clients are not mere 'UI wrappers' of the required
+			functionality but embed the entire app features, the logic to
+			interact with the database is concise an limited to a couple of lines
+			of code.</p>
+		<p>
+			For instance, the most advanced version of the application to make
+			posts to the wall <a
+				href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_add_authorization.js">demo06_add_authorization.js</a>
+			contains only 30 lines of code, which contain references to the
+			Nextweb API.
+		</p>
+
+
+		<h5 style="margin-top: 40px;">Easy Data Structure Extensability and Evolveability</h5>
+		<p>
+			Starting with a very simple model developed in <a href="#salve">demo
+				01</a>, we have evolved the data model of our application in small
+			incremental steps:
+		</p>
+		<ul>
+			<li>Demo 02 added a data type 'aPost' to identify posts.</li>
+			<li>Demo 05 added the data types 'anAvatar' and 'aUserName'.</li>
+			<li>Demo 06 added a data type 'aRemarkablePost'.</li>
+		</ul>
+		<p>All these changes did not affect the 'backward compatibility'
+			of the data stored by our server. For instance, a wall created with
+			demo 06 could without problems be loaded by the client in demo 05.</p>
+
+		<h5 style="margin-top: 40px;">High Modularity</h5>
+		<p>We have created the more complex demos out of a number loosely
+			coupled modules. Demo 07, for instance, consists of the following
+			modules:</p>
+		<table class="table table-bordered table-hover table-condensed">
+			<tr>
+				<th>Module</th>
+				<th>Script</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>Spawn</td>
+				<td><a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo07_spawn.js">demo07_spawn.js</a></td>
+				<td>To start clients apps and moderator app.</td>
+			</tr>
+			<tr>
+				<td>Login</td>
+				<td><a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo07_login.js">demo07_login.js</a></td>
+				<td>To register or sign in using email address and password.</td>
+			</tr>
+			<tr>
+				<td>Wall</td>
+				<td><a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_add_authorization.js">demo06_add_authorization.js</a></td>
+				<td>To make posts to the Wall of the Wise.</td>
+			</tr>
+			<tr>
+				<td>Moderator</td>
+				<td><a
+					href="https://github.com/appjangle/appjangle-demos/blob/master/src/main/js/demo06_moderation_app.js">demo06_moderation_app.js</a></td>
+				<td>To highlight posts as remarkable.</td>
+			</tr>
+		</table>
+		<p>
+			As can be seen, from the used JavaScript files, this <a
+				href="#userManagement">demo 07</a> reuses modules from <a
+				href="#fineGrainedSharing">demo 06</a>. Moreover, most of the
+			modules used in demo 07 are in turn used by <a href="#security">demo
+				08</a> as well.
+		</p>
+		<p>The only dependency these demos share is the application data
+			stored in the Appjangle cloud. There are no direct source code
+			dependencies between the modules, which allows to easily compose and
+			recombine the modules to react to evolving requirements.</p>
+
+		<h5 style="margin-top: 40px;">Rapid Application Evolution</h5>
+		<p>From the very simple text-only prototype developed in demo 01,
+			we were able to rapidly extend the functionality of our application
+			by drawing on the ready-made building blocks, the Appjangle platform
+			provided.</p>
+		<p>For instance, the following key steps in the development of our
+			application usually require significant resources to be implemented:</p>
+		<ul>
+			<li>From <a href="#instantData">demo 03</a> to <a
+				href="#transparentCloudPersistence">demo 04</a>, we changed only a
+				couple of lines of code, yet our application was transformed from a
+				JavaScript-only client-based application to an application which
+				persists its state in a centralized database.
+			</li>
+			<li>From <a href="#transparentCloudPersistence">demo 04</a> to <a
+				href="#stateSynchronization">demo 05</a>, we allowed our application
+				to be 'collaborative' in that multiple users are enabled to see each
+				others actions.
+			</li>
+			<li>From <a href="#fineGrainedSharing">demo 06</a> to <a
+				href="#userManagement">demo 07</a>, we added a 'traditional' user
+				registration and login dialog. We could accomplish this by reusing
+				the Appjangle user management facilities and could leave the logic
+				of our main application unaltered.
+			</li>
+		</ul>
+		<p>These steps are not only notable due to velocity in which they
+			could be accomplished but also because they solve 'hard' problems,
+			which can easily 'make or break' an application. For instance,
+			turning a client-only prototype into an application, which draws its
+			data from a central database and does so with acceptable performance,
+			can take up the majority of development time. In Appjangle, we get
+			this feature virtually for free.</p>
+		
+		<h5 style="margin-top: 40px;">The Platform for Smarter Apps</h5>
+		<p>While using Appjangle provided us with numerous benefits listed
+			above, the most significant advantages can be drawn by the unique
+			combination of all these benefits.</p>
+		<p>
+			While not needing to implement 'server login', building easily for
+			multiple-platforms, expressing database logic concisely in few lines
+			of code, and utilizing the powerful building blocks of the Appjangle
+			platform allow us to develop application <b>rapidly</b>, the easy and
+			flexible extension of data structures and intrinsic high modularity
+			give even quickly built application <b>sustainable value</b>; in that
+			they are easy to maintain, recombine and extend.
+		<p>
+		<p>Please try out Appjangle for yourself and let us know what you
+			think!</p>
+	</div>
+</div>
 <!-- one.end -->
