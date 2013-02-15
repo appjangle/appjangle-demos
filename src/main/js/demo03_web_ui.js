@@ -31,8 +31,9 @@ window.Appjangle = window.Appjangle || {};
 		// define data type for posts
 		aPost = seed.append("A post on a message board, wall or chat room.", "./aPost");
 		
-		// resolving request for data node
-		posts.get(function(posts) {
+		// resolving request for data nodes
+		session.getAll(posts, aPost, function(posts, aPostResolved) {
+			aPost = session.node(aPostResolved);
 			// when data node loaded, show ui
 			demo.initUi();
 		});
