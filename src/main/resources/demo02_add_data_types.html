@@ -7,8 +7,7 @@
 			After we have defined a simple data model as well as uploaded data
 			according to this model to the Appjangle cloud, we will improve and
 			extend our original model in the second development step. In
-			particular, we introduce a simple data type, upload this data type to
-			the Appjangle cloud and extend our first prototype from <a
+			particular, we introduce a simple data type and extend our first prototype from <a
 				href="#salve">demo 01</a> with this type.
 		</p>
 		<h5>Introduce Data Type</h5>
@@ -46,14 +45,7 @@
 			</p>
 		</div>
 		<h5>Upload Data Type to Appjangle Cloud</h5>
-		<p>
-			We have introduced the data type <em>aPost</em> in our hyperdata
-			model. In order to use this data type in an application, we first
-			need to create it. Luckily, this is very easy, since the property
-			pattern allows any arbitrary node to serve as a type node (<a
-				href="http://nextweb.io/docs/nextweb-data-pattern.value.html#type">see
-				Nextweb documentation</a>) and creating nodes is very easy in Appjangle.
-		</p>
+		
 		<p>
 			The following script creates a new data type node <em>aPost</em> and
 			prints out the address for this node. This address is all we need to
@@ -67,19 +59,7 @@
 </div>
 
 
-<div class="jsexample" id="dataTypesExample">
-	<pre class="jscode">var session = Nextweb.createSession();
 
-var typesRoot = session.seed();
-
-var aPost = typesRoot.append("A post on a message board, wall or chat room.", "./aPost");
-
-session.commit().get(function(success) {
-    console.log("URI: "+aPost.get().uri());
-    console.log("Secret: "+aPost.get().secret());
-    session.close().get(function() { });
-});
-</pre>
 
 
 </div>
@@ -100,6 +80,14 @@ session.commit().get(function(success) {
 
 <h5>Extend Prototype</h5>
 <p>
+            We have introduced the data type <em>aPost</em> in our hyperdata
+            model. In order to use this data type in an application, we first
+            need to create it. Luckily, this is very easy, since the property
+            pattern allows any arbitrary node to serve as a type node (<a
+                href="http://nextweb.io/docs/nextweb-data-pattern.value.html#type">see
+                Nextweb documentation</a>) and creating nodes is very easy in Appjangle.
+        </p>
+<p>
 	After we have created the new data type node, we can readily use it to
 	enhance the original application from <a href="#salve">demo 01</a>. For
 	this, we utilize the <a
@@ -108,11 +96,6 @@ session.commit().get(function(success) {
 	new data type node!
 </p>
 
-<p>
-	Also, In order to use the node we have defined in our application, we
-	need to reference it using the <a
-		href="http://nextweb.io/docs/nextweb-node-operation.value.html">node</a>
-	operation.
 <p>
 	In addition to adding the data types, we also retrieve the defined
 	posts with the defined data type not with the <a
@@ -126,7 +109,9 @@ session.commit().get(function(success) {
 	<pre class="jscode">var server = Nextweb.startServer(14142);
 var session = Nextweb.createSession();
 
-var aPost = session.node("http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1");
+var seed = session.seed("local");
+
+var aPost = seed.append("A post on a message board, wall or chat room.", "./aPost");
 
 var posts = session.seed("local").append("posts");
 
