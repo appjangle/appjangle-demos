@@ -223,23 +223,23 @@ session = Nextweb.createSession();</pre>
 // BEFORE: posts = session.seed("local");
 posts = session.seed();
 </pre>
-					<h5>Uploading Data Type To Appjangle Cloud</h5>
-					<p>Since in this example we connect our application with the
-						Appjangle cloud, it makes sense to define the data type for posts
-						to this cloud to enable easy reuse of the data type in this and
-						other applications.</p>
-					<p>
-						The following script creates a new data type node <em>aPost</em>
-						and prints out the address for this node. This address is all we
-						need to use the newly created node as globally available, reusable
-						and documented data type (the nodes you have created will be
-						persisted indefinitely)! We can also save the 'secret' for the
-						node in order to be able to edit and modify our data type later
-						on.
-					</p>
+				</div>
+				<h5>Uploading Data Type To Appjangle Cloud</h5>
+				<p>Since in this example we connect our application with the
+					Appjangle cloud, it makes sense to define the data type for posts
+					to this cloud to enable easy reuse of the data type in this and
+					other applications.</p>
+				<p>
+					The following script creates a new data type node <em>aPost</em>
+					and prints out the address for this node. This address is all we
+					need to use the newly created node as globally available, reusable
+					and documented data type (the nodes you have created will be
+					persisted indefinitely)! We can also save the 'secret' for the node
+					in order to be able to edit and modify our data type later on.
+				</p>
 
-					<div class="jsexample" id="dataTypesExample">
-						<pre class="jscode">var session = Nextweb.createSession();
+				<div class="jsexample" id="dataTypesExample">
+					<pre class="jscode">var session = Nextweb.createSession();
 
 var typesRoot = session.seed();
 
@@ -252,20 +252,26 @@ session.commit().get(function(success) {
 });
 </pre>
 
-					</div>
-
-					<p>
-						Note: You can click on the link to the generated node to explore
-						its automatically generated web representation. By adding to the
-						end of the URI <a
-							href="http://slicnet.com/seed1/seed1/4/4/1/4/h/sd/aPost.value.xml">.value.xml</a>
-						or <a
-							href="http://slicnet.com/seed1/seed1/4/4/1/4/h/sd/aPost.value.json">.value.json</a>,
-						you can also easily see the other rendered representations of the
-						node.
-					</p>
-
 				</div>
+
+				<p>
+					Note: You can click on the link to the generated node to explore
+					its automatically generated web representation. By adding to the
+					end of the URI <a
+						href="http://slicnet.com/seed1/seed1/4/4/1/4/h/sd/aPost.value.xml">.value.xml</a>
+					or <a
+						href="http://slicnet.com/seed1/seed1/4/4/1/4/h/sd/aPost.value.json">.value.json</a>,
+					you can also easily see the other rendered representations of the
+					node.
+				</p>
+				<p>
+					We reference this data type in our application using the <a
+						href="http://nextweb.io/docs/nextweb-node-operation.value.html">node
+						operation</a>, such as:</p>
+				<pre class="prettyprint">// load data type for posts
+postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
+aPost = session.node(postType);
+				</pre>
 			</div>
 
 		</div>
