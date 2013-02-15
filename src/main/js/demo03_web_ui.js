@@ -25,9 +25,8 @@ window.Appjangle = window.Appjangle || {};
 		session = Nextweb.createSession();
 
 		seed = session.seed("local");
-
 		// request for data node to store all posts
-		posts = seed.append("local");
+		posts = seed.append("posts");
 		
 		// define data type for posts
 		aPost = seed.append("A post on a message board, wall or chat room.", "./aPost");

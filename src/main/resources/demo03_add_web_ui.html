@@ -244,25 +244,20 @@ session = Nextweb.createSession();
 										indirect child nodes to this root node.
 									</p>
 									<pre class="prettyprint linenums:27">
-// request for data node to store all posts
-posts = session.seed("local");
+seed = session.seed("local");
+// create data node to store all posts
+posts = seed.append("posts");
 </pre>
 									<p
 										style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
-										The <a
-											href="http://nextweb.io/docs/nextweb-node-operation.value.html">node
-											operation</a> is used to create a reference to a data type node.
-										This data type node has been defined before with another
-										Appjangle app. The data type can be shared between unlimited
-										apps and allows to distinguish posted messages from other data
+										A data type is created for posts. It allows to distinguish posted messages from other data
 										stored in the database (see <a
 											href="http://nextweb.io/docs/nextweb-data-pattern.value.html">property
 											pattern</a>).
 									</p>
 									<pre class="prettyprint linenums:30">
-// load data type for posts
-postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
-aPost = session.node(postType);
+// define data type for posts
+aPost = seed.append("A post on a message board, wall or chat room.", "./aPost");
 </pre>
 									<p
 										style="margin-left: 40px; margin-top: -13px; font-size: 90%;">
