@@ -231,19 +231,19 @@ posts.append("Salve, Nubes!");
 			link the Appjangle Java library from the <a
 				href="http://appjangle.com/downloads">downloads</a> page.
 		</p>
-		<pre class="prettyprint language-java">Server server = Nextweb.startServer(14142);
+		<pre class="prettyprint language-java">LocalServer server = Nextweb.startServer(14142);
 Session session = Nextweb.createSession();
 
-Query posts = session.seed("local").;
+Query posts = session.seed("local").append("posts");
 
 posts.append("Salve, Munde.");
 posts.append("Salve, Nubes!");
 
 session.commit().get();
 
-NodeList posts = posts.selectAll().get();
+NodeList postsList = posts.selectAll().get();
 
-System.out.println("Posts defined: "+posts.values());
+System.out.println("Posts defined: "+postsList.values());
 
 session.close().get();
 server.shutdown().get();
