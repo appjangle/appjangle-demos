@@ -12,7 +12,7 @@ window.Appjangle = window.Appjangle || {};
 	Appjangle.demos = Appjangle.demos || {};
 	
 	Appjangle.demos.initInstantDataDemo = function(params) {
-		var wrapper, Nextweb, server, session, posts, aPost, demo;
+		var wrapper, Nextweb, server, session, seed, posts, aPost, demo;
 
 		demo =  {};
 		
@@ -24,12 +24,13 @@ window.Appjangle = window.Appjangle || {};
 		server = Nextweb.startServer(12322);
 		session = Nextweb.createSession();
 
+		seed = session.seed("local");
+
 		// request for data node to store all posts
-		posts = session.seed("local");
+		posts = seed.append("local");
 		
-		// load data type for posts
-		postType = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
-		aPost = session.node(postType);
+		// define data type for posts
+		aPost = seed.append("A post on a message board, wall or chat room.", "./aPost");
 		
 		// resolving request for data node
 		posts.get(function(posts) {
