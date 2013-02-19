@@ -52,11 +52,11 @@ window.Appjangle = window.Appjangle || {};
 											assembledAppUrl
 													+ "&Caesar&http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50");
 
-							$(".spawnCleopetra", elem)
+							$(".spawnCleopatra", elem)
 									.attr(
 											"href",
 											assembledAppUrl
-													+ "&Cleopetra&http://docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50");
+													+ "&Cleopatra&http://docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50");
 
 							$(".spawnSocrates", elem)
 									.attr(
