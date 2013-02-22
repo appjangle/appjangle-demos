@@ -77,6 +77,10 @@ window.Appjangle = window.Appjangle || {};
 											+ "&" + moderations.uri() + "&"
 											+ moderatorToken.getSecret());
 							
+							$(".spawnCaesar, .spawnCleopatra, .spawnSocrates, .spawnLincoln").click(function() {
+								this.disabled = true;
+							});
+							
 							session.commit().get(function(success) {
 								elem.show();
 							});

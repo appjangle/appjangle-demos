@@ -54,6 +54,10 @@ window.Appjangle = window.Appjangle || {};
 								+ postsSecret
 								+ "&Lincoln&http://docs.google.com/drawings/d/1VyBRCBo2OOOcBVOmiRLP8r-ZPvva-VolSenXdnni4VM/pub?w=50");
 
+		$(".spawnCaesar, .spawnCleopatra, .spawnSocrates, .spawnLincoln").click(function() {
+			this.disabled = true;
+		});
+		
 		elem.show();
 
 	};
