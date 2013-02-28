@@ -172,13 +172,13 @@ window.Appjangle = window.Appjangle || {};
 
 			switch (avatar) {
 			case "Caesar":
-				return "http://docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50";
+				return "//docs.google.com/drawings/d/1nL9LVuDNjakiFW9YL5t1QOMtUgn2bVIl4OAXpPS6pMw/pub?w=50";
 			case "Cleopatra":
-				return "http://docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50";
+				return "//docs.google.com/drawings/d/1ITfQfEuslX7P0Mj0ZYhCzKFUNdmU0gUXbJcEI_mz0oE/pub?w=50";
 			case "Socrates":
-				return "http://docs.google.com/drawings/d/1kqVqej6c6R6PGpox-STQEc9O6fZO9zGicL5S6mmBkdQ/pub?w=50";
+				return "//docs.google.com/drawings/d/1kqVqej6c6R6PGpox-STQEc9O6fZO9zGicL5S6mmBkdQ/pub?w=50";
 			case "Lincoln":
-				return "http://docs.google.com/drawings/d/1VyBRCBo2OOOcBVOmiRLP8r-ZPvva-VolSenXdnni4VM/pub?w=50";
+				return "//docs.google.com/drawings/d/1VyBRCBo2OOOcBVOmiRLP8r-ZPvva-VolSenXdnni4VM/pub?w=50";
 			}
 
 			throw "No avatar picture available for " + avatar;
