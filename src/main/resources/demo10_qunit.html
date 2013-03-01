@@ -1,0 +1,60 @@
+<!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo10_qunit -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Wall of the Wise - QUnit</title>
+
+<link rel="stylesheet"
+    href="http://code.jquery.com/qunit/qunit-1.10.0.css">
+
+<script src="http://appjangle.com/js/v01/appjangle/appjangle.nocache.js"></script>
+
+
+<script>
+    window.onNextwebOnedb = function(engine) {
+    	var aPost = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
+
+    	function calculateNumberOfPosts(posts, callback) {
+    	    posts.selectAll(session.node(aPost)).get(function(postsList) {
+    	        callback(postsList.size());
+    	    });
+    	};
+
+    	test("Calculate total number of posts", function() {
+    	    stop();
+    	    var server = Nextweb.startServer(14142);
+    	    var session = Nextweb.createSession();
+    	    
+    	    var posts = session.seed("local");
+    	    
+    	    posts.append("Post 1").append(session.node(aPost));
+    	    
+    	    calculateNumberOfPosts(posts, function(total) {
+    	       ok(total === 1, "Total is "+total+" (expected 1)");
+    	       
+    	       session.close().get(function(success) {
+    	           server.shutdown().get(function(success) {
+    	               start();
+    	           });
+    	       });
+    	    });
+    	});
+
+    };
+</script>
+
+<style>
+</style>
+
+</head>
+
+<body>
+    
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+    
+</body>
+</html>
+<!-- one.end -->
