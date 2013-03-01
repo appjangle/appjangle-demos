@@ -11,12 +11,13 @@
 
 <script src="http://appjangle.com/js/v01/appjangle/appjangle.nocache.js"></script>
 
+<script src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
 
 <script>
     window.onNextwebOnedb = function(engine) {
     	var aPost = "http://slicnet.com/seed1/seed1/3/6/5/2/h/sd/aPost1";
 
-    	function calculateNumberOfPosts(posts, callback) {
+    	function calculateNumberOfPosts(session, posts, callback) {
     	    posts.selectAll(session.node(aPost)).get(function(postsList) {
     	        callback(postsList.size());
     	    });
@@ -31,7 +32,9 @@
     	    
     	    posts.append("Post 1").append(session.node(aPost));
     	    
-    	    calculateNumberOfPosts(posts, function(total) {
+    	    session.commit().get();
+    	    
+    	    calculateNumberOfPosts(session, posts, function(total) {
     	       ok(total === 1, "Total is "+total+" (expected 1)");
     	       
     	       session.close().get(function(success) {
