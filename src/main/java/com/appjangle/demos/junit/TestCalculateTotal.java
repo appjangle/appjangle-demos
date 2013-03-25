@@ -1,5 +1,6 @@
 package com.appjangle.demos.junit;
 
+import io.nextweb.Link;
 import io.nextweb.Query;
 import io.nextweb.Session;
 import io.nextweb.common.LocalServer;
