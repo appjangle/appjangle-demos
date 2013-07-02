@@ -1,19 +1,15 @@
-<!-- one.createPublic demo-android-client -->
+<!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/files/demo-android-client -->
 <div class="row-fluid">
 	<div class="span12">
-		<h4>Demo 09: Add Desktop UI (Java Swing)</h4>
+		<h4>Demo 09b: Add Mobile UI (Android)</h4>
 		<hr>
-		<p>The previous demos have incrementally expanded on the initial
-			simple design of the Wall of the Wise. However, the proceeding demos
-			were build on top of JavaScript and JQuery platform.</p>
+		<p>In the previous demo, we have developed a Java Swing client for
+			the Wall of the Wise. In this demo, we port this client to the
+			Android environment.</p>
 		<p>
-			In this demo, we will link a simple Java application with this
-			JS/JQuery application. This applications prime purpose is to
-			determine how many posts are made by each historic figure. You can
-			download the assembled JavaScript application below or build it
-			yourself from the <a
-				href="https://github.com/mxro/appjangle-java-demo">sources</a>.
-		</p>
+			You can install this demo from the Play Store and explore the <a
+				hre="https://github.com/denley/WallOfTheWiseAndroid">full source
+				code on GitHub</a>.
 	</div>
 </div>
 
@@ -27,23 +23,31 @@
 	style="padding: 20px; border: 1px solid rgb(76, 60, 27)">
 	<div class="row-fluid">
 		<div class="span12">
-			<p>Please follow the steps below to explore the Java demo:</p>
-			<h5 style="margin-top: 30px;">1. Download JAR</h5>
+			<p>Please follow the steps below to explore the Android demo:</p>
+			<h5 style="margin-top: 30px;">1. Install App</h5>
 			<table class="table table-bordered table-hover">
 				<tr>
-					<td width="20"><a
-						href="http://dl.dropbox.com/u/957046/onedb/mvn-releases/com/appjangle/demos/appjangle-java-demo/0.1.1/appjangle-java-demo-0.1.1-jar-with-dependencies.jar"><img
+
+					<td width="129"><a href=""><img
+							src="http://dl.dropboxusercontent.com/u/957046/static/assets/1307/get_it_on_play_store.png"
+							alt="Get it on Play Store"></a></td>
+					<td><a href="">Install 'Wall of the Wise' from Play Store</a></td>
+
+				</tr>
+				<tr>
+
+					<td><a
+						href="https://dl.dropboxusercontent.com/u/957046/static/assets/1307/WallOfTheWise.apk"><img
 							src="http://docs.google.com/drawings/d/13cIM_U81UGopb4EggU__u_4D1REzi19IAwej9wIBYrg/pub?w=30"
 							alt="Download Icon"></a></td>
 					<td><a
-						href="http://dl.dropbox.com/u/957046/onedb/mvn-releases/com/appjangle/demos/appjangle-java-demo/0.1.1/appjangle-java-demo-0.1.1-jar-with-dependencies.jar">Download
-							Demo JAR</a></td>
+						href="https://dl.dropboxusercontent.com/u/957046/static/assets/1307/WallOfTheWise.apk">Download
+							APK</a></td>
 				</tr>
 			</table>
 
-			<p>You need to download a self-container JAR file from the link
-				above. After you start the application (double click on the
-				downloaded JAR file or by 'java -jar ...'),</p>
+			<p>You can either install the app from the Google Play store or
+				download the APK and install it manually on your device or emulator.</p>
 			<h5 style="margin-top: 30px;">2. Provide Wall URL</h5>
 			<p>
 				You need to open <a href="#stateSynchronization">demo 05</a>, <a
@@ -55,7 +59,7 @@
 			<img
 				src="http://docs.google.com/drawings/d/1pDWDBNVmL7f1ESIqt2JyD-f9LqhCYsJchmhB4xULwJs/pub?w=332">
 
-			<p>Then, paste this URL into the Java application and click
+			<p>Then, provide this URL in the Android application and click
 				submit.</p>
 			<img
 				src="http://docs.google.com/drawings/d/1G_OIHF_McY_kj3XezVLhsmc53DQ8Megit78PuE7ey64/pub?w=425">
@@ -119,6 +123,8 @@
     }
 }
 		
+		
+		
 		</pre>
 		<h5>DisplayPostsCountsPanel</h5>
 		<p>
@@ -160,6 +166,8 @@
     });
 }
 		
+		
+		
 		</pre>
 		<p>The method updateData will start a new thread, in which the
 			calculation of posts is performed. The actual calculation is done by
@@ -185,6 +193,8 @@
         }
     }.start();
 }
+		
+		
 		
 		</pre>
 		<h5>Calculations</h5>
@@ -228,6 +238,8 @@
     ...
 }
 		
+		
+		
 		</pre>
 	</div>
 </div>
@@ -238,12 +250,14 @@
 		<p>
 			All files used in this example can be explored on the github project
 			<a href="https://github.com/mxro/appjangle-java-demo">appjangle-java-demo</a>.
+
+
 		
 		<p>All classes are in the packages:</p>
 		<p style="margin-left: 20px;">
 			<a
 				href="https://github.com/mxro/appjangle-java-demo/tree/master/appjangle-java-demo/src/main/java/com/appjangle/demos/appjanglejavademo">com.appjangle.demos.appjanglejavademo</a>
-			
+
 		</p>
 		<p style="margin-left: 20px;">
 			<a
